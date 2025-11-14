@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Explorar - Recetagram</title>
   <link rel="stylesheet" href="../css/explorar.css">
-  <link rel="stylesheet" href="../css/menu.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
@@ -24,7 +23,6 @@
             <span>Notificaciones</span>
             <span class="notif-badge" id="notif-badge">3</span>
         </div>
-        
 
         <a href="crear-receta.html"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
         <a href="amigos.html"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>
@@ -37,22 +35,6 @@
         </a>
     </div>
   </aside>
-
-  <!-- Dropdown de notificaciones (overlay sobre feed) -->
-  <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar">
-    <div class="notif-item">
-        <img src="https://i.pravatar.cc/40?img=10" alt="chef_luisa" class="notif-avatar">
-        <p><b>chef_luisa</b> le dio like a tu publicación</p>
-    </div>
-    <div class="notif-item">
-        <img src="https://i.pravatar.cc/40?img=25" alt="recetas_ana" class="notif-avatar">
-        <p><b>recetas_ana</b> te envió una solicitud de amistad</p>
-    </div>
-    <div class="notif-item">
-        <img src="https://i.pravatar.cc/40?img=10" alt="chef_luisa" class="notif-avatar">
-        <p><b>chef_luisa</b> le dio like a tu publicación</p>
-    </div>
-  </div>
 
    <!-- Barra superior con búsqueda -->
     <div class="topbar">
@@ -113,24 +95,24 @@
     </div>
 
    <!-- Resultados -->
+    <a href="receta.html" class="recipe-link">
     <div class="results recetas">
-      <a href="receta.html" class="recipe-link">
-        <div class="recipe-card">
-          <img src="../img/batido_verde.jpg" alt="Receta" class="recipe-img">
-          <div class="recipe-info">
-            <h3 class="recipe-title">Smoothie verde detox 🥬</h3>
-            <div class="recipe-user">
-              <img src="https://i.pravatar.cc/40?img=18" class="avatar" alt="Usuario">
-              <span>@healthy_life</span>
-            </div>
-            <p class="recipe-desc">
-              <i class="fa-solid fa-fire recipe-icon"></i> Fácil &nbsp;
-              <i class="fa-solid fa-clock recipe-icon"></i> 10 min &nbsp;
-              <i class="fa-solid fa-leaf recipe-icon"></i> Healthy
-            </p>
+      <div class="recipe-card">
+        <img src="../img/batido_verde.jpg" alt="Receta" class="recipe-img">
+        <div class="recipe-info">
+          <h3 class="recipe-title">Smoothie verde detox 🥬</h3>
+          <div class="recipe-user">
+            <img src="https://i.pravatar.cc/40?img=18" class="avatar" alt="Usuario">
+            <span>@healthy_life</span>
           </div>
+          <p class="recipe-desc">
+            <i class="fa-solid fa-fire recipe-icon"></i> Fácil &nbsp;
+            <i class="fa-solid fa-clock recipe-icon"></i> 10 min &nbsp;
+            <i class="fa-solid fa-leaf recipe-icon"></i> Healthy
+          </p>
         </div>
-      </a>
+      </div>
+    </a>
       <a href="receta.html" class="recipe-link">
       <div class="recipe-card">
         <img src="../img/pan_sin_gl.jpg" alt="Receta" class="recipe-img">
@@ -168,7 +150,6 @@
   </main>
    <!-- Script -->
   <script src="../js/explorar.js"></script>
-  <script src="../js/menu.js"></script>
 </body>
 </html>
 
