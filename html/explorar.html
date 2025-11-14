@@ -71,8 +71,6 @@
     </div>
     </div>
 
-    </div>
-
     <!-- Iconos en la esquina superior derecha -->
     <div class="top-right-icons">
         <a href="chat.html" class="icon"><i class="fa-solid fa-envelope"></i></a>
@@ -88,62 +86,67 @@
       <button class="tab" id="tab-usuarios">Usuarios</button>
     </div>
 
-   <!-- Resultados -->
-    <a href="receta.html" class="recipe-link">
-    <div class="results recetas">
-      <div class="recipe-card">
-        <img src="../img/batido_verde.jpg" alt="Receta" class="recipe-img">
-        <div class="recipe-info">
-          <h3 class="recipe-title">Smoothie verde detox 🥬</h3>
-          <div class="recipe-user">
-            <img src="https://i.pravatar.cc/40?img=18" class="avatar" alt="Usuario">
-            <span>@healthy_life</span>
-          </div>
-          <p class="recipe-desc">
-            <i class="fa-solid fa-fire recipe-icon"></i> Fácil &nbsp;
-            <i class="fa-solid fa-clock recipe-icon"></i> 10 min &nbsp;
-            <i class="fa-solid fa-leaf recipe-icon"></i> Healthy
-          </p>
+  <!-- Resultados de recetas -->
+<div class="results recetas">
+  <a href="receta.html" class="recipe-link">
+    <article class="recipe-card">
+      <img src="../img/batido_verde.jpg" alt="Smoothie verde detox con espinaca y kale" class="recipe-img">
+      <div class="recipe-info">
+        <h3 class="recipe-title">Smoothie verde detox 🥬</h3>
+        <div class="recipe-user">
+          <img src="https://i.pravatar.cc/40?img=18" class="avatar" alt="Perfil de @healthy_life">
+          <span>@healthy_life</span>
         </div>
+        <p class="recipe-desc">
+          <i class="fa-solid fa-fire recipe-icon" aria-hidden="true"></i> Fácil &nbsp;
+          <i class="fa-solid fa-clock recipe-icon" aria-hidden="true"></i> 10 min &nbsp;
+          <i class="fa-solid fa-leaf recipe-icon" aria-hidden="true"></i> Healthy
+        </p>
       </div>
-    </a>
-      <a href="receta.html" class="recipe-link">
-      <div class="recipe-card">
-        <img src="../img/pan_sin_gl.jpg" alt="Receta" class="recipe-img">
-        <div class="recipe-info">
-          <h3 class="recipe-title">Pan sin gluten artesanal 🍞</h3>
-          <div class="recipe-user">
-            <img src="https://i.pravatar.cc/40?img=26" class="avatar" alt="Usuario">
-            <span>@glutenfree_marta</span>
-          </div>
-          <p class="recipe-desc">
-            <i class="fa-solid fa-fire recipe-icon"></i> Media &nbsp;
-            <i class="fa-solid fa-clock recipe-icon"></i> 45 min &nbsp;
-            <img src="../img/sin-gluten.png" alt="Sin gluten" class="diet-icon"> Sin gluten
-          </p>
+    </article>
+  </a>
+
+  <a href="receta.html" class="recipe-link">
+    <article class="recipe-card">
+      <img src="../img/pan_sin_gl.jpg" alt="Pan sin gluten artesanal" class="recipe-img">
+      <div class="recipe-info">
+        <h3 class="recipe-title">Pan sin gluten artesanal 🍞</h3>
+        <div class="recipe-user">
+          <img src="https://i.pravatar.cc/40?img=26" class="avatar" alt="Perfil de @glutenfree_marta">
+          <span>@glutenfree_marta</span>
         </div>
+        <p class="recipe-desc">
+          <i class="fa-solid fa-fire recipe-icon" aria-hidden="true"></i> Media &nbsp;
+          <i class="fa-solid fa-clock recipe-icon" aria-hidden="true"></i> 45 min &nbsp;
+          <img src="../img/sin-gluten.png" alt="Icono sin gluten" class="diet-icon"> Sin gluten
+        </p>
       </div>
-      </a>
-    </div>
-    <div class="results usuarios hidden">
-      <div class="user-card">
-        <img src="https://i.pravatar.cc/60?img=12" alt="Usuario" class="avatar-large">
-        <div>
-          <h4>@chef_carlos</h4>
-          <p>Amante de la cocina mediterránea 🍅</p>
-        </div>
+    </article>
+  </a>
+</div>
+
+<!-- Resultados de usuarios -->
+<div class="results usuarios hidden">
+  <ul>
+    <li class="user-card">
+      <img src="https://i.pravatar.cc/60?img=12" alt="Perfil de @chef_carlos" class="avatar-large">
+      <div>
+        <h4>@chef_carlos</h4>
+        <p>Amante de la cocina mediterránea 🍅</p>
       </div>
-      <div class="user-card">
-        <img src="https://i.pravatar.cc/60?img=27" alt="Usuario" class="avatar-large">
-        <div>
-          <h4>@laura_tartas</h4>
-          <p>Reina de las tartas 🍰</p>
-        </div>
+    </li>
+    <li class="user-card">
+      <img src="https://i.pravatar.cc/60?img=27" alt="Perfil de @laura_tartas" class="avatar-large">
+      <div>
+        <h4>@laura_tartas</h4>
+        <p>Reina de las tartas 🍰</p>
       </div>
-    </div>
-  </main>
-   <!-- Script -->
-  <script src="../js/explorar.js"></script>
+    </li>
+  </ul>
+</div>
+
+<!-- Script -->
+<script src="../js/explorar.js"></script>
+</main>
 </body>
 </html>
-
