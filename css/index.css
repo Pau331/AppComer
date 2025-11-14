@@ -44,6 +44,10 @@ body {
   color: #555;
   margin-bottom: 30px;
 }
+.inicio-logo {
+  width: 180px; /* Ajusta el tamaño como prefieras */
+  margin-bottom: 15px; /* Espacio entre el logo y el título */
+}
 
 /* --- Botones --- */
 .botones button {
