@@ -1,6 +1,8 @@
 const $ = s => document.querySelector(s);
 
 const receta = {
+  usuario: "ChefAna",
+  foto_perfil: "https://i.pravatar.cc/60?img=5",
   titulo: "Brownies de Chocolate",
   tiempo: "20 min",
   dificultad: "Baja",
@@ -16,6 +18,8 @@ const receta = {
 };
 
 // Pintar datos
+$("#fotoUsuario").src = receta.foto_perfil;
+$("#nombreUsuario").textContent = "@" + receta.usuario;
 $("#tituloReceta").textContent = receta.titulo;
 $("#difText").textContent = receta.dificultad;
 $("#tiempoText").textContent = receta.tiempo;
