@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recetagram — Receta</title>
+
+  <link rel="stylesheet" href="../css/menu.css" />
+  <link rel="stylesheet" href="../css/receta.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo"><img src="../img/logo_texto.png" alt="Recetagram" class="logo-full"></div>
+    <nav class="nav-links">
+      <a href="menu.html"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+      <div class="notification-wrapper-sidebar" id="notif-wrapper">
+        <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i><span>Notificaciones</span>
+        <span class="notif-badge" id="notif-badge">3</span>
+      </div>
+      <a href="crear-receta.html"><i class="fa-solid fa-circle-plus"></i><span>Crear receta</span></a>
+      <a href="amigos.html"><i class="fa-solid fa-user-group"></i><span>Amigos</span></a>
+    </nav>
+    <div class="logout-wrapper">
+      <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></a>
+    </div>
+  </aside>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-actions">
+      <a href="chat.html" class="icon-btn" aria-label="Mensajes"><i class="fa-solid fa-envelope"></i></a>
+      <a href="perfil.html" class="icon-btn" aria-label="Perfil"><i class="fa-solid fa-user"></i></a>
+    </div>
+  </div>
+
+  <!-- CONTENIDO CENTRADO -->
+  <main class="page-wrap">
+    <div class="center-col">
+      <div class="recipe-header">
+        <h1 class="title" id="tituloReceta">Brownies de Chocolate</h1>
+      </div>
+
+      <!-- INFO DIFICULTAD | TIEMPO | DIETAS -->
+      <div class="recipe-details">
+        <div class="detail"><i class="fa-solid fa-star"></i> <span id="difText"></span></div>
+        <div class="detail"><i class="fa-solid fa-clock"></i> <span id="tiempoText"></span></div>
+        <div class="detail" id="dietasLista"></div>
+      </div>
+
+      <div class="grid-2">
+        <!-- PASOS -->
+        <section class="card">
+          <div class="card-body">
+            <h3>Pasos</h3>
+            <ol id="listaPasos" class="steps"></ol>
+          </div>
+        </section>
+
+        <!-- FOTO + LIKE -->
+        <aside class="card">
+          <div class="card-body">
+            <img id="fotoReceta" class="photo" src="../img/brownie.jpg" alt="Brownie">
+
+            <div class="like-area">
+              <button id="btnLike" class="btn-like">❤️ Me gusta</button>
+              <span class="count"><strong id="likeNum">0</strong> likes</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar"></div>
+
+  <script src="../js/menu.js"></script>
+  <script type="module" src="../js/receta.js"></script>
+</body>
+</html>
+

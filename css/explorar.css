@@ -1,0 +1,443 @@
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  background-color: #fafafa;
+  display: flex;
+  min-height: 100vh;
+  color: #262626;
+}
+
+/* ----- Menú lateral (sidebar) ----- */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  border-right: 1px solid #dbdbdb;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.logo-full {
+  max-width: 140px;
+  height: auto;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav-links a,
+.notification-wrapper-sidebar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #262626;
+  font-size: 17px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-links a:hover,
+.notification-wrapper-sidebar:hover {
+  background-color: #f2f2f2;
+  color: #df3767; /* hover rosa */
+}
+
+.notif-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 6px;
+    pointer-events: none;
+}
+
+/* Iconos del menú lateral */
+.nav-links a i {
+  font-size: 18px;
+}
+
+
+/* ----- Iconos superiores ----- */
+.top-right-icons {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  display: flex;
+  gap: 20px;
+  z-index: 101;
+}
+
+.top-right-icons .icon {
+  font-size: 22px;
+  color: #262626;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.top-right-icons .icon:hover {
+  color: #e13b63;
+}
+
+/* Botón cerrar sesión */
+.logout-wrapper {
+  margin-top: auto;
+  padding: 25px 15px;
+}
+
+.logout-wrapper a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  background-color: #e13b63;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.logout-wrapper a:hover {
+  background-color: #c12c54;
+}
+
+/* TOPBAR */
+.topbar { 
+    position: fixed; 
+    top: 0; 
+    left: 250px; 
+    right: 0; 
+    height: 70px; 
+    background-color: #fff; 
+    border-bottom: 1px solid #dbdbdb; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0 40px; 
+    z-index: 10; 
+}
+.search-wrapper { 
+    position: relative; 
+}
+
+.search-icon { 
+    position: absolute; 
+    left: 12px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    color: #8e8e8e; 
+}
+
+.search-bar { 
+    width: 350px; 
+    height: 36px; 
+    padding-left: 35px; 
+    border: 1px solid #dbdbdb; 
+    border-radius: 10px; 
+    background-color: #fafafa; 
+    font-size: 15px; 
+}
+
+
+/* Contenedor de búsqueda + filtros */
+.search-filters-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* espacio entre barra y filtros */
+}
+
+/* Ajustar botón de filtros */
+.filters-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #df3767;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 6px 12px;
+  border: 1px solid #df3767;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.filters-btn:hover {
+  background-color: #df3767;
+  color: #fff;
+}
+
+
+/* CONTENIDO PRINCIPAL */
+.explore-section {
+  margin-left: 270px; /* Deja espacio para el sidebar */
+  margin-top: 100px;  /* Deja espacio para la topbar */
+  padding: 20px 40px;
+}
+
+/* FILTROS */
+
+.filters-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filters-dropdown {
+  display: none; /* se muestra con JS */
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 100;
+  width: 220px;
+  flex-direction: column;
+}
+
+.filters-dropdown .filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  font-size: 14px;
+}
+
+.filters-dropdown .filter:hover {
+  background-color: #e13b63;
+  color: #fff;
+}
+
+.filter {
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.filter.active {
+  background-color: #df3767;
+  color: #fff;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.filter-icon.hover {
+  display: none;
+}
+
+.filter:hover .filter-icon.default {
+  display: none;
+}
+
+.filter:hover .filter-icon.hover {
+  display: inline;
+}
+
+
+/* PESTAÑAS */
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #dbdbdb;
+  margin-bottom: 15px;
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #8e8e8e;
+  transition: color 0.2s;
+}
+
+.tab.active {
+  color: #df3767;
+  border-bottom: 3px solid #df3767;
+}
+
+/* RESULTADOS */
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.results.hidden {
+  display: none;
+}
+
+/* TARJETA DE RECETA */
+.feed {
+  margin-left: 300px; /* ancho sidebar + margen */
+  margin-top: 120px;  /* más espacio debajo de la barra superior */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* ----- Tarjetas de receta ----- */
+.recipe-card {
+  display: flex;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 600px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s;
+}
+
+.recipe-card:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.recipe-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.recipe-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.recipe-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.recipe-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.recipe-user .avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.recipe-details {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.recipe-link {
+  text-decoration: none; /* quitar subrayado */
+  color: inherit;        /* mantener colores de texto */
+  display: block;        /* que abarque todo el ancho */
+}
+
+.diet-icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: auto; /* suaviza el icono */
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  gap: 5px;                /* espacio entre icono y texto */
+  font-size: 14px;
+  color: #555;
+}
+
+.detail i {
+  color: #e13b63;
+}
+
+/* ----- ICONOS DE RECETAS ----- */
+.recipe-desc .recipe-icon {
+    color: #e13b63; /* rosa */
+    margin-right: 5px; /* opcional, separación entre icono y texto */
+}
+
+/* ----- ICONOS DE FILTRO ----- */
+.filter-icon {
+    color: #e13b63; /* rosa predeterminado */
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    transition: color 0.2s ease;
+}
+
+.filter:hover .filter-icon {
+    color: #fff; /* blanco al pasar el mouse */
+}
+
+
+/* USUARIOS */
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+
+.avatar-large {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}

@@ -1,0 +1,353 @@
+/* ----- Reset básico ----- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+  color: #262626;
+}
+
+/* ----- Menú lateral ----- */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  border-right: 1px solid #dbdbdb;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.logo-full {
+  max-width: 140px;
+  height: auto;
+}
+
+/* ----- Enlaces del menú ----- */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nav-links a,
+.notification-wrapper-sidebar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #262626;
+  font-size: 17px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* HOVER en el menú lateral */
+.nav-links a:hover,
+.notification-wrapper-sidebar:hover {
+  background-color: #f2f2f2;
+  color: #df3767; /* Rosa principal */
+}
+
+
+/* ----- Barra superior ----- */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 250px; /* ancho de sidebar */
+  right: 0;
+  height: 70px;
+  background-color: #fff;
+  border-bottom: 1px solid #dbdbdb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+/* Contenedor relativo para la lupa */
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Icono de lupa */
+.search-icon {
+    position: absolute;
+    left: 12px;          /* separación del borde izquierdo */
+    font-size: 16px;
+    color: #8e8e8e;
+    pointer-events: none; /* para que no interfiera con escribir */
+}
+
+/* Ajustar padding del input para que no se superponga la lupa */
+.search-bar {
+    width: 350px;
+    height: 36px;
+    padding: 0 15px 0 35px; /* padding-left mayor para la lupa */
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    background-color: #fafafa;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.search-bar:focus {
+    background-color: #fff;
+    border-color: #bdbdbd;
+}
+
+
+/* ----- Feed principal ----- */
+.feed {
+  margin-left: 300px; /* ancho sidebar + margen */
+  margin-top: 120px;  /* más espacio debajo de la barra superior */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* ----- Tarjetas de receta ----- */
+.recipe-card {
+  display: flex;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 600px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s;
+}
+
+.recipe-card:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.recipe-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.recipe-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.recipe-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.recipe-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.recipe-user .avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+.recipe-details {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.recipe-link {
+  text-decoration: none; /* quitar subrayado */
+  color: inherit;        /* mantener colores de texto */
+  display: block;        /* que abarque todo el ancho */
+}
+
+.diet-icon {
+  width: 16px;
+  height: 16px;
+  image-rendering: auto; /* suaviza el icono */
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  gap: 5px;                /* espacio entre icono y texto */
+  font-size: 14px;
+  color: #555;
+}
+
+.detail i {
+  color: #e13b63;
+}
+
+/* ----- Notificaciones ----- */
+.notification-wrapper-sidebar {
+  position: relative;
+}
+
+.notifications-dropdown-overlay {
+    display: none;
+    position: fixed;
+    top: 80px;                   /* debajo de la barra superior */
+    left: calc(250px + 10px);    /* alineado al sidebar */
+    width: 350px;
+    max-height: 400px;
+    overflow-y: auto;            /* scroll si hay muchas notificaciones */
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    z-index: 1000;
+    padding: 10px;
+}
+
+.notifications-dropdown-overlay p {
+  margin: 8px 0;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 6px;
+  cursor: default;
+}
+
+.notifications-dropdown-overlay p:hover {
+  background-color: #f2f2f2;
+}
+
+.notif-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 6px;
+    pointer-events: none;
+}
+
+/* Cada notificación con avatar */
+.notif-item {
+    display: flex;          /* fila con foto y texto */
+    align-items: center;    /* alinear verticalmente */
+    gap: 10px;              /* espacio entre foto y texto */
+    padding: 5px;           /* espacio interno */
+    border-radius: 6px;     /* esquinas redondeadas */
+    cursor: default;
+}
+
+.notif-item:hover {
+    background-color: #f2f2f2; /* efecto al pasar el mouse */
+}
+
+.notif-avatar {
+    width: 40px;            /* tamaño de la foto */
+    height: 40px;
+    border-radius: 50%;     /* foto circular */
+    object-fit: cover;      /* para que la foto no se deforme */
+}
+
+
+/* ----- Cerrar sesión ----- */
+.logout-wrapper {
+  margin-top: auto;
+  padding: 25px 15px;
+}
+
+.logout-wrapper a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  background-color: #e13b63;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.logout-wrapper a:hover {
+  background-color: #c12c54;
+}
+
+/* ----- Iconos superiores ----- */
+.top-right-icons {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  display: flex;
+  gap: 20px;
+  z-index: 101;
+}
+
+.top-right-icons .icon {
+  font-size: 22px;
+  color: #262626;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.top-right-icons .icon:hover {
+  color: #e13b63;
+}
+
+/* ----- Responsive básico ----- */
+@media (max-width: 1000px) {
+  .feed {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 70px;
+  }
+  .nav-links a span,
+  .notification-wrapper-sidebar span {
+    display: none;
+  }
+  .feed {
+    margin-left: 90px;
+  }
+  .top-right-icons {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .recipe-card {
+    flex-direction: column;
+    width: 90%; /* se ajusta al ancho del feed */
+  }
+  .recipe-img {
+    width: 100%;
+    height: auto;
+  }
+}
