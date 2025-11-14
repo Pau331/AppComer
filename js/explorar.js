@@ -23,7 +23,6 @@ const filtersDropdown = document.getElementById('filters-dropdown');
 const filters = document.querySelectorAll(".filter");
 
 // Mostrar/ocultar dropdown al click en el botón
-
 filtersBtn.addEventListener('click', () => {
   filtersDropdown.style.display = filtersDropdown.style.display === 'flex' ? 'none' : 'flex';
 });
