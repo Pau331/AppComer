@@ -63,7 +63,7 @@ body {
 .nav-links a:hover,
 .notification-wrapper-sidebar:hover {
   background-color: #f2f2f2;
-  color: #df3767; /* hover rosa */
+  color: #df3767;
 }
 
 .notif-badge {
@@ -176,7 +176,7 @@ body {
 .search-filters-wrapper {
   display: flex;
   align-items: center;
-  gap: 15px; /* espacio entre barra y filtros */
+  gap: 15px;
 }
 
 /* Ajustar botón de filtros */
@@ -203,8 +203,8 @@ body {
 
 /* CONTENIDO PRINCIPAL */
 .explore-section {
-  margin-left: 270px; /* Deja espacio para el sidebar */
-  margin-top: 100px;  /* Deja espacio para la topbar */
+  margin-left: 270px; 
+  margin-top: 100px; 
   padding: 20px 40px;
 }
 
@@ -218,7 +218,7 @@ body {
 }
 
 .filters-dropdown {
-  display: none; /* se muestra con JS */
+  display: none;
   position: absolute;
   top: 40px;
   right: 0;
@@ -322,8 +322,8 @@ body {
 
 /* TARJETA DE RECETA */
 .feed {
-  margin-left: 300px; /* ancho sidebar + margen */
-  margin-top: 120px;  /* más espacio debajo de la barra superior */
+  margin-left: 300px; 
+  margin-top: 120px; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -399,7 +399,7 @@ body {
 .detail {
   display: flex;
   align-items: center;
-  gap: 5px;                /* espacio entre icono y texto */
+  gap: 5px;                
   font-size: 14px;
   color: #555;
 }
@@ -410,13 +410,13 @@ body {
 
 /* ----- ICONOS DE RECETAS ----- */
 .recipe-desc .recipe-icon {
-    color: #e13b63; /* rosa */
-    margin-right: 5px; /* opcional, separación entre icono y texto */
+    color: #e13b63;
+    margin-right: 5px; 
 }
 
 /* ----- ICONOS DE FILTRO ----- */
 .filter-icon {
-    color: #e13b63; /* rosa predeterminado */
+    color: #e13b63; 
     width: 16px;
     height: 16px;
     display: inline-block;
@@ -425,7 +425,7 @@ body {
 }
 
 .filter:hover .filter-icon {
-    color: #fff; /* blanco al pasar el mouse */
+    color: #fff; 
 }
 
 
@@ -439,8 +439,8 @@ body {
   border: 1px solid #dbdbdb;
   border-radius: 10px;
   padding: 15px;
-  width: 600px;          /* Igual que recipe-card */
-  margin: 0 auto 20px;   /* Centrado */
+  width: 600px;          
+  margin: 0 auto 20px; 
 }
 
 .user-card:hover {
