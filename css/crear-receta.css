@@ -122,10 +122,84 @@
     background:#1f8b4c; } /*verde para guardar*/
 
 /*Responsive*/
-@media (max-width:980px){
-  .page-wrap{ 
-    margin-left:90px; }
+/* ======== MÓVIL: max-width 768px ======== */
+@media (max-width: 768px) {
 
-  .center-col{ 
-    width:100%; max-width:730px; }}
-    
+  /* Ajuste general de la página */
+  .page-wrap {
+    margin-left: 70px; /* sidebar reducido */
+    margin-top: 90px;  /* topbar */
+    padding: 12px;
+  }
+
+  .center-col {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+
+  /* Inputs principales */
+  .input-title {
+    font-size: 18px;
+    padding: 10px 12px;
+  }
+
+  .form-details .select,
+  .form-details .input {
+    padding: 6px 8px;
+  }
+
+  /* Selector de dietas */
+  .dietas-select {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* Pasos editables */
+  .steps-edit {
+    padding-left: 12px;
+    gap: 8px;
+  }
+
+  .step-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .step-row input {
+    padding: 6px 8px;
+  }
+
+  .step-row .del {
+    align-self: flex-end;
+    padding: 6px 8px;
+  }
+
+  /* Selector de imagen */
+  .image-drop {
+    min-height: 200px;
+  }
+
+  .image-drop .placeholder i {
+    font-size: 36px;
+  }
+
+  /* Botones secundarios */
+  .btn-sec {
+    padding: 0.35rem 0.6rem;
+  }
+
+  /* Actions */
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  /* Botón guardar */
+  .save-btn {
+    width: 100%;
+  }
+}
