@@ -35,11 +35,24 @@ $("#dietasLista").innerHTML = receta.dietas.map(d => {
 // Pasos
 $("#listaPasos").innerHTML = receta.pasos.map(p=>`<li>${p}</li>`).join("");
 
-// Like (demo)
+// Like(demo)
 let liked = false;
-$("#btnLike").addEventListener("click", ()=>{
+
+const btnLike = $("#btnLike");
+const likeNum = $("#likeNum");
+const heartIcon = btnLike.querySelector("i");
+
+btnLike.addEventListener("click", () => {
   liked = !liked;
   receta.likes += liked ? 1 : -1;
-  $("#likeNum").textContent = receta.likes;
-  $("#btnLike").textContent = liked ? "💙 Te gusta" : "❤️ Me gusta";
+  likeNum.textContent = receta.likes;
+
+  // Cambiar la clase del corazón según like
+  if (liked) {
+    heartIcon.classList.remove("fa-regular");
+    heartIcon.classList.add("fa-solid");
+  } else {
+    heartIcon.classList.remove("fa-solid");
+    heartIcon.classList.add("fa-regular");
+  }
 });
