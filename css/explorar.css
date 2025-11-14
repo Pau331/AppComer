@@ -129,6 +129,9 @@ body {
 
 .logout-wrapper a:hover {
   background-color: #c12c54;
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border-color: #e13b63; 
 }
 
 /* TOPBAR */
