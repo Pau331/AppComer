@@ -436,6 +436,10 @@ body {
   padding: 10px 15px;
 }
 
+.user-card:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
 .avatar-large {
   border-radius: 50%;
   width: 60px;
