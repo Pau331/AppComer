@@ -107,10 +107,21 @@ const feed = document.getElementById('feed');
 function pintarRecetas() {
   feed.innerHTML = recetas.map(r => {
     const dietasHTML = r.dietas.map(d => {
-      if(d.toLowerCase().includes("gluten")) return `<img src="../img/sin-gluten.png" class="diet-icon" alt="Sin gluten"><span>Sin gluten</span>`;
-      if(d.toLowerCase() === "healthy") return `<i class="fa-solid fa-apple-whole"></i><span>Healthy</span>`;
-      if(d.toLowerCase() === "vegetariano") return `<i class="fa-solid fa-leaf"></i><span>Vegetariano</span>`;
-      return "";
+      let icon = "";
+      let text = d;
+
+      if(d.toLowerCase().includes("gluten")) {
+        icon = `<img src="../img/sin-gluten.png" class="diet-icon" alt="Sin gluten">`;
+        text = "Sin gluten";
+      } else if(d.toLowerCase() === "healthy") {
+        icon = `<i class="fa-solid fa-apple-whole"></i>`;
+        text = "Healthy";
+      } else if(d.toLowerCase() === "vegetariano") {
+        icon = `<i class="fa-solid fa-leaf"></i>`;
+        text = "Vegetariano";
+      }
+
+      return `<div class="detail">${icon} <span>${text}</span></div>`;
     }).join("");
 
     return `
@@ -135,9 +146,7 @@ function pintarRecetas() {
                 <i class="fa-solid fa-clock"></i>
                 <span>Tiempo: ${r.tiempo}</span>
               </div>
-              <div class="detail">
-                ${dietasHTML}
-              </div>
+              ${dietasHTML}
             </div>
           </div>
         </div>
@@ -145,6 +154,7 @@ function pintarRecetas() {
     `;
   }).join("");
 }
+
 
 // Pintar recetas al cargar la página
 pintarRecetas();
