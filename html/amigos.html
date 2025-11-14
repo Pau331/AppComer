@@ -105,6 +105,10 @@
       position: relative;
     }
 
+    .user-card:hover {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
     /* Mensaje temporal de confirmación */
     .sent-msg {
       position: fixed;
@@ -239,6 +243,17 @@
 
     // Limpiar textarea
       chatPanel.querySelector('textarea').value = '';
+    });
+
+    // Usuarios clicables
+    document.querySelectorAll('.user-card').forEach(card => {
+      card.addEventListener('click', e => {
+        // Evitar que se active al hacer clic en el botón de enviar mensaje
+        if (!e.target.closest('.send-message')) {
+          const username = card.dataset.username; // opcional si quieres pasar info
+          window.location.href = `perfil.html?user=${encodeURIComponent(username)}`;
+        }
+      });
     });
   </script>
 
