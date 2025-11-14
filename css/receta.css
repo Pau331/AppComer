@@ -204,6 +204,19 @@
 .count{ 
     color:#555; }
 
+/* Lista de pasos */
+.steps {
+  padding-left: 20px;           /* espacio para los números */
+  margin: 10px 0;               /* espacio arriba y abajo de toda la lista */
+  list-style-position: inside;  /* que los números estén dentro del padding */
+  font-size: 15px;
+  line-height: 1.6;             /* separación entre líneas */
+}
+
+.steps li {
+  margin-bottom: 8px;           /* espacio entre cada paso */
+}
+
 /*Responsive*/
 @media(max-width:980px){
   .page-wrap{
