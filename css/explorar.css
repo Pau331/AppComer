@@ -81,6 +81,73 @@ body {
 
 /* para que la foto no se deforme */
 
+/* ----- Notificaciones ----- */
+.notification-wrapper-sidebar {
+  position: relative;
+}
+
+.notifications-dropdown-overlay {
+    display: none;
+    position: fixed;
+    top: 80px;                   /* debajo de la barra superior */
+    left: calc(250px + 10px);    /* alineado al sidebar */
+    width: 350px;
+    max-height: 400px;
+    overflow-y: auto;            /* scroll si hay muchas notificaciones */
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    z-index: 1000;
+    padding: 10px;
+}
+
+.notifications-dropdown-overlay p {
+  margin: 8px 0;
+  font-size: 14px;
+  padding: 5px;
+  border-radius: 6px;
+  cursor: default;
+}
+
+.notifications-dropdown-overlay p:hover {
+  background-color: #f2f2f2;
+}
+
+.notif-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 6px;
+    pointer-events: none;
+}
+
+/* Cada notificación con avatar */
+.notif-item {
+    display: flex;          /* fila con foto y texto */
+    align-items: center;    /* alinear verticalmente */
+    gap: 10px;              /* espacio entre foto y texto */
+    padding: 5px;           /* espacio interno */
+    border-radius: 6px;     /* esquinas redondeadas */
+    cursor: default;
+}
+
+.notif-item:hover {
+    background-color: #f2f2f2; /* efecto al pasar el mouse */
+}
+
+.notif-avatar {
+    width: 40px;            /* tamaño de la foto */
+    height: 40px;
+    border-radius: 50%;     /* foto circular */
+    object-fit: cover;      /* para que la foto no se deforme */
+}
+
 
 /* Botón cerrar sesión */
 .logout-wrapper {
