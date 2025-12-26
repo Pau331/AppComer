@@ -36,9 +36,12 @@
     </div>
   </aside>
 
+  <!-- Dropdown de notificaciones -->
+  <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar"></div>
+
    <!-- Barra superior con búsqueda -->
-    <div class="topbar">
-    <div class="search-filters-wrapper">
+  <div class="topbar">
+  <div class="search-filters-wrapper">
         <div class="search-wrapper">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
         <input type="text" placeholder="Buscar recetas o usuarios..." class="search-bar">
@@ -145,8 +148,9 @@
   </ul>
 </div>
 
+<!-- Mensaje si no hay resultados -->
+<div id="no-results-msg" style="display:none;">No se encontraron resultados</div>
+
 <!-- Script -->
 <script src="../js/explorar.js"></script>
-</main>
-</body>
-</html>
+<script src="../js/menu.js"></script>
