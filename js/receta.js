@@ -60,3 +60,63 @@ btnLike.addEventListener("click", () => {
     heartIcon.classList.add("fa-regular");
   }
 });
+// Array de comentarios demo con fecha
+const comentarios = [
+  { usuario: "chefCarlos", avatar: "https://i.pravatar.cc/40?img=12", texto: "¡Se ve delicioso!", fecha: new Date(Date.now() - 2 * 60 * 60 * 1000) }, // hace 2h
+  { usuario: "laura_tartas", avatar: "https://i.pravatar.cc/40?img=27", texto: "Tengo que probar esta receta.", fecha: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000) } // hace 3d
+];
+
+// Función para obtener fecha relativa
+function fechaRelativa(fecha) {
+  const ahora = new Date();
+  const diff = ahora - fecha; // diferencia en ms
+  const segundos = Math.floor(diff / 1000);
+  const minutos = Math.floor(segundos / 60);
+  const horas = Math.floor(minutos / 60);
+  const dias = Math.floor(horas / 24);
+  const meses = Math.floor(dias / 30);
+  const años = Math.floor(dias / 365);
+
+  if (dias === 0) return "hoy";
+  if (dias < 30) return `${dias}d`;
+  if (meses < 12) return `${meses}m`;
+  return `${años}y`;
+}
+
+// Función para renderizar los comentarios
+function mostrarComentarios() {
+  const lista = document.getElementById("listaComentarios");
+  lista.innerHTML = "";
+  comentarios.forEach(c => {
+    const div = document.createElement("div");
+    div.classList.add("comment");
+    div.innerHTML = `
+      <img src="${c.avatar}" alt="${c.usuario}" class="avatar">
+      <div class="content">
+        <div class="username">@${c.usuario} <span class="fecha">${fechaRelativa(new Date(c.fecha))}</span></div>
+        <div class="texto">${c.texto}</div>
+      </div>
+    `;
+    lista.appendChild(div);
+  });
+}
+
+// Inicializar comentarios al cargar
+mostrarComentarios();
+
+// Agregar nuevo comentario con fecha actual
+const btnAgregar = document.getElementById("btnAgregarComentario");
+btnAgregar.addEventListener("click", () => {
+  const textarea = document.getElementById("nuevoComentario");
+  const texto = textarea.value.trim();
+  if (texto) {
+    comentarios.push({
+      usuario: "Yo",
+      avatar: "https://i.pravatar.cc/40?img=5",
+      texto,
+      fecha: new Date()
+    });
+    textarea.value = "";
+    mostrarComentarios();
+  }
+});

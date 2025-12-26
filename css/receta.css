@@ -146,6 +146,84 @@
 }
 
 
+#comentarios-section {
+  margin-top: 30px;
+}
+
+.add-comment {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.add-comment textarea {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  resize: none;
+}
+
+.add-comment button {
+  padding: 8px 12px;
+  background-color: #df3767;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.add-comment button:hover {
+  background-color: #c12c54;
+}
+
+.comments-list .comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.comment .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.comment .content {
+  flex: 1;
+}
+
+.comment .content .username {
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.comment .content .texto {
+  font-size: 14px;
+}
+
+.comment .username {
+  font-weight: 600; /* nombre del usuario */
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.comment .username .fecha {
+  font-weight: 400;       /* menos importante */
+  font-size: 12px;        /* más pequeño */
+  color: #888888;         /* gris suave */
+  font-family: 'Segoe UI', Arial, sans-serif; /* distinta si quieres */
+}
+
+
+
 /*Responsive*/
 @media(max-width:980px){
     .page-wrap{
