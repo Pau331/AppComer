@@ -1,0 +1,151 @@
+/* --- General --- */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #262626;
+}
+
+/* --- Contenedor principal --- */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* --- Tarjeta --- */
+.auth-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px 35px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border: 1px solid #dbdbdb;
+}
+
+.auth-logo {
+  width: 160px;
+  margin-bottom: 15px;
+}
+
+/* --- Título --- */
+h1 {
+  font-size: 1.8rem;
+  color: #262626;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* --- Formulario --- */
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+label {
+  font-weight: 600;
+  color: #555;
+  margin-top: 12px;
+}
+
+input {
+  padding: 10px 12px;
+  margin-top: 5px;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: #fafafa;
+}
+
+input:focus {
+  border-color: #e13b63;
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(225, 59, 99, 0.1);
+}
+
+/* --- Botón --- */
+button {
+  margin-top: 25px;
+  padding: 12px;
+  background-color: #e13b63;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.1s ease;
+}
+
+button:hover {
+  background-color: #c12c54;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* --- Texto inferior --- */
+.auth-text {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.auth-text a {
+  color: #e13b63;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-text a:hover {
+  text-decoration: underline;
+}
+
+.form-message {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #e13b63;
+  text-align: center;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  .auth-card {
+    padding: 25px 20px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* --- Ajustes para el modo recuperación --- */
+.oculto {
+  display: none !important;
+}
+
+.small-text {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.small-text a {
+  color: #e13b63;
+  text-decoration: none;
+}
+
+.small-text a:hover {
+  text-decoration: underline;
+}
+

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amigos - Recetagram</title>
+  <link rel="stylesheet" href="../css/explorar.css">
+  <link rel="stylesheet" href="../css/menu.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+        
+    /* ----- Iconos superiores ----- */
+    .top-right-icons {
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        display: flex;
+        gap: 20px;
+        z-index: 101;
+    }
+
+    .top-right-icons a {
+        font-size: 22px;
+        color: #262626;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .top-right-icons a:hover {
+        color: #e13b63;
+    }
+
+
+    /* Botón de enviar mensaje dentro de cada usuario */
+    .user-card .send-message {
+      margin-left: auto;
+      cursor: pointer;
+      color: #e13b63;
+      font-size: 18px;
+      transition: color 0.2s;
+    }
+
+    .user-card .send-message:hover {
+      color: #a21845;
+    }
+
+    /* Chat panel a la derecha */
+    .chat-panel {
+      position: fixed;
+      right: 0;
+      top: 70px; 
+      width: 300px;
+      height: calc(100% - 70px);
+      background-color: #fff;
+      border-left: 1px solid #dbdbdb;
+      box-shadow: -4px 0 12px rgba(0,0,0,0.1);
+      padding: 15px;
+      display: none; 
+      flex-direction: column;
+      z-index: 100;
+    }
+
+    .chat-panel.active {
+      display: flex;
+    }
+
+    .chat-panel h4 {
+      margin-bottom: 10px;
+    }
+
+    .chat-panel textarea {
+      resize: none;
+      width: 100%;
+      height: 120px;
+      border: 1px solid #dbdbdb;
+      border-radius: 6px;
+      padding: 5px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .chat-panel .send-btn {
+      background-color: #e13b63;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .chat-panel .send-btn:hover {
+      background-color: #df3767;
+    }
+
+    /* Ajuste del user-card */
+    .user-card {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background-color: #fff;
+      border: 1px solid #dbdbdb;
+      border-radius: 10px;
+      padding: 10px 15px;
+      position: relative;
+    }
+
+    .user-card:hover {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Mensaje temporal de confirmación */
+    .sent-msg {
+      position: fixed;
+      top: 80px; 
+      right: 20px;
+      background-color: #e13b63;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      font-size: 14px;
+      display: none;
+      z-index: 1000;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="../img/logo_texto.png" alt="Logo Recetagram" class="logo-full">
+    </div>
+
+    <nav class="nav-links">
+      <a href="menu.html"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
+      <div class="notification-wrapper-sidebar" id="notif-wrapper">
+            <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i>
+            <span>Notificaciones</span>
+            <span class="notif-badge" id="notif-badge">3</span>
+      </div>
+      <a href="crear-receta.html"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
+      <a href="amigos.html" class="active"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>
+    </nav>
+
+    <div class="logout-wrapper">
+      <a href="index.html" id="index-link">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Cerrar sesión</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Dropdown de notificaciones (overlay sobre feed) -->
+  <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar">
+    <div class="notif-item">
+        <img src="https://i.pravatar.cc/40?img=10" alt="chef_luisa" class="notif-avatar">
+        <p><b>chef_luisa</b> le dio like a tu publicación</p>
+    </div>
+    <div class="notif-item">
+        <img src="https://i.pravatar.cc/40?img=25" alt="recetas_ana" class="notif-avatar">
+        <p><b>recetas_ana</b> te envió una solicitud de amistad</p>
+    </div>
+    <div class="notif-item">
+        <img src="https://i.pravatar.cc/40?img=10" alt="chef_luisa" class="notif-avatar">
+        <p><b>chef_luisa</b> le dio like a tu publicación</p>
+    </div>
+  </div>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="search-wrapper">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input type="text" placeholder="Buscar amigos..." class="search-bar">
+    </div>
+
+    <div class="top-right-icons">
+        <a href="chat.html"><i class="fa-solid fa-envelope"></i></a>
+        <a href="perfil.html"><i class="fa-solid fa-user"></i></a>
+    </div>
+  </div>
+
+  <!-- Contenido principal -->
+  <main class="explore-section">
+    <div class="results usuarios">
+      <div class="user-card" data-username="@chef_carlos">
+        <img src="https://i.pravatar.cc/60?img=12" alt="Usuario" class="avatar-large">
+        <div>
+          <h4>@chef_carlos</h4>
+          <p>Amante de la cocina mediterránea 🍅</p>
+        </div>
+        <i class="fa-solid fa-envelope send-message" title="Enviar mensaje"></i>
+      </div>
+
+      <div class="user-card" data-username="@healthy_life">
+        <img src="https://i.pravatar.cc/60?img=18" alt="Usuario" class="avatar-large">
+        <div>
+          <h4>@healthy_life</h4>
+          <p>Recetas saludables y smoothies 🥬</p>
+        </div>
+        <i class="fa-solid fa-envelope send-message" title="Enviar mensaje"></i>
+      </div>
+
+      <div class="user-card" data-username="@recetas_ana">
+        <img src="https://i.pravatar.cc/60?img=25" alt="Usuario" class="avatar-large">
+        <div>
+          <h4>@recetas_ana</h4>
+          <p>Postres y recetas fáciles 🍰</p>
+        </div>
+        <i class="fa-solid fa-envelope send-message" title="Enviar mensaje"></i>
+      </div>
+      <div class="user-card" data-username="@chef_maria">
+        <img src="https://i.pravatar.cc/60?img=31" alt="Usuario" class="avatar-large">
+        <div>
+          <h4>@chef_maria</h4>
+          <p>Amante de la repostería y panadería 🍞</p>
+        </div>
+        <i class="fa-solid fa-envelope send-message" title="Enviar mensaje"></i>
+      </div>
+
+      <div class="user-card" data-username="@vegan_john">
+        <img src="https://i.pravatar.cc/60?img=67" alt="Usuario" class="avatar-large">
+        <div>
+          <h4>@vegan_john</h4>
+          <p>Recetas veganas y saludables 🥑</p>
+        </div>
+        <i class="fa-solid fa-envelope send-message" title="Enviar mensaje"></i>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Chat panel derecho -->
+  <div class="chat-panel" id="chat-panel">
+    <h4 id="chat-username">@usuario</h4>
+    <textarea placeholder="Escribe tu mensaje..."></textarea>
+    <button class="send-btn">Enviar</button>
+  </div>
+
+  <!-- Mensaje de confirmación -->
+  <div class="sent-msg" id="sent-msg">Mensaje enviado</div>
+
+  <script>
+    const chatPanel = document.getElementById('chat-panel');
+    const chatUsername = document.getElementById('chat-username');
+    const sendButtons = document.querySelectorAll('.send-message');
+    const sendBtn = chatPanel.querySelector('.send-btn');
+    const sentMsg = document.getElementById('sent-msg');
+
+    // Abrir panel al hacer clic en icono
+    sendButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const userCard = btn.closest('.user-card');
+        const username = userCard.dataset.username;
+        chatUsername.textContent = username;
+        chatPanel.classList.add('active');
+      });
+    });
+
+    // Cerrar panel si se hace clic fuera
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.send-message') && !e.target.closest('.chat-panel')) {
+        chatPanel.classList.remove('active');
+      }
+    });
+
+    // Enviar mensaje
+    sendBtn.addEventListener('click', () => {
+    chatPanel.classList.remove('active'); // cerrar panel
+    sentMsg.style.display = 'block'; // mostrar mensaje
+
+    // Ocultar mensaje después de 2 segundos
+    setTimeout(() => {
+      sentMsg.style.display = 'none';
+    }, 2000);
+
+    // Limpiar textarea
+      chatPanel.querySelector('textarea').value = '';
+    });
+
+    // Usuarios clicables
+    document.querySelectorAll('.user-card').forEach(card => {
+      card.addEventListener('click', e => {
+        // Evitar que se active al hacer clic en el botón de enviar mensaje
+        if (!e.target.closest('.send-message')) {
+          const username = card.dataset.username; // opcional si quieres pasar info
+          window.location.href = `perfil.html?user=${encodeURIComponent(username)}`;
+        }
+      });
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+    const notifWrapper = document.getElementById('notif-wrapper');
+    const notifDropdown = document.getElementById('notif-dropdown-sidebar');
+
+    notifWrapper.addEventListener('click', (e) => {
+      e.stopPropagation(); // evita que se cierre inmediatamente
+      notifDropdown.classList.toggle('active'); // mostrar/ocultar dropdown
+    });
+
+    // Cerrar dropdown si se hace click fuera
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#notif-wrapper') && !e.target.closest('#notif-dropdown-sidebar')) {
+        notifDropdown.classList.remove('active');
+      }
+    });
+  });
+
+  // Búsqueda de amigos
+  const searchInput = document.querySelector('.search-bar');
+  const userCards = document.querySelectorAll('.user-card');
+
+  searchInput.addEventListener('input', () => {
+    const text = searchInput.value.toLowerCase();
+
+    userCards.forEach(card => {
+      const username = card.dataset.username.toLowerCase();
+      const desc = card.querySelector('p').textContent.toLowerCase();
+
+      // Mostrar si coincide con @usuario o su descripción
+      if (username.includes(text) || desc.includes(text)) {
+        card.style.display = "flex";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+
+
+  </script>
+   <!-- Script -->
+  <script src="../js/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explorar - Recetagram</title>
+  <link rel="stylesheet" href="../css/explorar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+        <img src="../img/logo_texto.png" alt="Logo Recetagram" class="logo-full">
+    </div>
+
+    <nav class="nav-links">
+        <a href="menu.html"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
+
+        <div class="notification-wrapper-sidebar" id="notif-wrapper">
+            <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i>
+            <span>Notificaciones</span>
+            <span class="notif-badge" id="notif-badge">3</span>
+        </div>
+
+        <a href="crear-receta.html"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
+        <a href="amigos.html"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>
+    </nav>
+
+    <div class="logout-wrapper">
+        <a href="index.html" id="index-link">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Cerrar sesión</span>
+        </a>
+    </div>
+  </aside>
+
+  <!-- Dropdown de notificaciones -->
+  <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar"></div>
+
+   <!-- Barra superior con búsqueda -->
+  <div class="topbar">
+  <div class="search-filters-wrapper">
+        <div class="search-wrapper">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" placeholder="Buscar recetas o usuarios..." class="search-bar">
+        </div>
+
+        <div class="filters-wrapper">
+        <div class="filters-btn" id="filters-btn">
+            <i class="fa-solid fa-sliders"></i> Filtros
+        </div>
+
+        <!-- Dropdown de filtros con iconos -->
+        <div class="filters-dropdown" id="filters-dropdown">
+            <div class="filter" data-filter="sin-gluten">
+                <img src="../img/sin-gluten.png" class="filter-icon default" alt="Sin gluten">
+                <img src="../img/sin-gluten-blanc.png" class="filter-icon hover" alt="Sin gluten blanco">
+                Sin gluten
+            </div>
+
+            <div class="filter" data-filter="vegano">
+            <i class="fa-solid fa-leaf filter-icon"></i> Vegano
+            </div>
+            <div class="filter" data-filter="vegetariano">
+            <i class="fa-solid fa-carrot filter-icon"></i> Vegetariano
+            </div>
+            <div class="filter" data-filter="healthy">
+            <i class="fa-solid fa-heart-pulse filter-icon"></i> Healthy
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Iconos en la esquina superior derecha -->
+    <div class="top-right-icons">
+        <a href="chat.html" class="icon"><i class="fa-solid fa-envelope"></i></a>
+        <a href="perfil.html" class="icon"><i class="fa-solid fa-user"></i></a>
+    </div>
+
+  <!-- Contenido principal -->
+  <main class="explore-section">
+
+    <!-- Pestañas -->
+    <div class="tabs">
+      <button class="tab active" id="tab-recetas">Recetas</button>
+      <button class="tab" id="tab-usuarios">Usuarios</button>
+    </div>
+
+  <!-- Resultados de recetas -->
+<div class="results recetas">
+  <a href="receta.html" class="recipe-link">
+    <article class="recipe-card">
+      <img src="../img/batido_verde.jpg" alt="Smoothie verde detox con espinaca y kale" class="recipe-img">
+      <div class="recipe-info">
+        <h3 class="recipe-title">Smoothie verde detox 🥬</h3>
+        <div class="recipe-user">
+          <img src="https://i.pravatar.cc/40?img=18" class="avatar" alt="Perfil de @healthy_life">
+          <span>@healthy_life</span>
+        </div>
+        <p class="recipe-desc">
+          <i class="fa-solid fa-fire recipe-icon" aria-hidden="true"></i> Fácil &nbsp;
+          <i class="fa-solid fa-clock recipe-icon" aria-hidden="true"></i> 10 min &nbsp;
+          <i class="fa-solid fa-leaf recipe-icon" aria-hidden="true"></i> Healthy
+        </p>
+      </div>
+    </article>
+  </a>
+
+  <a href="receta.html" class="recipe-link">
+    <article class="recipe-card">
+      <img src="../img/pan_sin_gl.jpg" alt="Pan sin gluten artesanal" class="recipe-img">
+      <div class="recipe-info">
+        <h3 class="recipe-title">Pan sin gluten artesanal 🍞</h3>
+        <div class="recipe-user">
+          <img src="https://i.pravatar.cc/40?img=26" class="avatar" alt="Perfil de @glutenfree_marta">
+          <span>@glutenfree_marta</span>
+        </div>
+        <p class="recipe-desc">
+          <i class="fa-solid fa-fire recipe-icon" aria-hidden="true"></i> Media &nbsp;
+          <i class="fa-solid fa-clock recipe-icon" aria-hidden="true"></i> 45 min &nbsp;
+          <img src="../img/sin-gluten.png" alt="Icono sin gluten" class="diet-icon"> Sin gluten
+        </p>
+      </div>
+    </article>
+  </a>
+</div>
+
+<!-- Resultados de usuarios -->
+<div class="results usuarios hidden">
+  <ul>
+    <li class="user-card">
+      <img src="https://i.pravatar.cc/60?img=12" alt="Perfil de @chef_carlos" class="avatar-large">
+      <div>
+        <h4>@chef_carlos</h4>
+        <p>Amante de la cocina mediterránea 🍅</p>
+      </div>
+    </li>
+    <li class="user-card">
+      <img src="https://i.pravatar.cc/60?img=27" alt="Perfil de @laura_tartas" class="avatar-large">
+      <div>
+        <h4>@laura_tartas</h4>
+        <p>Reina de las tartas 🍰</p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- Mensaje si no hay resultados -->
+<div id="no-results-msg" style="display:none;">No se encontraron resultados</div>
+
+<!-- Script -->
+<script src="../js/explorar.js"></script>
+<script src="../js/menu.js"></script>

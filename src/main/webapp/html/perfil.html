@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recetagram — Mi perfil</title>
+
+  <link rel="stylesheet" href="../css/menu.css">
+  <link rel="stylesheet" href="../css/perfil.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo"><img src="../img/logo_texto.png" class="logo-full" alt="Recetagram"></div>
+    <nav class="nav-links">
+      <a href="menu.html"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+      <div class="notification-wrapper-sidebar" id="notif-wrapper">
+        <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i><span>Notificaciones</span>
+        <span class="notif-badge" id="notif-badge">3</span>
+      </div>
+      <a href="crear-receta.html"><i class="fa-solid fa-circle-plus"></i><span>Crear receta</span></a>
+      <a href="amigos.html"><i class="fa-solid fa-user-group"></i><span>Amigos</span></a>
+    </nav>
+    <div class="logout-wrapper">
+      <a href="index.html" id="index-link"><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></a>
+    </div>
+  </aside>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-actions">
+      <a href="chat.html" class="icon-btn" aria-label="Mensajes"><i class="fa-solid fa-envelope"></i></a>
+      <a href="perfil.html" class="icon-btn" aria-label="Perfil"><i class="fa-solid fa-user"></i></a>
+    </div>
+  </div>
+
+  <!-- CONTENIDO CENTRADO -->
+  <main class="page-wrap">
+    <div class="center-col">
+      <!-- Cabecera perfil propio -->
+      <section class="header">
+        <div class="body">
+        <img id="avatarYo" class="avatar-lg" src="../img/avatar-placeholder.png" alt="Avatar de usuario">
+          <div style="flex:1">
+            <div class="row">
+              <h2 id="usernameYo" class="u">@tuusuario</h2>
+              <button id="btnEditarPerfil" class="btn">Editar perfil</button>
+              <button id="btnVerAmigos" class="btn">Ver amigos</button>
+            </div>
+            <div class="meta" id="nombreYo">Nombre y bio</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tus recetas -->
+      <section class="card">
+        <div class="card-body">
+          <h3 style="margin-top:0">Mis recetas</h3>
+          <div id="misRecetas" class="lista"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar"></div>
+
+  <script src="../js/menu.js"></script>
+  <script src="../js/perfil.js"></script>
+</body>
+</html>
+

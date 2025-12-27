@@ -1,0 +1,205 @@
+/*Centrado*/
+.page-wrap{ 
+    margin-left:300px; 
+    margin-top:120px; 
+    padding:16px; }
+
+.center-col{ 
+    width:860px; 
+    max-width:calc(100vw - 360px); 
+    margin:0 auto; }
+
+/*Inputs*/
+.input-title{
+  width:100%;
+  border:1px solid #dbdbdb;
+  border-radius:10px;
+  padding:12px 14px;
+  font-size:22px;
+  font-weight:700;
+  outline:none;}
+
+.input-title::placeholder{ 
+    color:#aaa; }
+
+.form-details .select,
+
+.form-details .input{
+  border:1px solid #dbdbdb;
+  border-radius:999px;
+  padding:6px 10px;
+  outline:none;}
+
+
+.dietas-select{ 
+    display:flex; 
+    gap:14px; 
+    flex-wrap:wrap; }
+
+.chk{ 
+    display:flex; 
+    align-items:center; 
+    gap:6px; }
+
+/*Pasos editables*/
+.steps-edit{ 
+    list-style:decimal;
+    padding-left:18px; 
+    display:flex; 
+    flex-direction:column; 
+    gap:10px; }
+
+.step-row{ 
+    display:flex; 
+    align-items:center; 
+    gap:8px; }
+
+.step-row input{ 
+    flex:1; 
+    border:1px solid #dbdbdb; 
+    border-radius:8px; 
+    padding:8px 10px; }
+
+.step-row .del{ 
+    border:0; 
+    background:#eee; 
+    border-radius:8px; 
+    padding:7px 9px; 
+    cursor:pointer; }
+
+.step-row .del:hover{ 
+    background:#e2e2e2; }
+
+/*Selector de imagen con drag&drop*/
+.image-drop{
+  position:relative;
+  border:1px dashed #bbb;
+  border-radius:12px;
+  min-height:260px;
+  cursor:pointer;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;}
+
+.image-drop .photo{ 
+    width:100%; 
+    height:auto; 
+    display:none; 
+    border-radius:10px; }
+
+.image-drop .placeholder{ 
+    text-align:center; 
+    color:#666; }
+
+.image-drop .placeholder i{ 
+    font-size:42px; 
+    display:block; 
+    margin-bottom:8px; }
+
+.row-space{ 
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center; 
+    gap:10px; }
+
+.btn-sec{
+  border:1px solid #dbdbdb; 
+  background:#fff; 
+  border-radius:999px;
+  padding:.45rem .8rem; 
+  cursor:pointer;}
+
+.btn-sec:hover{ 
+    background:#f7f7f7; }
+
+.actions{ 
+    display:flex; 
+    justify-content:flex-end; 
+    margin-top:14px; }
+
+.save-btn{ 
+    background:#1f8b4c; } /*verde para guardar*/
+
+/*Responsive*/
+/* ======== MÓVIL: max-width 768px ======== */
+@media (max-width: 768px) {
+
+  /* Ajuste general de la página */
+  .page-wrap {
+    margin-left: 70px; /* sidebar reducido */
+    margin-top: 90px;  /* topbar */
+    padding: 12px;
+  }
+
+  .center-col {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+
+  /* Inputs principales */
+  .input-title {
+    font-size: 18px;
+    padding: 10px 12px;
+  }
+
+  .form-details .select,
+  .form-details .input {
+    padding: 6px 8px;
+  }
+
+  /* Selector de dietas */
+  .dietas-select {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* Pasos editables */
+  .steps-edit {
+    padding-left: 12px;
+    gap: 8px;
+  }
+
+  .step-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .step-row input {
+    padding: 6px 8px;
+  }
+
+  .step-row .del {
+    align-self: flex-end;
+    padding: 6px 8px;
+  }
+
+  /* Selector de imagen */
+  .image-drop {
+    min-height: 200px;
+  }
+
+  .image-drop .placeholder i {
+    font-size: 36px;
+  }
+
+  /* Botones secundarios */
+  .btn-sec {
+    padding: 0.35rem 0.6rem;
+  }
+
+  /* Actions */
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  /* Botón guardar */
+  .save-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,169 @@
+.topbar{ 
+    display:flex; 
+    align-items:center; 
+    height:70px; 
+    border-bottom:1px solid #ddd; 
+    background:#fff; }
+
+.topbar .search-wrapper{ 
+    display:none; }
+
+.topbar .topbar-actions{ 
+    margin-left:auto; 
+    display:flex; 
+    align-items:center; 
+    gap:18px;
+    padding-right:24px; }
+
+.topbar .icon-btn i{ 
+    font-size:22px; 
+    color:#444; 
+    cursor:pointer; }
+
+.topbar .icon-btn i:hover{ 
+    color:#000; }
+
+/*Área principal + centrado*/
+.page-wrap{ 
+    margin-left:300px; 
+    margin-top:120px; 
+    padding:16px; }
+
+.center-col{ 
+    width:860px; 
+    max-width:calc(100vw - 360px); 
+    margin:0 auto; }
+
+/*Cabecera usuario*/
+.header{ 
+    background:#fff; 
+    border:1px solid #dbdbdb; 
+    border-radius:10px; 
+    margin-bottom:12px; }
+
+.header .body{ 
+    padding:16px; 
+    display:flex; 
+    gap:14px; 
+    align-items:center; }
+
+.avatar-lg{ 
+    width:72px; 
+    height:72px; 
+    border-radius:50%; 
+    object-fit:cover; 
+    border:1px solid #dbdbdb; }
+
+.row{ 
+    display:flex; 
+    gap:10px; 
+    align-items:center; 
+    flex-wrap:wrap; }
+
+.u{ 
+    margin:0; }
+
+.btn{ 
+    border:1px solid #dbdbdb; 
+    border-radius:999px; 
+    padding:.5rem .9rem; 
+    background:#fff; 
+    cursor:pointer; }
+
+.btn:hover{ 
+    background:#f7f7f7; }
+
+.meta{ 
+    color:#555; }
+
+/*Tarjeta lista de recetas*/
+.card{ 
+    background:#fff; 
+    border:1px solid #dbdbdb; 
+    border-radius:10px; }
+
+.card-body{ 
+    padding:16px; }
+
+.lista{ 
+    display:flex; 
+    flex-direction:column; 
+    gap:20px; }
+
+/* -------------------------
+   Adaptación para pantallas <=768px
+   ------------------------- */
+@media screen and (max-width: 768px) {
+
+    /* Topbar */
+    .topbar {
+        height:60px;
+        padding:0 12px;
+    }
+
+    .topbar .topbar-actions {
+        gap:10px;
+        padding-right:8px;
+    }
+
+    .topbar .icon-btn i {
+        font-size:18px;
+    }
+
+    /* Página principal */
+    .page-wrap {
+        margin-left:0; /* eliminar margen lateral */
+        margin-top:80px;
+        padding:12px;
+    }
+
+    .center-col {
+        width:100%;
+        max-width:100%;
+        padding:0 8px;
+        margin:0 auto;
+    }
+
+    /* Cabecera de usuario */
+    .header {
+        border-radius:8px;
+        margin-bottom:10px;
+    }
+
+    .header .body {
+        flex-direction: column;
+        align-items: flex-start;
+        gap:8px;
+        padding:12px;
+    }
+
+    .avatar-lg {
+        width:56px;
+        height:56px;
+    }
+
+    /* Botones */
+    .btn {
+        padding:.4rem .7rem;
+        font-size:14px;
+    }
+
+    /* Tarjetas y listas */
+    .card {
+        border-radius:8px;
+    }
+
+    .card-body {
+        padding:12px;
+    }
+
+    .lista {
+        gap:16px;
+    }
+
+    /* Ajustes generales de filas */
+    .row {
+        gap:8px;
+        flex-wrap:wrap;
+    }
+}
