@@ -1,4 +1,5 @@
-package util;
+package com.mycompany.recetagram.util;
+
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

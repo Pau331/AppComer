@@ -17,8 +17,8 @@ CREATE TABLE usuarios (
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    foto_perfil BLOB,
-    biografia CLOB,
+    foto_perfil VARCHAR(255),
+    biografia VARCHAR(1000),
     isAdmin BOOLEAN DEFAULT FALSE
 );
 

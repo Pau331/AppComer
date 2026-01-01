@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Redirecciones
   btnLogin.addEventListener("click", () => {
-    window.location.href = "html/login.html";
+    window.location.href = "jsp/logIn.jsp";
   });
 
   btnRegistro.addEventListener("click", () => {
-    window.location.href = "html/registro.html";
+    window.location.href = "jsp/registro.jsp";
   });
 });
