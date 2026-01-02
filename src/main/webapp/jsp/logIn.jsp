@@ -71,7 +71,7 @@
             </form>
 
             <p class="auth-text">
-                ¿No tienes cuenta? <a href="registro.jsp">Regístrate aquí</a>
+                ¿No tienes cuenta? <a href="Registro.jsp">Regístrate aquí</a>
             </p>
         </div>
     </main>

@@ -18,6 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   btnRegistro.addEventListener("click", () => {
-    window.location.href = "jsp/registro.jsp";
+    window.location.href = "jsp/Registro.jsp";
   });
 });

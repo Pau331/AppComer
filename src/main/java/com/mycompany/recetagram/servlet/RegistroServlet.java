@@ -44,16 +44,16 @@ public class RegistroServlet extends HttpServlet {
 
                 // 5. Redirigir al Login tras el éxito
                 // Se usa contextPath para que la ruta sea siempre correcta
-                response.sendRedirect(request.getContextPath() + "/html/login.html");
+                response.sendRedirect(request.getContextPath() + "/jsp/logIn.jsp?success=registered");
                 
             } catch (SQLException e) {
                 // Error de base de datos (ej: usuario o email ya existen)
                 e.printStackTrace();
-                response.sendRedirect(request.getContextPath() + "/html/registro.html?error=db");
+                response.sendRedirect(request.getContextPath() + "/jsp/Registro.jsp?error=db");
             }
         } else {
             // Error: las contraseñas no coinciden
-            response.sendRedirect(request.getContextPath() + "/html/registro.html?error=password");
+            response.sendRedirect(request.getContextPath() + "/jsp/Registro.jsp?error=password");
         }
     }
 }

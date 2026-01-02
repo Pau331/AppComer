@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("formRegistro");
   const btn = document.getElementById("btnRegistrar");
 
-  // MANTENER: Efecto hover del botón (es puramente visual)
+ 
   btn.addEventListener("mouseover", () => (btn.style.backgroundColor = "#c12c54"));
   btn.addEventListener("mouseout", () => (btn.style.backgroundColor = "#e13b63"));
 
-  // MODIFICAR: Validación y envío
+  
   form.addEventListener("submit", (e) => {
     
     const nombre = document.getElementById("nombre").value.trim();
@@ -34,8 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // SI LLEGA AQUÍ: No hay e.preventDefault(), por lo que 
-    // el navegador enviará automáticamente los datos a tu Servlet.
     console.log("Datos validados en cliente. Enviando al servidor...");
   });
 });
