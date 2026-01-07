@@ -9,8 +9,8 @@ import java.util.List;
 
 public class RecetaDAO {
 
-    public void insertar(Receta r) throws SQLException {
-        String sql = "INSERT INTO recetas(usuario_id, titulo, pasos, tiempo_preparacion, dificultad, likes) VALUES(?,?,?,?,?,?)";
+    public void crearReceta(Receta r) throws SQLException {
+        String sql = "INSERT INTO recetas(usuario_id, titulo, pasos, tiempo_preparacion, dificultad) VALUES(?,?,?,?,?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, r.getUsuarioId());
@@ -18,20 +18,29 @@ public class RecetaDAO {
             ps.setString(3, r.getPasos());
             ps.setInt(4, r.getTiempoPreparacion());
             ps.setString(5, r.getDificultad());
-            ps.setInt(6, r.getLikes());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
-            if(rs.next()) r.setId(rs.getInt(1));
+            if (rs.next()) r.setId(rs.getInt(1));
         }
     }
 
-    public List<Receta> listarTodos() throws SQLException {
-        List<Receta> lista = new ArrayList<>();
-        String sql = "SELECT * FROM recetas";
+    public void borrarReceta(int recetaId, int usuarioId) throws SQLException {
+        String sql = "DELETE FROM recetas WHERE id=? AND usuario_id=?";
         try (Connection conn = DatabaseConnection.getConnection();
-             Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
-            while(rs.next()){
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, recetaId);
+            ps.setInt(2, usuarioId);
+            ps.executeUpdate();
+        }
+    }
+
+    public List<Receta> listarTodas() throws SQLException {
+        List<Receta> lista = new ArrayList<>();
+        String sql = "SELECT * FROM recetas ORDER BY id DESC";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
                 Receta r = new Receta();
                 r.setId(rs.getInt("id"));
                 r.setUsuarioId(rs.getInt("usuario_id"));
@@ -44,5 +53,26 @@ public class RecetaDAO {
             }
         }
         return lista;
+    }
+
+    public Receta obtenerPorId(int id) throws SQLException {
+        String sql = "SELECT * FROM recetas WHERE id=?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Receta r = new Receta();
+                r.setId(rs.getInt("id"));
+                r.setUsuarioId(rs.getInt("usuario_id"));
+                r.setTitulo(rs.getString("titulo"));
+                r.setPasos(rs.getString("pasos"));
+                r.setTiempoPreparacion(rs.getInt("tiempo_preparacion"));
+                r.setDificultad(rs.getString("dificultad"));
+                r.setLikes(rs.getInt("likes"));
+                return r;
+            }
+        }
+        return null;
     }
 }
