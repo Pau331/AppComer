@@ -12,6 +12,7 @@ tabRecetas.addEventListener('click', () => {
 
     filtersBtn.style.display = "flex";
 });
+
 tabUsuarios.addEventListener('click', () => {
     tabUsuarios.classList.add('active');
     tabRecetas.classList.remove('active');
@@ -28,8 +29,9 @@ const filtersDropdown = document.getElementById('filters-dropdown');
 const filters = document.querySelectorAll(".filter");
 
 filtersBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); // Evitar que se cierre inmediatamente
-    filtersDropdown.style.display = filtersDropdown.style.display === 'flex' ? 'none' : 'flex';
+    e.stopPropagation();
+    filtersDropdown.style.display =
+        filtersDropdown.style.display === 'flex' ? 'none' : 'flex';
 });
 
 filters.forEach(filter => {
@@ -47,7 +49,9 @@ document.addEventListener("click", (e) => {
 });
 
 function obtenerFiltrosActivos() {
-    return Array.from(filters).filter(f => f.classList.contains("active")).map(f => f.dataset.filter);
+    return Array.from(filters)
+        .filter(f => f.classList.contains("active"))
+        .map(f => f.dataset.filter);
 }
 
 function recetaCoincideFiltros(card, filtros) {
@@ -70,13 +74,15 @@ function filtrarResultados(query) {
         const username = card.querySelector('.recipe-user span').textContent.toLowerCase();
         const coincideTexto = title.includes(q) || username.includes(q);
         const coincideFiltros = recetaCoincideFiltros(card, filtrosActivos);
-        card.parentElement.style.display = (coincideTexto && coincideFiltros) ? 'block' : 'none';
+        card.parentElement.style.display =
+            (coincideTexto && coincideFiltros) ? 'block' : 'none';
     });
 
     usuarioCards.forEach(card => {
         const username = card.querySelector('h4').textContent.toLowerCase();
         const desc = card.querySelector('p').textContent.toLowerCase();
-        card.style.display = (username.includes(q) || desc.includes(q)) ? 'flex' : 'none';
+        card.style.display =
+            (username.includes(q) || desc.includes(q)) ? 'flex' : 'none';
     });
 }
 
@@ -100,52 +106,8 @@ document.querySelectorAll('.user-card').forEach(card => {
     card.addEventListener('click', e => {
         if (!e.target.closest('.send-message')) {
             const username = card.dataset.username;
-            window.location.href = `perfil.html?user=${encodeURIComponent(username)}`;
+            window.location.href =
+                `perfil.jsp?user=${encodeURIComponent(username)}`;
         }
     });
 });
-
-// ---------------------- NOTIFICACIONES ----------------------
-const notifWrapper = document.getElementById('notif-wrapper');
-const notifDropdown = document.getElementById('notif-dropdown-sidebar');
-const notifBadge = document.getElementById('notif-badge');
-
-if (notifWrapper && notifDropdown && notifBadge) {
-
-    let notificaciones = [
-        { id: 1, usuario: "chef_luisa", foto: "https://i.pravatar.cc/40?img=10", texto: "le dio like a tu publicación" },
-        { id: 2, usuario: "recetas_ana", foto: "https://i.pravatar.cc/40?img=25", texto: "te envió una solicitud de amistad" },
-        { id: 3, usuario: "healthychef", foto: "https://i.pravatar.cc/40?img=30", texto: "le comentó a tu receta" }
-    ];
-
-    function pintarNotificaciones() {
-        if (notificaciones.length === 0) {
-            notifDropdown.innerHTML = '<p>No tienes nuevas notificaciones</p>';
-            notifBadge.style.display = 'none';
-            return;
-        }
-
-        notifDropdown.innerHTML = notificaciones.map(n => `
-            <div class="notif-item">
-                <img src="${n.foto}" alt="${n.usuario}" class="notif-avatar">
-                <p><b>${n.usuario}</b> ${n.texto}</p>
-            </div>
-        `).join("");
-
-        notifBadge.textContent = notificaciones.length;
-        notifBadge.style.display = 'inline-block';
-    }
-
-    pintarNotificaciones();
-
-    notifWrapper.addEventListener('click', e => {
-        e.stopPropagation();
-        notifDropdown.style.display = notifDropdown.style.display === 'block' ? 'none' : 'block';
-    });
-
-    notifDropdown.addEventListener('click', e => e.stopPropagation());
-
-    document.addEventListener('click', () => {
-        notifDropdown.style.display = 'none';
-    });
-}
