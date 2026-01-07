@@ -33,6 +33,15 @@ CREATE TABLE recetas (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
+CREATE TABLE likes (
+    usuario_id INT,
+    receta_id INT,
+    PRIMARY KEY (usuario_id, receta_id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (receta_id) REFERENCES recetas(id) ON DELETE CASCADE
+);
+
+
 CREATE TABLE caracteristicas (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     nombre VARCHAR(20) CHECK (nombre IN ('Vegetariano','Vegano','Sin gluten','Healthy')) NOT NULL
