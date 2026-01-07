@@ -1,23 +1,49 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.recetagram.dao;
 
 import com.mycompany.recetagram.util.DatabaseConnection;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class LikeDAO {
 
-    public void darLike(int recetaId) throws SQLException {
-        String sql = "UPDATE recetas SET likes = likes + 1 WHERE id=?";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, recetaId);
+    public boolean existeLike(int usuarioId, int recetaId) throws SQLException {
+        String sql = "SELECT 1 FROM likes WHERE usuario_id=? AND receta_id=?";
+        try (Connection c = DatabaseConnection.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, usuarioId);
+            ps.setInt(2, recetaId);
+            return ps.executeQuery().next();
+        }
+    }
+
+    public void darLike(int usuarioId, int recetaId) throws SQLException {
+        String sql = "INSERT INTO likes(usuario_id, receta_id) VALUES (?,?)";
+        try (Connection c = DatabaseConnection.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, usuarioId);
+            ps.setInt(2, recetaId);
+            ps.executeUpdate();
+        }
+    }
+
+    public void quitarLike(int usuarioId, int recetaId) throws SQLException {
+        String sql = "DELETE FROM likes WHERE usuario_id=? AND receta_id=?";
+        try (Connection c = DatabaseConnection.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, usuarioId);
+            ps.setInt(2, recetaId);
+            ps.executeUpdate();
+        }
+    }
+
+    public void actualizarContador(int recetaId, int delta) throws SQLException {
+        String sql = "UPDATE recetas SET likes = likes + ? WHERE id=?";
+        try (Connection c = DatabaseConnection.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, delta);
+            ps.setInt(2, recetaId);
             ps.executeUpdate();
         }
     }
 }
+
+
