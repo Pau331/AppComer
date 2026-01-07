@@ -10,18 +10,29 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
-
 @WebServlet("/like")
 public class LikeServlet extends HttpServlet {
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
+            throws IOException {
+
+        int recetaId = Integer.parseInt(req.getParameter("recetaId"));
+        int usuarioId = (int) req.getSession().getAttribute("usuarioId");
+
+        LikeDAO dao = new LikeDAO();
+
         try {
-            int recetaId = Integer.parseInt(request.getParameter("recetaId"));
-            new LikeDAO().darLike(recetaId);
+            if (dao.existeLike(usuarioId, recetaId)) {
+                dao.quitarLike(usuarioId, recetaId);
+                dao.actualizarContador(recetaId, -1);
+            } else {
+                dao.darLike(usuarioId, recetaId);
+                dao.actualizarContador(recetaId, +1);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        response.sendRedirect("verReceta?id=" + request.getParameter("recetaId"));
+
+        res.sendRedirect("verReceta?id=" + recetaId);
     }
 }
