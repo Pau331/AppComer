@@ -1,20 +1,111 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.mycompany.recetagram.model.Receta" %>
-
-<h1>Feed de Recetas</h1>
+<%@ page import="com.mycompany.recetagram.model.Usuario" %>
+<%@ page import="com.mycompany.recetagram.dao.UsuarioDAO" %>
+<%@ page import="com.mycompany.recetagram.dao.RecetaCaracteristicaDAO" %>
 
 <%
-    List<Receta> recetas = (List<Receta>) request.getAttribute("recetas");
-    if (recetas != null) {
-        for (Receta r : recetas) {
+List<Receta> recetas = (List<Receta>) request.getAttribute("recetas");
+UsuarioDAO udao = new UsuarioDAO();
+RecetaCaracteristicaDAO rcdao = new RecetaCaracteristicaDAO();
+
+if (recetas == null) {
 %>
-    <div class="receta-card">
-        <h3><%= r.getTitulo() %></h3>
-        <p>Dificultad: <%= r.getDificultad() %></p>
-        <p>Likes: <%= r.getLikes() %></p>
-        <a href="verReceta?id=<%= r.getId() %>">Ver receta</a>
-    </div>
+    <p>No se pudieron cargar las recetas.</p>
 <%
+} else if (recetas.isEmpty()) {
+%>
+    <p>No hay recetas de tus amigos todavía.</p>
+<%
+} else {
+    for (Receta r : recetas) {
+
+        /* =========================
+           USUARIO AUTOR
+        ========================== */
+        Usuario autor = udao.buscarPorId(r.getUsuarioId());
+        String username = "Desconocido";
+        String avatar = request.getContextPath() + "/img/default-avatar.png";
+
+        if (autor != null) {
+            username = autor.getUsername();
+
+            if (autor.getFotoPerfil() != null && !autor.getFotoPerfil().isEmpty()) {
+                String fotoPerfil = autor.getFotoPerfil();
+                if (fotoPerfil.startsWith("/")) fotoPerfil = fotoPerfil.substring(1);
+                if (!fotoPerfil.startsWith("img/")) fotoPerfil = "img/" + fotoPerfil;
+                avatar = request.getContextPath() + "/" + fotoPerfil;
+            }
         }
-    }
+
+        /* =========================
+           FOTO RECETA
+        ========================== */
+        String recetaFoto = request.getContextPath() + "/img/default-recipe.jpg";
+
+        if (r.getFoto() != null && !r.getFoto().isEmpty()) {
+            String foto = r.getFoto();
+            if (foto.startsWith("/")) foto = foto.substring(1);
+            if (!foto.startsWith("img/")) foto = "img/" + foto;
+            recetaFoto = request.getContextPath() + "/" + foto;
+        }
+
+        /* =========================
+           DIETAS / CARACTERÍSTICAS
+        ========================== */
+        List<String> dietas = rcdao.listarCaracteristicasReceta(r.getId());
+%>
+
+<a href="receta.jsp?id=<%= r.getId() %>" class="recipe-link">
+    <div class="recipe-card">
+
+        <!-- Contenedor de imagen flexible -->
+        <div class="recipe-img-container">
+            <img src="<%= recetaFoto %>" alt="<%= r.getTitulo() %>">
+        </div>
+
+        <div class="recipe-info">
+
+            <h2 class="recipe-title"><%= r.getTitulo() %></h2>
+
+            <div class="recipe-user">
+                <img src="<%= avatar %>" alt="<%= username %>" class="avatar">
+                <span class="username"><%= username %></span>
+            </div>
+
+            <div class="recipe-details">
+
+                <div class="detail">
+                    <i class="fa-solid fa-star"></i>
+                    <span>Dificultad: <%= r.getDificultad() %></span>
+                </div>
+
+                <div class="detail">
+                    <i class="fa-solid fa-clock"></i>
+                    <span>Tiempo: <%= r.getTiempoPreparacion() %> min</span>
+                </div>
+
+                <% for (String d : dietas) { %>
+                    <div class="detail">
+                        <% if (d.equalsIgnoreCase("Vegetariano")) { %>
+                            <i class="fa-solid fa-leaf"></i>
+                        <% } else if (d.equalsIgnoreCase("Vegano")) { %>
+                            <i class="fa-solid fa-seedling"></i>
+                        <% } else if (d.equalsIgnoreCase("Sin gluten")) { %>
+                            <img src="<%= request.getContextPath() %>/img/sin-gluten.png" class="diet-icon">
+                        <% } else if (d.equalsIgnoreCase("Healthy")) { %>
+                            <i class="fa-solid fa-apple-whole"></i>
+                        <% } %>
+                        <span><%= d %></span>
+                    </div>
+                <% } %>
+
+            </div>
+        </div>
+    </div>
+</a>
+
+<%
+    } // for recetas
+} // else
 %>
