@@ -59,5 +59,33 @@ public class ComentarioDAO {
         ps.executeUpdate();
     }
 }
+ 
+    public List<Comentario> listarTodos() throws SQLException {
+    List<Comentario> lista = new ArrayList<>();
+    String sql = "SELECT * FROM comentarios";
+    try (Connection conn = DatabaseConnection.getConnection();
+         Statement st = conn.createStatement();
+         ResultSet rs = st.executeQuery(sql)) {
+        while (rs.next()) {
+            Comentario c = new Comentario();
+            c.setId(rs.getInt("id"));
+            c.setRecetaId(rs.getInt("receta_id"));
+            c.setUsuarioId(rs.getInt("usuario_id"));
+            c.setTexto(rs.getString("texto"));
+            c.setFecha(rs.getTimestamp("fecha"));
+            lista.add(c);
+        }
+    }
+    return lista;
+}
+
+public boolean eliminarPorId(int id) throws SQLException {
+    String sql = "DELETE FROM comentarios WHERE id = ?";
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, id);
+        return ps.executeUpdate() > 0;
+    }
+}
 
 }

@@ -116,4 +116,38 @@ public class UsuarioDAO {
         return ps.executeUpdate() > 0;
     }
 }
+    
+    // === BUSCAR USUARIOS POR USERNAME (para explorar/amigos) ===
+public List<Usuario> buscarPorUsernameLike(String q) throws SQLException {
+    List<Usuario> lista = new ArrayList<>();
+    String sql = "SELECT * FROM APP.usuarios WHERE LOWER(username) LIKE ?";
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, "%" + (q == null ? "" : q.toLowerCase()) + "%");
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Usuario u = new Usuario();
+                u.setId(rs.getInt("id"));
+                u.setUsername(rs.getString("username"));
+                u.setEmail(rs.getString("email"));
+                u.setFotoPerfil(rs.getString("foto_perfil"));
+                u.setBiografia(rs.getString("biografia"));
+                u.setAdmin(rs.getBoolean("isAdmin"));
+                lista.add(u);
+            }
+        }
+    }
+    return lista;
+}
+
+// === ELIMINAR USUARIO (ADMIN) ===
+public boolean eliminarPorId(int id) throws SQLException {
+    String sql = "DELETE FROM APP.usuarios WHERE id = ?";
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, id);
+        return ps.executeUpdate() > 0;
+    }
+}
+
 }
