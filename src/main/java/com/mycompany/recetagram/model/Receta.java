@@ -26,8 +26,8 @@ public class Receta {
     public void setDificultad(String dificultad) { this.dificultad = dificultad; }
     public int getLikes() { return likes; }
     public void setLikes(int likes) { this.likes = likes; }
-    public String getFotoPerfil() { return foto; }
-    public void setFotoPerfil(String foto) { this.foto = foto; }
+    public String getFoto() { return foto; }
+    public void setFoto(String foto) { this.foto = foto; }
    
 }
 
