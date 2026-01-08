@@ -42,4 +42,25 @@ public class NotificacionDAO {
         }
         return lista;
     }
+
+    public boolean marcarComoLeido(int notificacionId) throws SQLException {
+        String sql = "UPDATE notificaciones SET leido = TRUE WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, notificacionId);
+            return ps.executeUpdate() > 0;
+        }
+    }
+
+    public int contarNoLeidas(int usuarioId) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM notificaciones WHERE usuario_destino_id = ? AND leido = FALSE";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, usuarioId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
 }
