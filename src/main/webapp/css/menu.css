@@ -69,48 +69,45 @@ body {
 
 
 /* ----- Barra superior ----- */
+/* Topbar */
 .topbar {
   position: fixed;
   top: 0;
-  left: 250px; /* ancho de sidebar */
+  left: 250px;       /* ancho del sidebar */
   right: 0;
   height: 70px;
   background-color: #fff;
   border-bottom: 1px solid #dbdbdb;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center;      /* centra verticalmente contenido */
+  justify-content: center;  /* centra horizontalmente contenido */
   z-index: 100;
+  padding: 0 20px;
 }
 /* Contenedor relativo para la lupa */
 .search-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 0;               /* quitar margen */
 }
 
-/* Icono de lupa */
+/* Icono de lupa dentro del input */
 .search-icon {
-    position: absolute;
-    left: 12px;          /* separación del borde izquierdo */
-    font-size: 16px;
-    color: #8e8e8e;
-    pointer-events: none; /* para que no interfiera con escribir */
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
 }
 
-/* Ajustar padding del input para que no se superponga la lupa */
 .search-bar {
-    width: 350px;
-    height: 36px;
-    padding: 0 15px 0 35px; /* padding-left mayor para la lupa */
-    border: 1px solid #dbdbdb;
-    border-radius: 10px;
-    background-color: #fafafa;
-    font-size: 15px;
-    outline: none;
-    transition: all 0.2s ease;
+  width: 100%;
+  height: 36px;
+  padding-left: 35px; /* deja espacio para la lupa */
+  border-radius: 10px;
+  border: 1px solid #dbdbdb;
 }
-
 .search-bar:focus {
     background-color: #fff;
     border-color: #bdbdbd;
@@ -119,67 +116,74 @@ body {
 
 /* ----- Feed principal ----- */
 .feed {
-  margin-left: 300px; /* ancho sidebar + margen */
-  margin-top: 120px;  /* más espacio debajo de la barra superior */
+  margin-left: 300px; 
+  margin-top: 120px;  
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  padding-bottom: 80px;
 }
 
 /* ----- Tarjetas de receta ----- */
 .recipe-card {
-  display: flex;
-  background-color: #fff;
-  border: 1px solid #dbdbdb;
-  border-radius: 8px;
-  overflow: hidden;
-  width: 600px;
-  margin-bottom: 20px;
-  transition: box-shadow 0.2s;
+    display: flex;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 700px;
+    height: 220px;        /* altura fija */
+    flex-direction: row;
+    transition: box-shadow 0.2s;
 }
 
 .recipe-card:hover {
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-
-.recipe-img {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
+.recipe-img,
+.recipe-img-container img {
+    width: 250px;          /* ancho fijo */
+    height: 100%;          /* altura completa de la tarjeta */
+    object-fit: cover;     /* mantiene proporción y recorta si hace falta */
+    flex-shrink: 0;
 }
 
 .recipe-info {
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    justify-content: space-between; /* reparte espacio entre título, usuario y detalles */
 }
 
-.recipe-title {
-  font-size: 20px;
-  margin-bottom: 10px;
-  font-weight: 600;
+recipe-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;  /* menos margen para dejar más espacio */
+    line-height: 1.2;
 }
 
 .recipe-user {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;  /* menos margen para más espacio a detalles */
 }
 
 .recipe-user .avatar {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
 }
 
 .recipe-details {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;      
+    gap: 10px;
+    overflow: hidden;     
+    flex-grow: 1;      
+    min-height: 60px;
 }
 .recipe-link {
   text-decoration: none; /* quitar subrayado */
@@ -304,11 +308,11 @@ body {
 /* ----- Iconos superiores ----- */
 .top-right-icons {
   position: fixed;
-  top: 15px;
-  right: 20px;
+  top: 15px;      /* alineado al top */
+  right: 20px;    /* margen del borde */
   display: flex;
   gap: 20px;
-  z-index: 101;
+  z-index: 101;   /* superior a la topbar para que se vean */
 }
 
 .top-right-icons .icon {
@@ -393,6 +397,10 @@ body {
     width: 90%;
     top: 70px;
   }
+}
+
+.topbar .search-wrapper {
+  display: block !important;
 }
 
 /* ======== MÓVIL: max-width 768px ======== */
