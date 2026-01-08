@@ -65,7 +65,8 @@ $("#btnGuardar").addEventListener("click", async () => {
   formData.append("titulo", titulo);
   formData.append("dificultad", dificultad);
   formData.append("tiempo", tiempo);
-  formData.append("pasos", JSON.stringify(pasos)); // enviamos array como JSON
+  // Enviar pasos con nombres paso0, paso1, paso2, etc.
+  pasos.forEach((paso, i) => formData.append("paso" + i, paso));
   dietas.forEach(d => formData.append("dietas", d)); // múltiples valores
   if (fotoFile) formData.append("foto", fotoFile);
 
