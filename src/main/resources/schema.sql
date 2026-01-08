@@ -29,7 +29,7 @@ CREATE TABLE recetas (
     pasos CLOB NOT NULL,
     tiempo_preparacion INT,
     dificultad VARCHAR(10) CHECK (dificultad IN ('Facil','Media','Dificil')),
-    likes INT DEFAULT 0,
+    foto VARCHAR(255),
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
 
