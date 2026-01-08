@@ -2,14 +2,16 @@ SET SCHEMA APP;
 
 -- Eliminar tablas en orden correcto (para evitar violación de FK)
 -- En Derby, si la tabla no existe, el DROP fallará; en Java se puede capturar la excepción
-DROP TABLE mensajes_privados;
+DROP TABLE likes;
+DROP TABLE receta_caracteristica;
 DROP TABLE comentarios;
+DROP TABLE mensajes_privados;
 DROP TABLE notificaciones;
 DROP TABLE amigos;
-DROP TABLE receta_caracteristica;
-DROP TABLE caracteristicas;
 DROP TABLE recetas;
+DROP TABLE caracteristicas;
 DROP TABLE usuarios;
+
 
 -- Crear tablas
 CREATE TABLE usuarios (
@@ -107,10 +109,10 @@ INSERT INTO caracteristicas (nombre) VALUES
 ('Sin gluten'),
 ('Healthy');
 
-INSERT INTO recetas (usuario_id, titulo, pasos, tiempo_preparacion, dificultad, likes) VALUES
-(1, 'Pasta al pesto', 'Cocer la pasta. Preparar el pesto. Mezclar y servir.', 25, 'Facil', 10),
-(2, 'Tarta de manzana', 'Preparar masa. Hornear manzanas. Montar y hornear.', 60, 'Media', 5),
-(1, 'Ensalada vegana', 'Cortar verduras. Mezclar con aderezo. Servir.', 15, 'Facil', 8);
+INSERT INTO recetas (usuario_id, titulo, pasos, tiempo_preparacion, dificultad) VALUES
+(1, 'Pasta al pesto', 'Cocer la pasta. Preparar el pesto. Mezclar y servir.', 25, 'Facil'),
+(2, 'Tarta de manzana', 'Preparar masa. Hornear manzanas. Montar y hornear.', 60, 'Media'),
+(1, 'Ensalada vegana', 'Cortar verduras. Mezclar con aderezo. Servir.', 15, 'Facil');
 
 INSERT INTO receta_caracteristica (receta_id, caracteristica_id) VALUES
 (1, 1),
@@ -134,3 +136,10 @@ INSERT INTO comentarios (receta_id, usuario_id, texto) VALUES
 INSERT INTO mensajes_privados (remitente_id, destinatario_id, texto, leido) VALUES
 (1, 2, 'Hola Maria, ¿quieres probar mi nueva receta?', TRUE),
 (2, 1, '¡Claro, envíamela!', FALSE);
+
+-- Insertar likes de usuarios en recetas
+INSERT INTO likes (usuario_id, receta_id) VALUES
+(1, 2),  -- Juan le da like a la receta 2
+(2, 1),  -- Maria le da like a la receta 1
+(3, 1),  -- Admin le da like a la receta 1
+(1, 3);  -- Juan le da like a la receta 3
