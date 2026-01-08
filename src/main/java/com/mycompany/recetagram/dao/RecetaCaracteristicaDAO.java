@@ -46,4 +46,19 @@ public class RecetaCaracteristicaDAO {
             ps.executeUpdate();
         }
     }
+    
+    // Devuelve el ID de una característica a partir de su nombre
+    public int obtenerIdPorNombre(String nombre) throws SQLException {
+        String sql = "SELECT id FROM caracteristicas WHERE nombre = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, nombre);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                }
+            }
+        }
+        return -1; // Devuelve -1 si no existe
+    }
 }
