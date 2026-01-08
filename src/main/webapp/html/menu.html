@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recetagram</title>
+  <link rel="stylesheet" href="../css/menu.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Menú lateral -->
+  <aside class="sidebar">
+    <div class="logo">
+        <img src="../img/logo_texto.png" alt="Logo Recetagram" class="logo-full">
+    </div>
+
+    <nav class="nav-links">
+      <a href="menu.html"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
+
+      <div class="notification-wrapper-sidebar" id="notif-wrapper">
+          <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i>
+          <span>Notificaciones</span>
+          <span class="notif-badge" id="notif-badge">3</span>
+      </div>
+
+      <a href="crear-receta.html"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
+      <a href="amigos.html"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>
+    </nav>
+    <div class="logout-wrapper">
+        <a href="../index.html" id="index-link">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Cerrar sesión</span>
+        </a>
+    </div>
+  </aside>
+
+  <!-- Dropdown de notificaciones -->
+  <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar"></div>
+
+
+
+  <!-- Barra superior de búsqueda -->
+  <div class="topbar">
+    <div class="search-wrapper">
+    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+    <input 
+        type="text" 
+        placeholder="Buscar recetas o usuarios..." 
+        class="search-bar" 
+        onclick="window.location.href='explorar.html'"
+        readonly
+    >
+    </div>
+</div>
+
+  <!-- Iconos en la esquina superior derecha -->
+  <div class="top-right-icons">
+      <a href="chat.html" class="icon"><i class="fa-solid fa-envelope"></i></a>
+      <a href="../jsp/perfil.jsp" class="icon"><i class="fa-solid fa-user"></i></a>
+  </div>
+
+  <!-- Feed principal -->
+  <main class="feed" id="feed">
+  </main>
+
+  <!-- Script -->
+  <script src="../js/menu.js"></script>
+</body>
+</html>

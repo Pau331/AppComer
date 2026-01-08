@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recetagram — Crear receta</title>
+
+  <link rel="stylesheet" href="../css/menu.css">
+  <link rel="stylesheet" href="../css/receta.css">
+  <link rel="stylesheet" href="../css/crear-receta.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo"><img src="../img/logo_texto.png" class="logo-full" alt="Recetagram"></div>
+    <nav class="nav-links">
+      <a href="menu.html"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+      <div class="notification-wrapper-sidebar" id="notif-wrapper">
+        <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i><span>Notificaciones</span>
+        <span class="notif-badge" id="notif-badge">3</span>
+      </div>
+      <a class="active"><i class="fa-solid fa-circle-plus"></i><span>Crear receta</span></a>
+      <a href="amigos.html"><i class="fa-solid fa-user-group"></i><span>Amigos</span></a>
+    </nav>
+    <div class="logout-wrapper">
+      <a href="index.html" id="index-link"><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></a>
+    </div>
+  </aside>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-actions">
+      <a href="chat.html" class="icon-btn" aria-label="Mensajes"><i class="fa-solid fa-envelope"></i></a>
+      <a href="perfil.html" class="icon-btn" aria-label="Perfil"><i class="fa-solid fa-user"></i></a>
+    </div>
+  </div>
+
+  <!-- CONTENIDO -->
+  <main class="page-wrap">
+    <div class="center-col">
+      <div class="recipe-header">
+        <input id="tituloInput" class="input-title" type="text" placeholder="Título de la receta (ej. Brownies de Chocolate)">
+      </div>
+
+      <!-- INFO (dificultad/tiempo/dietas) -->
+      <div class="recipe-details form-details">
+        <div class="detail">
+          <i class="fa-solid fa-star"></i>
+          <select id="dificultad" class="select">
+            <option value="Baja">Baja</option>
+            <option value="Media">Media</option>
+            <option value="Alta">Alta</option>
+          </select>
+        </div>
+        <div class="detail">
+          <i class="fa-solid fa-clock"></i>
+          <input id="tiempo" class="input" type="text" placeholder="Tiempo (ej. 20 min)">
+        </div>
+        <div class="detail dietas-select">
+          <label class="chk"><input type="checkbox" value="Sin gluten"> Sin gluten</label>
+          <label class="chk"><input type="checkbox" value="Healthy"> Healthy</label>
+          <label class="chk"><input type="checkbox" value="Vegetariano"> Vegetariano</label>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- PASOS -->
+        <section class="card">
+          <div class="card-body">
+            <div class="row-space">
+              <h3>Pasos</h3>
+              <button id="btnAddPaso" class="btn-sec">+ Añadir paso</button>
+            </div>
+            <ol id="listaPasosEdit" class="steps-edit"></ol>
+          </div>
+        </section>
+
+        <!-- FOTO + GUARDAR -->
+        <aside class="card">
+          <div class="card-body">
+            <div class="image-drop" id="dropFoto">
+              <img id="prevFoto" class="photo" src="../img/photo-placeholder.png" alt="Previsualización">
+              <div class="placeholder" id="placeholderFoto">
+                <i class="fa-solid fa-image"></i>
+                <p>Arrastra una imagen o pulsa para seleccionar</p>
+              </div>
+              <input id="fotoInput" type="file" accept="image/*" hidden>
+            </div>
+
+            <div class="actions">
+              <button id="btnGuardar" class="btn-like save-btn"><i class="fa-solid fa-floppy-disk"></i> Guardar</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar"></div>
+
+  <script src="../js/menu.js"></script>
+  <script src="../js/crear-receta.js"></script>
+</body>
+</html>
+
