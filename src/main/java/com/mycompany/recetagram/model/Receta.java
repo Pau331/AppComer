@@ -8,6 +8,8 @@ public class Receta {
     private int tiempoPreparacion;
     private String dificultad;
     private int likes;
+    private String foto;
+
 
     // Getters y setters
     public int getId() { return id; }
@@ -24,5 +26,8 @@ public class Receta {
     public void setDificultad(String dificultad) { this.dificultad = dificultad; }
     public int getLikes() { return likes; }
     public void setLikes(int likes) { this.likes = likes; }
+    public String getFotoPerfil() { return foto; }
+    public void setFotoPerfil(String foto) { this.foto = foto; }
+   
 }
 
