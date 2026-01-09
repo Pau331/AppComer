@@ -89,4 +89,58 @@ public class RecetaDAO {
         }
         return null;
     }
+    
+     public List<Receta> listarTodas() throws SQLException {
+        List<Receta> lista = new ArrayList<>();
+        String sql = "SELECT * FROM recetas ORDER BY id DESC";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Receta r = new Receta();
+                r.setId(rs.getInt("id"));
+                r.setUsuarioId(rs.getInt("usuario_id"));
+                r.setTitulo(rs.getString("titulo"));
+                r.setPasos(rs.getString("pasos"));
+                r.setTiempoPreparacion(rs.getInt("tiempo_preparacion"));
+                r.setDificultad(rs.getString("dificultad"));
+                r.setLikes(rs.getInt("likes"));
+                lista.add(r);
+            }
+        }
+        return lista;
+    }
+     
+     
+     public boolean eliminarPorId(int id) throws SQLException {
+    String sql = "DELETE FROM recetas WHERE id = ?";
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, id);
+        return ps.executeUpdate() > 0;
+    }
+}
+
+public List<Receta> buscarPorTituloLike(String q) throws SQLException {
+    List<Receta> lista = new ArrayList<>();
+    String sql = "SELECT * FROM recetas WHERE LOWER(titulo) LIKE ?";
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, "%" + (q == null ? "" : q.toLowerCase()) + "%");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Receta r = new Receta();
+            r.setId(rs.getInt("id"));
+            r.setUsuarioId(rs.getInt("usuario_id"));
+            r.setTitulo(rs.getString("titulo"));
+            r.setPasos(rs.getString("pasos"));
+            r.setTiempoPreparacion(rs.getInt("tiempo_preparacion"));
+            r.setDificultad(rs.getString("dificultad"));
+            r.setLikes(rs.getInt("likes"));
+            lista.add(r);
+        }
+    }
+    return lista;
+}
+
 }
