@@ -15,7 +15,7 @@ if (recetas == null) {
 <%
 } else if (recetas.isEmpty()) {
 %>
-    <p>No hay recetas de tus amigos todavï¿½a.</p>
+    <p>No hay recetas de tus amigos todavía.</p>
 <%
 } else {
     for (Receta r : recetas) {

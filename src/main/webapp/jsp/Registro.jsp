@@ -45,6 +45,7 @@
     </div>
   </main>
 
+  <script src="<%= request.getContextPath() %>/js/notificaciones.js"></script>
   <script src="<%= request.getContextPath() %>/js/Registro.js"></script>
 </body>
 </html>

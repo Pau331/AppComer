@@ -96,20 +96,31 @@
 .like-area{ 
     display:flex; 
     align-items:center; 
-    gap:10px; 
-    margin-top:10px; 
+    gap:12px; 
+    margin-top:16px; 
+    padding-top:16px;
+    border-top:1px solid #eee;
 }
 
 .btn-like{ 
   border:0;
   background:#e13b63;
-  border-radius:999px;
-  width:38px;
-  height:38px;
+  border-radius:8px;
+  padding:10px 20px;
   display:inline-flex;
   align-items:center;
   justify-content:center;
+  gap:8px;
   cursor:pointer;
+  font-weight:600;
+  font-size:15px;
+  color:#fff;
+  transition:background-color 0.2s;
+}
+
+
+.btn-like:hover{
+  background-color:#c12c54;
 }
 
 .btn-like i{
@@ -173,14 +184,16 @@
 }
 
 .add-comment button {
-  padding: 8px 12px;
+  padding: 14px 32px;
   background-color: #df3767;
   color: #fff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
+  font-size: 16px;
   transition: background-color 0.2s;
+  white-space: nowrap;
 }
 
 .add-comment button:hover {

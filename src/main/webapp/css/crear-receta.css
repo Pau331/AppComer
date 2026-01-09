@@ -119,7 +119,12 @@
     margin-top:14px; }
 
 .save-btn{ 
-    background:#1f8b4c; } /*verde para guardar*/
+    background:#1f8b4c; 
+}
+
+.save-btn:hover{
+    background:#176a3a;
+}
 
 /*Responsive*/
 /* ======== MÓVIL: max-width 768px ======== */

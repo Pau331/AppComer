@@ -1,6 +1,49 @@
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 
+// --- Función para mostrar notificaciones ---
+function mostrarNotificacion(mensaje, tipo = 'info') {
+  const notif = document.createElement('div');
+  notif.className = `notificacion notif-${tipo}`;
+  notif.textContent = mensaje;
+  notif.style.cssText = `
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    background: ${tipo === 'error' ? '#e13b63' : tipo === 'success' ? '#1f8b4c' : '#333'};
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    font-weight: 600;
+    animation: slideIn 0.3s ease;
+  `;
+  document.body.appendChild(notif);
+  
+  setTimeout(() => {
+    notif.style.animation = 'slideOut 0.3s ease';
+    setTimeout(() => notif.remove(), 300);
+  }, 3000);
+}
+
+// Agregar animaciones CSS si no existen
+if (!document.getElementById('notif-animations')) {
+  const style = document.createElement('style');
+  style.id = 'notif-animations';
+  style.textContent = `
+    @keyframes slideIn {
+      from { transform: translateX(400px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(400px); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
 // --- Pasos dinámicos ---
 const lista = $("#listaPasosEdit");
 const btnAddPaso = $("#btnAddPaso");
@@ -59,8 +102,8 @@ $("#btnGuardar").addEventListener("click", async (e) => {
   const pasos = [...$$(".step-row input")].map(i => i.value.trim()).filter(Boolean);
   const fotoFile = inputFile.files?.[0];
 
-  if (!titulo) { alert("Pon un título a la receta."); return; }
-  if (pasos.length === 0) { alert("Añade al menos un paso."); return; }
+  if (!titulo) { mostrarNotificacion("Pon un título a la receta.", "error"); return; }
+  if (pasos.length === 0) { mostrarNotificacion("Añade al menos un paso.", "error"); return; }
 
   const formData = new FormData();
   formData.append("titulo", titulo);
@@ -79,13 +122,15 @@ $("#btnGuardar").addEventListener("click", async (e) => {
 
     const result = await resp.json();
     if (result.success) {
-      alert("Receta guardada correctamente.");
-      window.location.href = CONTEXT_PATH + "/feed"; // redirige al feed
+      mostrarNotificacion("Receta guardada correctamente.", "success");
+      setTimeout(() => {
+        window.location.href = CONTEXT_PATH + "/feed"; // redirige al feed
+      }, 1500);
     } else {
-      alert("Error al guardar la receta:\n" + (result.message || "Error desconocido"));
+      mostrarNotificacion("Error al guardar: " + (result.message || "Error desconocido"), "error");
     }
   } catch (err) {
     console.error(err);
-    alert("Error en la conexión con el servidor.");
+    mostrarNotificacion("Error en la conexión con el servidor.", "error");
   }
 });

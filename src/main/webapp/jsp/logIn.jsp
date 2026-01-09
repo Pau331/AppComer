@@ -76,6 +76,7 @@
         </div>
     </main>
 
+    <script src="<%= request.getContextPath() %>/js/notificaciones.js"></script>
     <script src="<%= request.getContextPath() %>/js/login.js"></script>
 </body>
 </html>

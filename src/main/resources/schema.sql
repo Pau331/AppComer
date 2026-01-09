@@ -140,7 +140,6 @@ INSERT INTO notificaciones (usuario_destino_id, usuario_origen_id, tipo, leido) 
 (2, 4, 'Like en receta', FALSE),
 -- Para Juan (id=1): varios eventos, algunos no leídos
 (1, 2, 'Like en receta', TRUE),
-(1, 3, 'Comentario en receta', FALSE),
 (1, 4, 'Solicitud de amistad', FALSE),
 (1, 5, 'Comentario en receta', FALSE),
 (1, 2, 'Like en receta', FALSE),

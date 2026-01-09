@@ -148,6 +148,7 @@
   <script>
     const CONTEXT_PATH = '<%= request.getContextPath() %>';
   </script>
+  <script src="<%= request.getContextPath() %>/js/notificaciones.js"></script>
   <script src="<%= request.getContextPath() %>/js/menu.js"></script>
   <script src="<%= request.getContextPath() %>/js/crear-receta.js"></script>
 </body>
