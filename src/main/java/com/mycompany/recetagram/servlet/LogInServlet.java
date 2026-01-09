@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.recetagram.servlet;
 
 import com.mycompany.recetagram.dao.UsuarioDAO;
@@ -37,7 +34,8 @@ public class LogInServlet extends HttpServlet {
                 session.setAttribute("usuarioLogueado", u);
                 
                 // Redirigir
-                response.sendRedirect(request.getContextPath() + "/jsp/menu.jsp");
+                response.sendRedirect(request.getContextPath() + "/feed");
+
             } else {
                 // 4. Error: Volver al login con un mensaje 
                 request.setAttribute("error", "Usuario o contraseña incorrectos");

@@ -10,6 +10,7 @@ import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.sql.SQLException; 
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/feed")
@@ -30,21 +31,24 @@ public class FeedServlet extends HttpServlet {
 
         Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
         if (u == null) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect(request.getContextPath() + "/html/login.html");
             return;
         }
 
-        // Obtener recetas de amigos
         RecetaDAO rDAO = new RecetaDAO();
+        List<Receta> recetas = new ArrayList<>();
         try {
-            List<Receta> recetas = rDAO.listarRecetas(u.getId());
-            request.setAttribute("recetas", recetas);
+            recetas = rDAO.listarRecetas(u.getId());
+            System.out.println("Recetas encontradas: " + recetas.size()); // Para depurar
         } catch (SQLException e) {
             e.printStackTrace();
-            request.setAttribute("error", "No se pudieron cargar las recetas.");
         }
 
-        // Forward a JSP
-        request.getRequestDispatcher("menu.jsp").forward(request, response);
+        request.setAttribute("recetas", recetas);
+
+        // Forward al JSP principal
+        request.getRequestDispatcher("/jsp/menu.jsp").forward(request, response);
+
+
     }
 }

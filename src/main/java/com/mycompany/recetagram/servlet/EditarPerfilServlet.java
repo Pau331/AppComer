@@ -44,7 +44,7 @@ public class EditarPerfilServlet extends HttpServlet {
         if (filePart != null && filePart.getSize() > 0) {
             
             //debe ser ruta exacta
-            String uploadPath = "C:/Users/Tester/Documents/NetBeansProjects/AppComer/src/main/webapp/img";
+            String uploadPath = "C:/Users/paula/Documents/NetBeansProjects/Recetagram/src/main/webapp/img";
             
             // Creamos la carpeta si por algún motivo no existiera
             File uploadDir = new File(uploadPath);
