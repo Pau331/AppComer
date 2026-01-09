@@ -89,7 +89,6 @@ public class RecetaDAO {
         }
         return null;
     }
-}
 
     
     public boolean eliminarPorId(int id) throws SQLException {
@@ -100,6 +99,27 @@ public class RecetaDAO {
         return ps.executeUpdate() > 0;
     }
 }
+    
+public List<Receta> listarTodas() throws SQLException {
+        List<Receta> lista = new ArrayList<>();
+        String sql = "SELECT * FROM recetas ORDER BY id DESC";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Receta r = new Receta();
+                r.setId(rs.getInt("id"));
+                r.setUsuarioId(rs.getInt("usuario_id"));
+                r.setTitulo(rs.getString("titulo"));
+                r.setPasos(rs.getString("pasos"));
+                r.setTiempoPreparacion(rs.getInt("tiempo_preparacion"));
+                r.setDificultad(rs.getString("dificultad"));
+                r.setLikes(rs.getInt("likes"));
+                lista.add(r);
+            }
+        }
+        return lista;
+    }
 
 public List<Receta> buscarPorTituloLike(String q) throws SQLException {
     List<Receta> lista = new ArrayList<>();
