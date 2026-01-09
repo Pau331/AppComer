@@ -17,17 +17,22 @@ public class LikeServlet extends HttpServlet {
             throws IOException {
 
         int recetaId = Integer.parseInt(req.getParameter("recetaId"));
-        int usuarioId = (int) req.getSession().getAttribute("usuarioId");
+
+        // Tomamos el usuario logueado de sesión
+        var u = (com.mycompany.recetagram.model.Usuario) req.getSession().getAttribute("usuarioLogueado");
+        if (u == null) {
+            res.sendRedirect(req.getContextPath() + "/jsp/logIn.jsp");
+            return;
+        }
+        int usuarioId = u.getId();
 
         LikeDAO dao = new LikeDAO();
 
         try {
             if (dao.existeLike(usuarioId, recetaId)) {
                 dao.quitarLike(usuarioId, recetaId);
-                dao.actualizarContador(recetaId, -1);
             } else {
                 dao.darLike(usuarioId, recetaId);
-                dao.actualizarContador(recetaId, +1);
             }
         } catch (Exception e) {
             e.printStackTrace();

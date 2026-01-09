@@ -70,9 +70,15 @@ public class RecetaDAO {
 }
 
     public Receta obtenerPorId(int id) throws SQLException {
-        String sql = "SELECT * FROM recetas WHERE id=?";
+        String sql = "SELECT r.*, (SELECT COUNT(*) FROM likes l WHERE l.receta_id = r.id) AS likes_count " +
+                     "FROM recetas r WHERE r.id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
+            // Aseguramos usar el esquema APP para que la consulta encuentre la tabla
+            try (Statement stmt = conn.createStatement()) {
+                stmt.execute("SET SCHEMA APP");
+            }
+
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -83,7 +89,8 @@ public class RecetaDAO {
                 r.setPasos(rs.getString("pasos"));
                 r.setTiempoPreparacion(rs.getInt("tiempo_preparacion"));
                 r.setDificultad(rs.getString("dificultad"));
-                r.setLikes(rs.getInt("likes"));
+                r.setFoto(rs.getString("foto"));
+                r.setLikes(rs.getInt("likes_count"));
                 return r;
             }
         }

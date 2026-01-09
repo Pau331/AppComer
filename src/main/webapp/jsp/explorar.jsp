@@ -42,12 +42,13 @@
     </div>
 
     <nav class="nav-links">
-      <a href="<%=request.getContextPath()%>/jsp/menu.jsp"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
+      <a href="<%=request.getContextPath()%>/feed"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
 
       <div class="notification-wrapper-sidebar" id="notif-wrapper">
         <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i>
         <span>Notificaciones</span>
         <span class="notif-badge" id="notif-badge">3</span>
+        <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar"></div>
       </div>
 
       <a href="<%=request.getContextPath()%>/html/crear-receta.html"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
@@ -66,15 +67,6 @@
       </a>
     </div>
   </aside>
-
-  <!-- Notificaciones (si tu CSS/JS ya lo usa) -->
-  <div class="notif-panel" id="notif-panel">
-    <h3>Notificaciones</h3>
-    <div class="notif-item">
-      <img src="https://i.pravatar.cc/40?img=10" alt="notif" class="notif-avatar">
-      <p><b>chef_luisa</b> le dio like a tu publicación</p>
-    </div>
-  </div>
 
   <!-- Topbar -->
   <div class="topbar">
@@ -178,22 +170,9 @@
   </main>
 
   <script>
-    const notifWrapper = document.getElementById('notif-wrapper');
-    const notifPanel = document.getElementById('notif-panel');
-    const notifBadge = document.getElementById('notif-badge');
-
-    if (notifWrapper && notifPanel) {
-      notifWrapper.addEventListener('click', () => {
-        notifPanel.classList.toggle('open');
-        if (notifBadge) notifBadge.style.display = 'none';
-      });
-      document.addEventListener('click', (e) => {
-        if (!notifPanel.contains(e.target) && !notifWrapper.contains(e.target)) {
-          notifPanel.classList.remove('open');
-        }
-      });
-    }
+    const CONTEXT_PATH = '<%=request.getContextPath()%>';
   </script>
+  <script src="<%=request.getContextPath()%>/js/menu.js"></script>
 
 </body>
 </html>

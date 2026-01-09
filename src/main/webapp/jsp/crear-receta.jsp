@@ -33,6 +33,7 @@
         <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i>
         <span>Notificaciones</span>
         <span class="notif-badge" id="notif-badge">3</span>
+        <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar"></div>
       </div>
 
       <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp" class="active"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
@@ -46,9 +47,6 @@
       </a>
     </div>
   </aside>
-
-  <!-- Overlay notificaciones -->
-  <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar"></div>
 
   <!-- Topbar -->
   <div class="topbar">

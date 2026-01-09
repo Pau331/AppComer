@@ -31,11 +31,13 @@
 
   <aside class="sidebar">
     <div class="logo">
-      <img src="<%=request.getContextPath()%>/img/logo_texto.png" alt="Logo Recetagram" class="logo-full">
+      <a href="<%=request.getContextPath()%>/feed">
+        <img src="<%=request.getContextPath()%>/img/logo_texto.png" alt="Logo Recetagram" class="logo-full">
+      </a>
     </div>
 
     <nav class="nav-links">
-      <a href="<%=request.getContextPath()%>/jsp/menu.jsp"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
+      <a href="<%=request.getContextPath()%>/feed"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
       <a href="<%=request.getContextPath()%>/social/chat" class="active"><i class="fa-solid fa-envelope"></i> <span>Chats</span></a>
       <a href="<%=request.getContextPath()%>/jsp/crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
       <a href="<%=request.getContextPath()%>/social/amigos"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>

@@ -23,7 +23,7 @@
     <aside class="sidebar">
         <div class="logo"><img src="<%= request.getContextPath() %>/img/logo_texto.png" class="logo-full" alt="Recetagram"></div>
         <nav class="nav-links">
-            <a href="<%= request.getContextPath() %>/jsp/menu.jsp"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+            <a href="<%= request.getContextPath() %>/feed"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
             <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i><span>Crear receta</span></a>
             <a href="<%= request.getContextPath() %>/jsp/amigos.jsp"><i class="fa-solid fa-user-group"></i><span>Amigos</span></a>
         </nav>

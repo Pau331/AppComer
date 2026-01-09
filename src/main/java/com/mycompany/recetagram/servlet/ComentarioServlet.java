@@ -18,8 +18,20 @@ public class ComentarioServlet extends HttpServlet {
 
         try {
             int recetaId = Integer.parseInt(request.getParameter("recetaId"));
-            int usuarioId = (int) request.getSession().getAttribute("usuarioId");
+
+            var u = (com.mycompany.recetagram.model.Usuario) request.getSession().getAttribute("usuarioLogueado");
+            if (u == null) {
+                response.sendRedirect(request.getContextPath() + "/jsp/logIn.jsp");
+                return;
+            }
+            int usuarioId = u.getId();
+
             String texto = request.getParameter("texto");
+            if (texto != null) texto = texto.trim();
+            if (texto == null || texto.isEmpty()) {
+                response.sendRedirect("verReceta?id=" + recetaId);
+                return;
+            }
 
             Comentario c = new Comentario();
             c.setRecetaId(recetaId);

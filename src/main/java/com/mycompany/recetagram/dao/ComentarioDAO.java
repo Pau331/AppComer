@@ -30,7 +30,9 @@ public class ComentarioDAO {
 
     public List<Comentario> listarPorReceta(int recetaId) throws SQLException {
         List<Comentario> lista = new ArrayList<>();
-        String sql = "SELECT * FROM comentarios WHERE receta_id = ?";
+        String sql = "SELECT c.*, u.username, u.foto_perfil FROM comentarios c " +
+                     "JOIN usuarios u ON u.id = c.usuario_id " +
+                     "WHERE c.receta_id = ? ORDER BY c.fecha DESC";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, recetaId);
@@ -42,6 +44,8 @@ public class ComentarioDAO {
                 c.setUsuarioId(rs.getInt("usuario_id"));
                 c.setTexto(rs.getString("texto"));
                 c.setFecha(rs.getTimestamp("fecha"));
+                c.setUsuarioNombre(rs.getString("username"));
+                c.setUsuarioFoto(rs.getString("foto_perfil"));
                 lista.add(c);
             }
         }

@@ -35,15 +35,6 @@ public class LikeDAO {
         }
     }
 
-    public void actualizarContador(int recetaId, int delta) throws SQLException {
-        String sql = "UPDATE recetas SET likes = likes + ? WHERE id=?";
-        try (Connection c = DatabaseConnection.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setInt(1, delta);
-            ps.setInt(2, recetaId);
-            ps.executeUpdate();
-        }
-    }
 }
 
 

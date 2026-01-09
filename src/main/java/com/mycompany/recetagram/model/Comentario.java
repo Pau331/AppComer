@@ -9,6 +9,10 @@ public class Comentario {
     private String texto;
     private Timestamp fecha;
 
+    // Info del usuario autor (para mostrar en vistas)
+    private String usuarioNombre;
+    private String usuarioFoto;
+
     // Getters y setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -20,4 +24,9 @@ public class Comentario {
     public void setTexto(String texto) { this.texto = texto; }
     public Timestamp getFecha() { return fecha; }
     public void setFecha(Timestamp fecha) { this.fecha = fecha; }
+
+    public String getUsuarioNombre() { return usuarioNombre; }
+    public void setUsuarioNombre(String usuarioNombre) { this.usuarioNombre = usuarioNombre; }
+    public String getUsuarioFoto() { return usuarioFoto; }
+    public void setUsuarioFoto(String usuarioFoto) { this.usuarioFoto = usuarioFoto; }
 }
