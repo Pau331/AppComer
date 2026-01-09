@@ -10,7 +10,7 @@ import java.util.List;
 public class RecetaDAO {
 
     public void crearReceta(Receta r) throws SQLException {
-        String sql = "INSERT INTO recetas(usuario_id, titulo, pasos, tiempo_preparacion, dificultad) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO recetas(usuario_id, titulo, pasos, tiempo_preparacion, dificultad, foto) VALUES(?,?,?,?,?,?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, r.getUsuarioId());
@@ -18,6 +18,7 @@ public class RecetaDAO {
             ps.setString(3, r.getPasos());
             ps.setInt(4, r.getTiempoPreparacion());
             ps.setString(5, r.getDificultad());
+            ps.setString(6, r.getFoto());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) r.setId(rs.getInt(1));
@@ -34,26 +35,39 @@ public class RecetaDAO {
         }
     }
 
-    public List<Receta> listarTodas() throws SQLException {
-        List<Receta> lista = new ArrayList<>();
-        String sql = "SELECT * FROM recetas ORDER BY id DESC";
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                Receta r = new Receta();
-                r.setId(rs.getInt("id"));
-                r.setUsuarioId(rs.getInt("usuario_id"));
-                r.setTitulo(rs.getString("titulo"));
-                r.setPasos(rs.getString("pasos"));
-                r.setTiempoPreparacion(rs.getInt("tiempo_preparacion"));
-                r.setDificultad(rs.getString("dificultad"));
-                r.setLikes(rs.getInt("likes"));
-                lista.add(r);
+   public List<Receta> listarRecetas(int usuarioId) throws SQLException {
+    List<Receta> lista = new ArrayList<>();
+    String sql = "SELECT r.* FROM recetas r " +
+                 "JOIN amigos a ON r.usuario_id = a.amigo_id " +
+                 "WHERE a.usuario_id = ? AND a.estado = 'Aceptado' " +
+                 "ORDER BY r.id DESC";
+
+    try (Connection conn = DatabaseConnection.getConnection()) {
+        // FORZAR USAR SCHEMA APP
+        try (Statement stmt = conn.createStatement()) {
+            stmt.execute("SET SCHEMA APP");
+        }
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, usuarioId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Receta r = new Receta();
+                    r.setId(rs.getInt("id"));
+                    r.setUsuarioId(rs.getInt("usuario_id"));
+                    r.setTitulo(rs.getString("titulo"));
+                    r.setPasos(rs.getString("pasos"));
+                    r.setTiempoPreparacion(rs.getInt("tiempo_preparacion"));
+                    r.setDificultad(rs.getString("dificultad"));
+                    r.setFoto(rs.getString("foto"));
+                    
+                    lista.add(r);
+                }
             }
         }
-        return lista;
     }
+    return lista;
+}
 
     public Receta obtenerPorId(int id) throws SQLException {
         String sql = "SELECT * FROM recetas WHERE id=?";
@@ -75,6 +89,8 @@ public class RecetaDAO {
         }
         return null;
     }
+}
+
     
     public boolean eliminarPorId(int id) throws SQLException {
     String sql = "DELETE FROM recetas WHERE id = ?";
@@ -108,3 +124,4 @@ public List<Receta> buscarPorTituloLike(String q) throws SQLException {
 }
 
 }
+
