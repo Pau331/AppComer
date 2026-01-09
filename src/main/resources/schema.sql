@@ -143,6 +143,7 @@ INSERT INTO notificaciones (usuario_destino_id, usuario_origen_id, tipo, leido) 
 (1, 4, 'Solicitud de amistad', FALSE),
 (1, 5, 'Comentario en receta', FALSE),
 (1, 2, 'Like en receta', FALSE),
+(1, 5, 'Like en receta', FALSE),
 -- Para otros usuarios
 (3, 1, 'Comentario en receta', FALSE);
 

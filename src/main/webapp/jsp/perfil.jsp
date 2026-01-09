@@ -31,6 +31,11 @@
         <div class="logo"><img src="<%= request.getContextPath() %>/img/logo_texto.png" class="logo-full" alt="Recetagram"></div>
         <nav class="nav-links">
             <a href="<%= request.getContextPath() %>/feed"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+            <div class="notification-wrapper-sidebar" id="notif-wrapper">
+                <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i><span>Notificaciones</span>
+                <span class="notif-badge" id="notif-badge">0</span>
+                <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar"></div>
+            </div>
             <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i><span>Crear receta</span></a>
             <a href="<%= request.getContextPath() %>/jsp/amigos.jsp"><i class="fa-solid fa-user-group"></i><span>Amigos</span></a>
         </nav>
@@ -155,7 +160,25 @@
         </div>
     </main>
 
+    <script>
+        const CONTEXT_PATH = '<%= request.getContextPath() %>';
+    </script>
+    <script src="<%= request.getContextPath() %>/js/notificaciones.js"></script>
     <script src="<%= request.getContextPath() %>/js/menu.js"></script>
     <script src="<%= request.getContextPath() %>/js/perfil.js"></script>
+    
+    <%
+        // Mostrar notificación de perfil actualizado si existe
+        String perfilUpdateSuccess = (String) session.getAttribute("perfilUpdateSuccess");
+        if (perfilUpdateSuccess != null) {
+            session.removeAttribute("perfilUpdateSuccess");
+    %>
+    <script>
+        window.addEventListener('load', function() {
+            mostrarNotificacion('<%= perfilUpdateSuccess %>', 'success');
+        });
+    </script>
+    <% } %>
+    
 </body>
 </html>

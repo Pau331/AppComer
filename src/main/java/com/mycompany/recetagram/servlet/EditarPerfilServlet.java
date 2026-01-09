@@ -27,6 +27,10 @@ public class EditarPerfilServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        // Establecer codificación UTF-8 para evitar problemas con tildes
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        
         HttpSession session = request.getSession();
         Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
 
@@ -38,13 +42,18 @@ public class EditarPerfilServlet extends HttpServlet {
         // 1. Recuperar parámetros de texto
         String nuevoUsername = request.getParameter("username");
         String nuevaBio = request.getParameter("bio");
+        
+        // Limpiar la biografía de espacios extras
+        if (nuevaBio != null) {
+            nuevaBio = nuevaBio.trim();
+        }
 
         // 2. Manejo de la imagen con Persistencia Directa en el Proyecto
         Part filePart = request.getPart("avatar");
         if (filePart != null && filePart.getSize() > 0) {
             
-            //debe ser ruta exacta
-            String uploadPath = "C:/Users/paula/Documents/NetBeansProjects/Recetagram/src/main/webapp/img";
+            // Obtener la ruta real del directorio img en la aplicación desplegada
+            String uploadPath = getServletContext().getRealPath("/img");
             
             // Creamos la carpeta si por algún motivo no existiera
             File uploadDir = new File(uploadPath);
@@ -56,9 +65,20 @@ public class EditarPerfilServlet extends HttpServlet {
             String fileName = "avatar_" + u.getId() + "_" + System.currentTimeMillis() + ".jpg";
             File fileToSave = new File(uploadDir, fileName);
 
-            // Guardar físicamente el archivo en la carpeta src/main/webapp/img
+            // Guardar físicamente el archivo en la carpeta desplegada
             try (InputStream input = filePart.getInputStream()) {
                 Files.copy(input, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }
+            
+            // También copiar a src para que persista en el código fuente
+            String sourcePath = "C:/Users/paula/Documents/NetBeansProjects/Recetagram/src/main/webapp/img";
+            File sourceDir = new File(sourcePath);
+            if (!sourceDir.exists()) {
+                sourceDir.mkdirs();
+            }
+            File sourceFile = new File(sourceDir, fileName);
+            try (InputStream input = filePart.getInputStream()) {
+                Files.copy(input, sourceFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             }
             
             u.setFotoPerfil("img/" + fileName); 
@@ -75,7 +95,8 @@ public class EditarPerfilServlet extends HttpServlet {
             
             if (exito) {
                 session.setAttribute("usuarioLogueado", u);
-                response.sendRedirect(request.getContextPath() + "/jsp/perfil.jsp?update=success");
+                session.setAttribute("perfilUpdateSuccess", "¡Perfil actualizado correctamente!");
+                response.sendRedirect(request.getContextPath() + "/usu/perfil");
             } else {
                 response.sendRedirect(request.getContextPath() + "/jsp/editarPerfil.jsp?error=update_failed");
             }

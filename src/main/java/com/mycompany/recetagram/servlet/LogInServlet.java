@@ -32,6 +32,7 @@ public class LogInServlet extends HttpServlet {
                 // 3. Éxito: Crear sesión y guardar al usuario 
                 HttpSession session = request.getSession();
                 session.setAttribute("usuarioLogueado", u);
+                session.setAttribute("loginSuccess", "Bienvenido/a " + u.getUsername() + "! 👋");
                 
                 // Redirigir
                 response.sendRedirect(request.getContextPath() + "/feed");

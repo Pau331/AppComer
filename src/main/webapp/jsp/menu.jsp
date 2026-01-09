@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recetagram ? Inicio</title>
+    <title>Recetagram - Inicio</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/menu.css">
@@ -92,7 +92,21 @@
     <script>
         const CONTEXT_PATH = '<%= request.getContextPath() %>';
     </script>
+    <script src="<%= request.getContextPath() %>/js/notificaciones.js"></script>
     <script src="<%= request.getContextPath() %>/js/menu.js"></script>
+    
+    <%
+        // Mostrar notificación de bienvenida si existe
+        String loginSuccess = (String) session.getAttribute("loginSuccess");
+        if (loginSuccess != null) {
+            session.removeAttribute("loginSuccess");
+    %>
+    <script>
+        window.addEventListener('load', function() {
+            mostrarNotificacion('<%= loginSuccess %>', 'success');
+        });
+    </script>
+    <% } %>
     
 </body>
 </html>

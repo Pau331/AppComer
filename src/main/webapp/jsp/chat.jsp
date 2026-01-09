@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.mycompany.recetagram.model.*" %>
 <%
@@ -50,7 +51,7 @@
     <div class="logout-wrapper">
       <a href="<%=request.getContextPath()%>/usu/logout">
         <i class="fa-solid fa-right-from-bracket"></i>
-        <span>Cerrar sesi�n</span>
+        <span>Cerrar sesión</span>
       </a>
     </div>
   </aside>
@@ -66,7 +67,7 @@
         <%
           if (contactos == null || contactos.isEmpty()) {
         %>
-            <p style="padding:10px; opacity:.8;">A�n no tienes conversaciones.</p>
+            <p style="padding:10px; opacity:.8;">Aún no tienes conversaciones.</p>
         <%
           } else {
             for (Usuario u : contactos) {
@@ -79,7 +80,7 @@
               <img src="<%=av%>" alt="<%=u.getUsername()%>" class="chat-avatar">
               <div>
                 <p class="chat-name"><%=u.getUsername()%></p>
-                <p class="chat-preview">Abrir conversaci�n</p>
+                <p class="chat-preview">Abrir conversación</p>
               </div>
             </div>
           </a>

@@ -62,7 +62,16 @@
                         
                         <div class="form-row avatar-row">
                             <div class="image-drop small" id="dropAvatar">
-                                <img id="prevAvatar" class="avatar-lg" src="<%= u.getFotoPerfil() %>" alt="Avatar">
+                                <%
+                                    String avatarUrl = request.getContextPath() + "/img/default-avatar.png";
+                                    if (u.getFotoPerfil() != null && !u.getFotoPerfil().isEmpty()) {
+                                        String fotoPerfil = u.getFotoPerfil();
+                                        if (fotoPerfil.startsWith("/")) fotoPerfil = fotoPerfil.substring(1);
+                                        if (!fotoPerfil.startsWith("img/")) fotoPerfil = "img/" + fotoPerfil;
+                                        avatarUrl = request.getContextPath() + "/" + fotoPerfil;
+                                    }
+                                %>
+                                <img id="prevAvatar" class="avatar-lg" src="<%= avatarUrl %>" alt="Avatar">
                                 <div class="placeholder" id="placeholderAvatar" style="display:none;">
                                     <i class="fa-solid fa-user"></i>
                                     <p>Sube tu foto</p>
@@ -80,7 +89,11 @@
                         </div>
 
                         <label class="lbl">Bio</label>
-                        <textarea id="bio" name="bio" class="textarea" rows="4"><%= (u.getBiografia() != null) ? u.getBiografia() : "" %></textarea>
+                        <textarea id="bio" name="bio" class="textarea" rows="4"><%
+                            if (u.getBiografia() != null && !u.getBiografia().isEmpty()) {
+                                out.print(u.getBiografia().trim());
+                            }
+                        %></textarea>
 
                         <div class="form-actions">
                             <button type="submit" id="btnGuardarPerfil" class="btn-like save-btn">

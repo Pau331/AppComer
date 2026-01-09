@@ -78,5 +78,18 @@
 
     <script src="<%= request.getContextPath() %>/js/notificaciones.js"></script>
     <script src="<%= request.getContextPath() %>/js/login.js"></script>
+    
+    <%
+        // Mostrar notificación de registro exitoso si existe
+        String successMsg = request.getParameter("success");
+        if (successMsg != null) {
+    %>
+    <script>
+        window.addEventListener('load', function() {
+            mostrarNotificacion('<%= successMsg %>', 'success');
+        });
+    </script>
+    <% } %>
+    
 </body>
 </html>
