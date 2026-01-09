@@ -215,19 +215,21 @@ recipe-title {
 }
 
 .notifications-dropdown-overlay {
-    display: none;
-    position: fixed;
-    top: 80px;                   /* debajo de la barra superior */
-    left: calc(250px + 10px);    /* alineado al sidebar */
-    width: 350px;
-    max-height: 400px;
-    overflow-y: auto;            /* scroll si hay muchas notificaciones */
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    border-radius: 10px;
-    z-index: 1000;
-    padding: 10px;
+  display: none;
+  position: fixed;               /* lateral fijo respecto a la ventana */
+  top: 80px;                     /* debajo de la topbar */
+  left: 260px;                   /* pegado al borde derecho del sidebar (250px + 10px gap) */
+  width: 360px;                  /* ancho del panel lateral */
+  height: auto;                  /* se ajusta al contenido */
+  max-height: calc(100vh - 100px); /* límite para no desbordar */
+  overflow-y: auto;              /* scroll si hay muchas notificaciones */
+  max-height: 400px;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  z-index: 1000;
+  padding: 10px;
 }
 
 .notifications-dropdown-overlay p {
@@ -260,13 +262,19 @@ recipe-title {
     display: flex;          /* fila con foto y texto */
     align-items: center;    /* alinear verticalmente */
     gap: 10px;              /* espacio entre foto y texto */
-    padding: 5px;           /* espacio interno */
+    padding: 8px;           /* espacio interno */
     border-radius: 6px;     /* esquinas redondeadas */
     cursor: default;
 }
 
 .notif-item:hover {
     background-color: #f2f2f2; /* efecto al pasar el mouse */
+}
+
+.notif-item strong {
+    font-size: 14px;
+    font-weight: 600;
+    color: #262626 !important;
 }
 
 .notif-avatar {
@@ -393,9 +401,11 @@ recipe-title {
 /* Notificaciones */
 @media (max-width: 768px) {
   .notifications-dropdown-overlay {
-    left: 10px;
+    left: 10px;         /* centrado en móvil */
     width: 90%;
     top: 70px;
+    height: auto;       /* se adapta en móvil */
+    max-height: 70vh;
   }
 }
 
