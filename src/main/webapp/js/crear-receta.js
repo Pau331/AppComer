@@ -50,7 +50,8 @@ drop.addEventListener("drop", e => {
 });
 
 // --- Guardar receta vía Servlet ---
-$("#btnGuardar").addEventListener("click", async () => {
+$("#btnGuardar").addEventListener("click", async (e) => {
+  e.preventDefault(); // Prevenir envío del formulario
   const titulo = $("#tituloInput").value.trim();
   const dificultad = $("#dificultad").value;
   const tiempo = $("#tiempo").value.trim();
@@ -65,22 +66,23 @@ $("#btnGuardar").addEventListener("click", async () => {
   formData.append("titulo", titulo);
   formData.append("dificultad", dificultad);
   formData.append("tiempo", tiempo);
-  formData.append("pasos", JSON.stringify(pasos)); // enviamos array como JSON
+  // Enviar pasos separados por |
+  formData.append("pasos", pasos.join("|"));
   dietas.forEach(d => formData.append("dietas", d)); // múltiples valores
   if (fotoFile) formData.append("foto", fotoFile);
 
   try {
-    const resp = await fetch("receta", { // URL de tu RecetaServlet
+    const resp = await fetch(CONTEXT_PATH + "/receta", { // URL de tu RecetaServlet
       method: "POST",
       body: formData
     });
 
-    if (resp.ok) {
+    const result = await resp.json();
+    if (result.success) {
       alert("Receta guardada correctamente.");
-      window.location.href = "menu.jsp"; // redirige al feed
+      window.location.href = CONTEXT_PATH + "/feed"; // redirige al feed
     } else {
-      const text = await resp.text();
-      alert("Error al guardar la receta:\n" + text);
+      alert("Error al guardar la receta:\n" + (result.message || "Error desconocido"));
     }
   } catch (err) {
     console.error(err);

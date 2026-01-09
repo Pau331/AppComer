@@ -10,7 +10,7 @@ import java.util.List;
 public class RecetaDAO {
 
     public void crearReceta(Receta r) throws SQLException {
-        String sql = "INSERT INTO recetas(usuario_id, titulo, pasos, tiempo_preparacion, dificultad) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO recetas(usuario_id, titulo, pasos, tiempo_preparacion, dificultad, foto) VALUES(?,?,?,?,?,?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, r.getUsuarioId());
@@ -18,6 +18,7 @@ public class RecetaDAO {
             ps.setString(3, r.getPasos());
             ps.setInt(4, r.getTiempoPreparacion());
             ps.setString(5, r.getDificultad());
+            ps.setString(6, r.getFoto());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) r.setId(rs.getInt(1));

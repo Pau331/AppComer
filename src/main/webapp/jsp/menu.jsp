@@ -86,8 +86,8 @@
 
     <!-- Feed -->
     <main class="feed" id="feed">
-        <%-- Incluimos feed.jsp con recetas cargadas por FeedServlet --%>
-        <jsp:include page="feed.jsp" />
+        <jsp:include page="/jsp/feed.jsp" />
+
     </main>
 
     <!-- JS -->
@@ -95,5 +95,6 @@
         const CONTEXT_PATH = '<%= request.getContextPath() %>';
     </script>
     <script src="<%= request.getContextPath() %>/js/menu.js"></script>
+    
 </body>
 </html>

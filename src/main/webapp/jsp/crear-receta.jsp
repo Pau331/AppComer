@@ -1,4 +1,4 @@
-<%@ page import="com.mycompany.recetagram.model.Usuario" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="com.mycompany.recetagram.model.Usuario" %>
 <%
     Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
     if(u == null) {
@@ -11,22 +11,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recetagram ? Crear receta</title>
+  <title>Recetagram - Crear receta</title>
 
-  <link rel="stylesheet" href="../css/menu.css">
-  <link rel="stylesheet" href="../css/receta.css">
-  <link rel="stylesheet" href="../css/crear-receta.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/menu.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/receta.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/crear-receta.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-  <!-- Sidebar y Topbar (igual que tu men˙) -->
+  <!-- Sidebar -->
   <aside class="sidebar">
-    <!-- tu cÛdigo sidebar -->
+    <div class="logo">
+      <img src="<%= request.getContextPath() %>/img/logo_texto.png" alt="Logo Recetagram" class="logo-full">
+    </div>
+
+    <nav class="nav-links">
+      <a href="<%= request.getContextPath() %>/feed"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
+
+      <div class="notification-wrapper-sidebar" id="notif-wrapper">
+        <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i>
+        <span>Notificaciones</span>
+        <span class="notif-badge" id="notif-badge">3</span>
+      </div>
+
+      <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp" class="active"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
+      <a href="<%= request.getContextPath() %>/jsp/amigos.jsp"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>
+    </nav>
+    
+    <div class="logout-wrapper">
+      <a href="<%= request.getContextPath() %>/usu/logout" id="logout-link">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Cerrar sesi√≥n</span>
+      </a>
+    </div>
   </aside>
 
+  <!-- Overlay notificaciones -->
+  <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar"></div>
+
+  <!-- Topbar -->
   <div class="topbar">
-    <!-- tu cÛdigo topbar -->
+    <div class="search-wrapper">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input 
+        type="text" 
+        placeholder="Buscar recetas o usuarios..." 
+        class="search-bar" 
+        onclick="window.location.href='<%= request.getContextPath() %>/jsp/explorar.jsp'"
+        readonly
+      >
+    </div>
+  </div>
+
+  <!-- Top-right icons -->
+  <div class="top-right-icons">
+    <a href="<%= request.getContextPath() %>/jsp/chat.jsp" class="icon"><i class="fa-solid fa-envelope"></i></a>
+    <a href="<%= request.getContextPath() %>/jsp/perfil.jsp" class="icon">
+      <% 
+        String avatar = request.getContextPath() + "/img/default-avatar.png";
+        if (u.getFotoPerfil() != null && !u.getFotoPerfil().isEmpty()) {
+          String fotoPerfil = u.getFotoPerfil();
+          if (fotoPerfil.startsWith("/")) fotoPerfil = fotoPerfil.substring(1);
+          if (!fotoPerfil.startsWith("img/")) fotoPerfil = "img/" + fotoPerfil;
+          avatar = request.getContextPath() + "/" + fotoPerfil;
+        }
+      %>
+      <img src="<%= avatar %>" 
+           alt="Perfil" 
+           style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover;">
+    </a>
   </div>
 
   <!-- CONTENIDO -->
@@ -34,7 +88,7 @@
     <div class="center-col">
       <form action="<%= request.getContextPath() %>/receta" method="post" enctype="multipart/form-data">
         <div class="recipe-header">
-          <input name="titulo" id="tituloInput" class="input-title" type="text" placeholder="TÌtulo de la receta" required>
+          <input name="titulo" id="tituloInput" class="input-title" type="text" placeholder="T√≠tulo de la receta" required>
         </div>
 
         <div class="recipe-details form-details">
@@ -63,7 +117,7 @@
             <div class="card-body">
               <div class="row-space">
                 <h3>Pasos</h3>
-                <button id="btnAddPaso" class="btn-sec" type="button">+ AÒadir paso</button>
+                <button id="btnAddPaso" class="btn-sec" type="button">+ A√±adir paso</button>
               </div>
               <ol id="listaPasosEdit" class="steps-edit"></ol>
             </div>
@@ -73,7 +127,7 @@
           <aside class="card">
             <div class="card-body">
               <div class="image-drop" id="dropFoto">
-                <img id="prevFoto" class="photo" src="../img/photo-placeholder.png" alt="PrevisualizaciÛn">
+                <img id="prevFoto" class="photo" src="<%= request.getContextPath() %>/img/photo-placeholder.png" alt="Previsualization">
                 <div class="placeholder" id="placeholderFoto">
                   <i class="fa-solid fa-image"></i>
                   <p>Arrastra una imagen o pulsa para seleccionar</p>
@@ -93,7 +147,10 @@
     </div>
   </main>
 
-  <script src="../js/menu.js"></script>
-  <script src="../js/crear-receta.js"></script>
+  <script>
+    const CONTEXT_PATH = '<%= request.getContextPath() %>';
+  </script>
+  <script src="<%= request.getContextPath() %>/js/menu.js"></script>
+  <script src="<%= request.getContextPath() %>/js/crear-receta.js"></script>
 </body>
 </html>
