@@ -37,7 +37,7 @@
     <nav class="nav-links">
       <a href="<%=request.getContextPath()%>/jsp/menu.jsp"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
       <a href="<%=request.getContextPath()%>/social/chat" class="active"><i class="fa-solid fa-envelope"></i> <span>Chats</span></a>
-      <a href="<%=request.getContextPath()%>/html/crear-receta.html"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
+      <a href="<%=request.getContextPath()%>/jsp/crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
       <a href="<%=request.getContextPath()%>/social/amigos"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>
       <a href="<%=request.getContextPath()%>/social/explorar"><i class="fa-solid fa-compass"></i> <span>Explorar</span></a>
       <% if (yo.isAdmin()) { %>
@@ -48,7 +48,7 @@
     <div class="logout-wrapper">
       <a href="<%=request.getContextPath()%>/usu/logout">
         <i class="fa-solid fa-right-from-bracket"></i>
-        <span>Cerrar sesión</span>
+        <span>Cerrar sesiï¿½n</span>
       </a>
     </div>
   </aside>
@@ -64,7 +64,7 @@
         <%
           if (contactos == null || contactos.isEmpty()) {
         %>
-            <p style="padding:10px; opacity:.8;">Aún no tienes conversaciones.</p>
+            <p style="padding:10px; opacity:.8;">Aï¿½n no tienes conversaciones.</p>
         <%
           } else {
             for (Usuario u : contactos) {
@@ -77,7 +77,7 @@
               <img src="<%=av%>" alt="<%=u.getUsername()%>" class="chat-avatar">
               <div>
                 <p class="chat-name"><%=u.getUsername()%></p>
-                <p class="chat-preview">Abrir conversación</p>
+                <p class="chat-preview">Abrir conversaciï¿½n</p>
               </div>
             </div>
           </a>
@@ -119,7 +119,7 @@
         <%
           if (conversacion == null || conversacion.isEmpty()) {
         %>
-          <p style="padding:12px; opacity:.8;">No hay mensajes todavía.</p>
+          <p style="padding:12px; opacity:.8;">No hay mensajes todavï¿½a.</p>
         <%
           } else {
             for (MensajePrivado m : conversacion) {

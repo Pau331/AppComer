@@ -13,7 +13,7 @@
 <html>
 <head>
     <title><%= receta.getTitulo() %></title>
-    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/receta.css">
 </head>
 <body>
 
@@ -24,7 +24,7 @@
     <p><strong>Tiempo:</strong> <%= receta.getTiempoPreparacion() %> min</p>
     <p><strong>Likes:</strong> <%= receta.getLikes() %></p>
 
-    <form action="like" method="post">
+    <form action="<%= request.getContextPath() %>/like" method="post">
         <input type="hidden" name="recetaId" value="<%= receta.getId() %>">
         <button type="submit">❤️ Me gusta</button>
     </form>
@@ -37,7 +37,7 @@
 
         <!-- FORMULARIO NUEVO COMENTARIO -->
         <% if (usuarioId != null) { %>
-        <form class="add-comment" action="comentario" method="post">
+        <form class="add-comment" action="<%= request.getContextPath() %>/comentario" method="post">
             <input type="hidden" name="recetaId" value="<%= receta.getId() %>">
             <textarea name="texto" placeholder="Escribe un comentario..." rows="2" required></textarea>
             <button type="submit">Publicar</button>
@@ -53,7 +53,7 @@
                for (Comentario c : comentarios) {
         %>
             <div class="comment">
-                <img src="img/default-avatar.png" class="avatar" alt="avatar">
+                <img src="<%= request.getContextPath() %>/img/default-avatar.png" class="avatar" alt="avatar">
 
                 <div class="content">
                     <div class="username">
@@ -76,7 +76,7 @@
 </section>
 
 <!-- ================= JS ================= -->
-<script src="js/registro.js"></script>
+<script src="<%= request.getContextPath() %>/js/registro.js"></script>
 
 </body>
 </html>

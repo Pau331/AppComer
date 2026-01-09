@@ -15,7 +15,7 @@ if (recetas == null) {
 <%
 } else if (recetas.isEmpty()) {
 %>
-    <p>No hay recetas de tus amigos todavía.</p>
+    <p>No hay recetas de tus amigos todavï¿½a.</p>
 <%
 } else {
     for (Receta r : recetas) {
@@ -51,12 +51,12 @@ if (recetas == null) {
         }
 
         /* =========================
-           DIETAS / CARACTERÍSTICAS
+           DIETAS / CARACTERï¿½STICAS
         ========================== */
         List<String> dietas = rcdao.listarCaracteristicasReceta(r.getId());
 %>
 
-<a href="receta.jsp?id=<%= r.getId() %>" class="recipe-link">
+<a href="<%=request.getContextPath()%>/verReceta?id=<%= r.getId() %>" class="recipe-link">
     <div class="recipe-card">
 
         <!-- Contenedor de imagen flexible -->

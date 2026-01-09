@@ -40,7 +40,7 @@
       </form>
 
       <p class="auth-text">
-        ¿Ya tienes cuenta? <a href="logIn.jsp">Inicia sesión aquí</a>
+        ¿Ya tienes cuenta? <a href="<%= request.getContextPath() %>/jsp/logIn.jsp">Inicia sesión aquí</a>
       </p>
     </div>
   </main>

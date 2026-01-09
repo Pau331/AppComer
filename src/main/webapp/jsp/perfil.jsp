@@ -15,17 +15,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Recetagram — Mi perfil</title>
-    <link rel="stylesheet" href="../css/menu.css">
-    <link rel="stylesheet" href="../css/perfil.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/menu.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/perfil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <aside class="sidebar">
-        <div class="logo"><img src="../img/logo_texto.png" class="logo-full" alt="Recetagram"></div>
+        <div class="logo"><img src="<%= request.getContextPath() %>/img/logo_texto.png" class="logo-full" alt="Recetagram"></div>
         <nav class="nav-links">
-            <a href="menu.jsp"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
-            <a href="crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i><span>Crear receta</span></a>
-            <a href="amigos.jsp"><i class="fa-solid fa-user-group"></i><span>Amigos</span></a>
+            <a href="<%= request.getContextPath() %>/jsp/menu.jsp"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+            <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i><span>Crear receta</span></a>
+            <a href="<%= request.getContextPath() %>/jsp/amigos.jsp"><i class="fa-solid fa-user-group"></i><span>Amigos</span></a>
         </nav>
         <div class="logout-wrapper">
             <a href="<%= request.getContextPath() %>/usu/logout"><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></a>
@@ -65,7 +65,7 @@
         </div>
     </main>
 
-    <script src="../js/menu.js"></script>
-    <script src="../js/perfil.js"></script>
+    <script src="<%= request.getContextPath() %>/js/menu.js"></script>
+    <script src="<%= request.getContextPath() %>/js/perfil.js"></script>
 </body>
 </html>

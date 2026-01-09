@@ -11,12 +11,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Iniciar sesión - Recetagram</title>
-    <link rel="stylesheet" href="../css/general.css" />
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/general.css" />
 </head>
 <body>
     <main class="auth-container">
         <div class="auth-card">
-            <img src="../img/logo_texto.png" alt="Recetagram" class="auth-logo" />
+            <img src="<%= request.getContextPath() %>/img/logo_texto.png" alt="Recetagram" class="auth-logo" />
 
             <h1>Iniciar sesión</h1>
 
@@ -76,6 +76,6 @@
         </div>
     </main>
 
-    <script src="../js/login.js"></script>
+    <script src="<%= request.getContextPath() %>/js/login.js"></script>
 </body>
 </html>

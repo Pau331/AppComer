@@ -23,22 +23,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recetagram — Editar perfil</title>
 
-    <link rel="stylesheet" href="../css/menu.css">
-    <link rel="stylesheet" href="../css/receta.css">
-    <link rel="stylesheet" href="../css/editar-perfil.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/menu.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/receta.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/editar-perfil.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <aside class="sidebar">
-        <div class="logo"><img src="../img/logo_texto.png" class="logo-full" alt="Recetagram"></div>
+        <div class="logo"><img src="<%= request.getContextPath() %>/img/logo_texto.png" class="logo-full" alt="Recetagram"></div>
         <nav class="nav-links">
-            <a href="menu.jsp"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+            <a href="<%= request.getContextPath() %>/jsp/menu.jsp"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
             <div class="notification-wrapper-sidebar" id="notif-wrapper">
                 <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i><span>Notificaciones</span>
                 <span class="notif-badge">3</span>
             </div>
-            <a href="crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i><span>Crear receta</span></a>
-            <a href="amigos.jsp"><i class="fa-solid fa-user-group"></i><span>Amigos</span></a>
+            <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i><span>Crear receta</span></a>
+            <a href="<%= request.getContextPath() %>/jsp/amigos.jsp"><i class="fa-solid fa-user-group"></i><span>Amigos</span></a>
         </nav>
         <div class="logout-wrapper">
             <a href="<%= request.getContextPath() %>/usu/logout"><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></a>
@@ -47,8 +47,8 @@
     
     <div class="topbar">
         <div class="topbar-actions">
-            <a href="chat.jsp" class="icon-btn"><i class="fa-solid fa-envelope"></i></a>
-            <a href="perfil.jsp" class="icon-btn"><i class="fa-solid fa-user"></i></a>
+            <a href="<%= request.getContextPath() %>/jsp/chat.jsp" class="icon-btn"><i class="fa-solid fa-envelope"></i></a>
+            <a href="<%= request.getContextPath() %>/jsp/perfil.jsp" class="icon-btn"><i class="fa-solid fa-user"></i></a>
         </div>
     </div>
 
@@ -86,7 +86,7 @@
                             <button type="submit" id="btnGuardarPerfil" class="btn-like save-btn">
                                 <i class="fa-solid fa-floppy-disk"></i> Guardar
                             </button>
-                            <a href="perfil.jsp" class="btn-sec">Cancelar</a>
+                            <a href="<%= request.getContextPath() %>/jsp/perfil.jsp" class="btn-sec">Cancelar</a>
                         </div>
                     </form>
                 </div>
@@ -94,7 +94,7 @@
         </div>
     </main>
 
-    <script src="../js/menu.js"></script>
-    <script src="../js/editar-perfil.js"></script>
+    <script src="<%= request.getContextPath() %>/js/menu.js"></script>
+    <script src="<%= request.getContextPath() %>/js/editar-perfil.js"></script>
 </body>
 </html>
