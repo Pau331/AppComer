@@ -95,9 +95,9 @@
           <div class="detail">
             <i class="fa-solid fa-star"></i>
             <select name="dificultad" id="dificultad" class="select">
-              <option value="Fácil">Facil</option>
+              <option value="Facil">Facil</option>
               <option value="Media">Media</option>
-              <option value="Difícil">Dificil</option>
+              <option value="Dificil">Dificil</option>
             </select>
           </div>
           <div class="detail">
