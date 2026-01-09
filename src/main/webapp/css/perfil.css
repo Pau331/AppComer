@@ -85,15 +85,27 @@
 .card-body{ 
     padding:16px; }
 
-.lista{ 
-    display:flex; 
-    flex-direction:column; 
-    gap:0px; }
+/* Espaciado para las recetas en el perfil */
+.card-body .recipe-link {
+    display: block;
+    margin-bottom: 20px;
+}
 
-#misRecetas a {
-    display: block;      /* Asegura que margin funcione bien */
-    margin: 10px 0;      /* 20px arriba y abajo, ajustable */
-    text-decoration: none; /* opcional, para quitar subrayado de enlace */
+.card-body .recipe-link:first-of-type {
+    margin-top: 20px;
+}
+
+.card-body .recipe-link:last-child {
+    margin-bottom: 0;
+}
+
+.card-body .recipe-card {
+    margin-bottom: 0;
+}
+
+.card-body > p {
+    margin: 20px 0;
+    text-align: center;
 }
 
 

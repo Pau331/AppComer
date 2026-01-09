@@ -150,4 +150,36 @@ public List<Receta> buscarPorTituloLike(String q) throws SQLException {
     return lista;
 }
 
+public List<Receta> obtenerRecetasPorUsuario(int usuarioId) throws SQLException {
+    List<Receta> lista = new ArrayList<>();
+    String sql = "SELECT r.*, (SELECT COUNT(*) FROM likes l WHERE l.receta_id = r.id) AS likes_count " +
+                 "FROM recetas r WHERE r.usuario_id = ? ORDER BY r.id DESC";
+    
+    try (Connection conn = DatabaseConnection.getConnection()) {
+        // FORZAR USAR SCHEMA APP
+        try (Statement stmt = conn.createStatement()) {
+            stmt.execute("SET SCHEMA APP");
+        }
+        
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, usuarioId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Receta r = new Receta();
+                    r.setId(rs.getInt("id"));
+                    r.setUsuarioId(rs.getInt("usuario_id"));
+                    r.setTitulo(rs.getString("titulo"));
+                    r.setPasos(rs.getString("pasos"));
+                    r.setTiempoPreparacion(rs.getInt("tiempo_preparacion"));
+                    r.setDificultad(rs.getString("dificultad"));
+                    r.setFoto(rs.getString("foto"));
+                    r.setLikes(rs.getInt("likes_count"));
+                    lista.add(r);
+                }
+            }
+        }
+    }
+    return lista;
+}
+
 }

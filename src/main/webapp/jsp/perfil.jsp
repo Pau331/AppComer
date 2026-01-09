@@ -1,4 +1,7 @@
 <%@ page import="com.mycompany.recetagram.model.Usuario" %>
+<%@ page import="com.mycompany.recetagram.model.Receta" %>
+<%@ page import="com.mycompany.recetagram.dao.RecetaCaracteristicaDAO" %>
+<%@ page import="java.util.List" %>
 <%
     // 1. Recuperar la sesión
     Usuario u = (Usuario) session.getAttribute("usuarioLogueado");
@@ -8,6 +11,10 @@
         response.sendRedirect(request.getContextPath() + "/jsp/logIn.jsp");
         return;
     }
+    
+    // 3. Obtener las recetas desde el servlet
+    List<Receta> recetas = (List<Receta>) request.getAttribute("recetas");
+    RecetaCaracteristicaDAO rcdao = new RecetaCaracteristicaDAO();
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -37,9 +44,16 @@
             <section class="header">
                 <div class="body">
                     <%-- Foto de perfil dinámica con ruta absoluta --%>
-                    <img id="avatarYo" class="avatar-lg" 
-                         src="<%= request.getContextPath() %>/<%= (u.getFotoPerfil() != null && !u.getFotoPerfil().isEmpty()) ? u.getFotoPerfil() : "img/default-avatar.png" %>" 
-                         alt="Avatar">
+                    <%
+                        String avatarUrl = request.getContextPath() + "/img/default-avatar.png";
+                        if (u.getFotoPerfil() != null && !u.getFotoPerfil().isEmpty()) {
+                            String fotoPerfil = u.getFotoPerfil();
+                            if (fotoPerfil.startsWith("/")) fotoPerfil = fotoPerfil.substring(1);
+                            if (!fotoPerfil.startsWith("img/")) fotoPerfil = "img/" + fotoPerfil;
+                            avatarUrl = request.getContextPath() + "/" + fotoPerfil;
+                        }
+                    %>
+                    <img id="avatarYo" class="avatar-lg" src="<%= avatarUrl %>" alt="Avatar">
 
                     <div style="flex:1">
                         <div class="row">
@@ -57,9 +71,85 @@
             <section class="card">
                 <div class="card-body">
                     <h3 style="margin-top:0">Mis recetas</h3>
-                    <div id="misRecetas" class="lista">
-                        <p>Cargando tus recetas desde la base de datos...</p>
+                    
+                    <%
+                    if (recetas == null || recetas.isEmpty()) {
+                    %>
+                        <p style="text-align: center; color: #666;">No tienes recetas publicadas todavía. ¡Crea tu primera receta!</p>
+                    <%
+                    } else {
+                        for (Receta r : recetas) {
+                    // Procesar la foto de la receta
+                    String recetaFoto = request.getContextPath() + "/img/default-recipe.jpg";
+                    if (r.getFoto() != null && !r.getFoto().isEmpty()) {
+                        String foto = r.getFoto();
+                        if (foto.startsWith("/")) foto = foto.substring(1);
+                        if (!foto.startsWith("img/")) foto = "img/" + foto;
+                        recetaFoto = request.getContextPath() + "/" + foto;
+                    }
+                    
+                    // Obtener características/dietas de la receta
+                    List<String> dietas = rcdao.listarCaracteristicasReceta(r.getId());
+                    
+                    // Foto de perfil del usuario (que es el mismo)
+                    String avatar = request.getContextPath() + "/img/default-avatar.png";
+                    if (u.getFotoPerfil() != null && !u.getFotoPerfil().isEmpty()) {
+                        String fotoPerfil = u.getFotoPerfil();
+                        if (fotoPerfil.startsWith("/")) fotoPerfil = fotoPerfil.substring(1);
+                        if (!fotoPerfil.startsWith("img/")) fotoPerfil = "img/" + fotoPerfil;
+                        avatar = request.getContextPath() + "/" + fotoPerfil;
+                    }
+            %>
+            
+            <a href="<%=request.getContextPath()%>/verReceta?id=<%= r.getId() %>" class="recipe-link">
+                <div class="recipe-card">
+                    <!-- Contenedor de imagen flexible -->
+                    <div class="recipe-img-container">
+                        <img src="<%= recetaFoto %>" alt="<%= r.getTitulo() %>">
                     </div>
+
+                    <div class="recipe-info">
+                        <h2 class="recipe-title"><%= r.getTitulo() %></h2>
+
+                        <div class="recipe-user">
+                            <img src="<%= avatar %>" alt="<%= u.getUsername() %>" class="avatar">
+                            <span class="username"><%= u.getUsername() %></span>
+                        </div>
+
+                        <div class="recipe-details">
+                            <div class="detail">
+                                <i class="fa-solid fa-star"></i>
+                                <span>Dificultad: <%= r.getDificultad() %></span>
+                            </div>
+
+                            <div class="detail">
+                                <i class="fa-solid fa-clock"></i>
+                                <span>Tiempo: <%= r.getTiempoPreparacion() %> min</span>
+                            </div>
+
+                            <% for (String d : dietas) { %>
+                                <div class="detail">
+                                    <% if (d.equalsIgnoreCase("Vegetariano")) { %>
+                                        <i class="fa-solid fa-leaf"></i>
+                                    <% } else if (d.equalsIgnoreCase("Vegano")) { %>
+                                        <i class="fa-solid fa-seedling"></i>
+                                    <% } else if (d.equalsIgnoreCase("Sin gluten")) { %>
+                                        <img src="<%= request.getContextPath() %>/img/sin-gluten.png" class="diet-icon">
+                                    <% } else if (d.equalsIgnoreCase("Healthy")) { %>
+                                        <i class="fa-solid fa-apple-whole"></i>
+                                    <% } %>
+                                    <span><%= d %></span>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            
+            <%
+                } // for recetas
+            } // else
+            %>
                 </div>
             </section>
         </div>

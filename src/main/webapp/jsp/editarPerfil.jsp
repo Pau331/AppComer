@@ -48,7 +48,7 @@
     <div class="topbar">
         <div class="topbar-actions">
             <a href="<%= request.getContextPath() %>/jsp/chat.jsp" class="icon-btn"><i class="fa-solid fa-envelope"></i></a>
-            <a href="<%= request.getContextPath() %>/jsp/perfil.jsp" class="icon-btn"><i class="fa-solid fa-user"></i></a>
+            <a href="<%= request.getContextPath() %>/usu/perfil" class="icon-btn"><i class="fa-solid fa-user"></i></a>
         </div>
     </div>
 
@@ -86,7 +86,7 @@
                             <button type="submit" id="btnGuardarPerfil" class="btn-like save-btn">
                                 <i class="fa-solid fa-floppy-disk"></i> Guardar
                             </button>
-                            <a href="<%= request.getContextPath() %>/jsp/perfil.jsp" class="btn-sec">Cancelar</a>
+                            <a href="<%= request.getContextPath() %>/usu/perfil" class="btn-sec">Cancelar</a>
                         </div>
                     </form>
                 </div>

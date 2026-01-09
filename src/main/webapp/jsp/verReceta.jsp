@@ -77,7 +77,7 @@
     <!-- Top-right icons -->
     <div class="top-right-icons">
         <a href="<%= request.getContextPath() %>/social/chat" class="icon"><i class="fa-solid fa-envelope"></i></a>
-        <a href="<%= request.getContextPath() %>/perfil" class="icon">
+        <a href="<%= request.getContextPath() %>/usu/perfil" class="icon">
             <% 
                 String avatar = request.getContextPath() + "/img/default-avatar.png";
                 if (u.getFotoPerfil() != null && !u.getFotoPerfil().isEmpty()) {
