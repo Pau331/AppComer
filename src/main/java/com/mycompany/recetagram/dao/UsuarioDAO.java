@@ -8,6 +8,7 @@ import java.util.List;
 
 public class UsuarioDAO {
 
+    
     public void insertar(Usuario u) throws SQLException {
         String sql = "INSERT INTO APP.usuarios(username,email,password,foto_perfil,biografia,isAdmin) VALUES(?,?,?,?,?,?)";
         try (Connection conn = DatabaseConnection.getConnection();
@@ -149,5 +150,6 @@ public boolean eliminarPorId(int id) throws SQLException {
         return ps.executeUpdate() > 0;
     }
 }
+
 
 }
