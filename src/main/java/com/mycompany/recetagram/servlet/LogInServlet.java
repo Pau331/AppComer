@@ -40,7 +40,7 @@ public class LogInServlet extends HttpServlet {
             } else {
                 // 4. Error: Volver al login con un mensaje 
                 request.setAttribute("error", "Usuario o contraseña incorrectos");
-                request.getRequestDispatcher("/html/login.html").forward(request, response);
+                request.getRequestDispatcher("/jsp/logIn.jsp").forward(request, response);
             }
         } catch (SQLException e) {
             e.printStackTrace();
