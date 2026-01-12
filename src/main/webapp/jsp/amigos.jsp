@@ -86,13 +86,11 @@
             <div class="notifications-dropdown-overlay" id="notif-dropdown-sidebar"></div>
         </div>
 
-        <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp">
-            <i class="fa-solid fa-circle-plus"></i><span>Crear receta</span>
-        </a>
-
-        <a href="<%= request.getContextPath() %>/social/amigos" class="active">
-            <i class="fa-solid fa-user-group"></i><span>Amigos</span>
-        </a>
+      <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
+      <a href="<%= request.getContextPath() %>/social/amigos" class="active"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>
+      <% if (yo.isAdmin()) { %>
+      <a href="<%= request.getContextPath() %>/admin/panel"><i class="fa-solid fa-shield-halved"></i> <span>Panel Admin</span></a>
+      <% } %>
     </nav>
 
     <div class="logout-wrapper">
@@ -105,8 +103,8 @@
 <!-- TOP BAR -->
 <div class="topbar">
     <div class="search-wrapper">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" id="searchFriends" placeholder="Buscar amigos..." class="search-bar">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input id="searchFriends" type="text" placeholder="Buscar amigos..." class="search-bar">
     </div>
 
     <div class="top-right-icons">

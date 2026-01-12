@@ -71,16 +71,40 @@ document.addEventListener('DOMContentLoaded', () => {
               
               // Verificar si es una solicitud de amistad
               const esSolicitudAmistad = n.tipo === 'Solicitud de amistad';
+              const esRecetaEliminada = n.tipo === 'Receta eliminada';
+              const esComentarioEliminado = n.tipo === 'Comentario eliminado';
+              const esNotificacionSistema = !n.origen || !n.origen.username;
               
               // Formatear el mensaje según el tipo
               let mensajeTipo = n.tipo;
               if (n.tipo === 'Eres amigo de...') {
                 mensajeTipo = `Eres amigo de ${n.origen.username}`;
+              } else if (esRecetaEliminada && n.mensaje) {
+                mensajeTipo = n.mensaje;
+              } else if (esComentarioEliminado && n.mensaje) {
+                mensajeTipo = n.mensaje;
+              }
+              
+              // Icono/Avatar según tipo de notificación
+              let avatarHTML = '';
+              if (esNotificacionSistema || esRecetaEliminada || esComentarioEliminado) {
+                // Icono para notificaciones del sistema
+                avatarHTML = `<div class="notif-icon-system" style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#dc3545,#c82333);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;padding-bottom:8px;">⚠️</div>`;
+              } else {
+                // Foto de usuario para notificaciones normales
+                avatarHTML = `<img src="${n.origen.avatar}" class="notif-avatar" alt="${n.origen.username}">`;
               }
               
               div.innerHTML = `
-                <img src="${n.origen.avatar}" class="notif-avatar" alt="${n.origen.username}">
+                ${avatarHTML}
                 <div style="flex:1">
+                  ${esRecetaEliminada || esComentarioEliminado ? 
+                    `<div style="color:#dc3545;font-weight:600;font-size:13px;">${esRecetaEliminada ? 'Receta eliminada' : 'Comentario eliminado'}</div>
+                     <div style="font-size:13px;color:#555">${mensajeTipo}</div>` 
+                    : 
+                    `<strong>${n.origen.username}</strong>
+                     <div style="font-size:13px;color:#555">${mensajeTipo}</div>`
+                  }
                   <strong>${n.origen.username}</strong>
                   <div style="font-size:13px;color:#555">${mensajeTipo}</div>
                   ${esSolicitudAmistad ? `

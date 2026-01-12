@@ -48,6 +48,9 @@
             </div>
             <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i><span>Crear receta</span></a>
             <a href="<%= request.getContextPath() %>/jsp/amigos.jsp"><i class="fa-solid fa-user-group"></i><span>Amigos</span></a>
+            <% if (yo.isAdmin()) { %>
+            <a href="<%= request.getContextPath() %>/admin/panel"><i class="fa-solid fa-shield-halved"></i><span>Panel Admin</span></a>
+            <% } %>
         </nav>
         <div class="logout-wrapper">
             <a href="<%= request.getContextPath() %>/usu/logout"><i class="fa-solid fa-right-from-bracket"></i><span>Cerrar sesión</span></a>
@@ -126,6 +129,24 @@
 
                         </div>
                         <div class="meta">
+                            <button id="btnVerAmigos" class="btn">Ver amigos</button>
+                            
+                            <!-- Botones de administrador -->
+                            <% if (yo.isAdmin()) { %>
+                                <form action="<%= request.getContextPath() %><%= visitado.isBaneado() ? "/admin/desbanearUsuario" : "/admin/banearUsuario" %>" 
+                                      method="post" 
+                                      style="display:inline; margin-left: 10px;"
+                                      onsubmit="return confirm('<%= visitado.isBaneado() ? "¿Desbanear a este usuario?" : "¿Estás seguro de que quieres banear a este usuario?" %>');">
+                                    <input type="hidden" name="usuarioId" value="<%= visitado.getId() %>">
+                                    <button class="btn" type="submit" style="background-color: <%= visitado.isBaneado() ? "#28a745" : "#dc3545" %>;">
+                                        <i class="fa-solid fa-<%= visitado.isBaneado() ? "check" : "ban" %>"></i>
+                                        <%= visitado.isBaneado() ? "Desbanear" : "Banear" %> (Admin)
+                                    </button>
+                                </form>
+                            <% } %>
+                        </div>
+                        <div class="meta">
+                            <%= visitado.isBaneado() ? "<span style='color: #dc3545; font-weight: bold;'>⚠️ Usuario baneado</span><br>" : "" %>
                             <%= (visitado.getBiografia() != null) ? visitado.getBiografia() : "¡Cuéntanos algo sobre ti!" %>
                         </div>
                     </div>

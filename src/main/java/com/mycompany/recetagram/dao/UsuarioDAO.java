@@ -54,6 +54,7 @@ public class UsuarioDAO {
                 u.setFotoPerfil(rs.getString("foto_perfil"));
                 u.setBiografia(rs.getString("biografia"));
                 u.setAdmin(rs.getBoolean("isAdmin"));
+                u.setBaneado(rs.getBoolean("baneado"));
                 lista.add(u);
             }
         }
@@ -73,6 +74,7 @@ public class UsuarioDAO {
                     u.setUsername(rs.getString("username"));
                     u.setEmail(rs.getString("email"));
                     u.setAdmin(rs.getBoolean("isAdmin"));
+                    u.setBaneado(rs.getBoolean("baneado"));
                     u.setFotoPerfil(rs.getString("foto_perfil")); 
                     u.setBiografia(rs.getString("biografia"));
                     return u;
@@ -96,6 +98,7 @@ public class UsuarioDAO {
                     u.setFotoPerfil(rs.getString("foto_perfil"));
                     u.setBiografia(rs.getString("biografia"));
                     u.setAdmin(rs.getBoolean("isAdmin"));
+                    u.setBaneado(rs.getBoolean("baneado"));
                     return u;
                 }
             }
@@ -134,6 +137,7 @@ public List<Usuario> buscarPorUsernameLike(String q) throws SQLException {
                 u.setFotoPerfil(rs.getString("foto_perfil"));
                 u.setBiografia(rs.getString("biografia"));
                 u.setAdmin(rs.getBoolean("isAdmin"));
+                u.setBaneado(rs.getBoolean("baneado"));
                 lista.add(u);
             }
         }
@@ -144,6 +148,26 @@ public List<Usuario> buscarPorUsernameLike(String q) throws SQLException {
 // === ELIMINAR USUARIO (ADMIN) ===
 public boolean eliminarPorId(int id) throws SQLException {
     String sql = "DELETE FROM APP.usuarios WHERE id = ?";
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, id);
+        return ps.executeUpdate() > 0;
+    }
+}
+
+// === BANEAR USUARIO (ADMIN) ===
+public boolean banearUsuario(int id) throws SQLException {
+    String sql = "UPDATE APP.usuarios SET baneado = TRUE WHERE id = ?";
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, id);
+        return ps.executeUpdate() > 0;
+    }
+}
+
+// === DESBANEAR USUARIO (ADMIN) ===
+public boolean desbanearUsuario(int id) throws SQLException {
+    String sql = "UPDATE APP.usuarios SET baneado = FALSE WHERE id = ?";
     try (Connection conn = DatabaseConnection.getConnection();
          PreparedStatement ps = conn.prepareStatement(sql)) {
         ps.setInt(1, id);

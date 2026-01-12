@@ -243,4 +243,37 @@ public class RecetaDAO {
         }
         return lista;
     }
+    
+    // Método para obtener receta por ID
+    public Receta buscarPorId(int recetaId) throws SQLException {
+        String sql = "SELECT * FROM recetas WHERE id=?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, recetaId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Receta r = new Receta();
+                    r.setId(rs.getInt("id"));
+                    r.setUsuarioId(rs.getInt("usuario_id"));
+                    r.setTitulo(rs.getString("titulo"));
+                    r.setPasos(rs.getString("pasos"));
+                    r.setTiempoPreparacion(rs.getInt("tiempo_preparacion"));
+                    r.setDificultad(rs.getString("dificultad"));
+                    r.setFoto(rs.getString("foto"));
+                    return r;
+                }
+            }
+        }
+        return null;
+    }
+    
+    // Método para admin: eliminar cualquier receta sin verificar propietario
+    public void eliminarReceta(int recetaId) throws SQLException {
+        String sql = "DELETE FROM recetas WHERE id=?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, recetaId);
+            ps.executeUpdate();
+        }
+    }
 }

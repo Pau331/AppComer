@@ -125,6 +125,14 @@
       z-index: 1000;
     }
 
+    /* Corregir avatar en amigos */
+    .avatar-large {
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+    }
+
   </style>
 </head>
 <body>
@@ -179,7 +187,7 @@
 
     <div class="top-right-icons">
         <a href="chat.html"><i class="fa-solid fa-envelope"></i></a>
-        <a href="perfil.html"><i class="fa-solid fa-user"></i></a>
+        <a href="perfil.html"><img id="perfil-avatar-top" src="https://i.pravatar.cc/32?img=1" alt="Perfil" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid #e13b63;"></a>
     </div>
   </div>
 
@@ -327,6 +335,20 @@
       }
     });
   });
+
+  // Definir CONTEXT_PATH
+  const CONTEXT_PATH = '';
+
+  // Cargar avatar del usuario en el icono superior
+  fetch(`${CONTEXT_PATH}/usuario/perfil`)
+    .then(r => r.json())
+    .then(data => {
+      const avatarTop = document.getElementById('perfil-avatar-top');
+      if (avatarTop && data.avatar) {
+        avatarTop.src = data.avatar;
+      }
+    })
+    .catch(err => console.error('Error cargando avatar:', err));
 
 
   </script>

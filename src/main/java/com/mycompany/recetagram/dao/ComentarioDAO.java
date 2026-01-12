@@ -84,6 +84,29 @@ public class ComentarioDAO {
     return lista;
 }
 
+public Comentario obtenerPorId(int id) throws SQLException {
+    String sql = "SELECT c.*, u.username, u.foto_perfil FROM comentarios c " +
+                 "JOIN usuarios u ON u.id = c.usuario_id " +
+                 "WHERE c.id = ?";
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            Comentario c = new Comentario();
+            c.setId(rs.getInt("id"));
+            c.setRecetaId(rs.getInt("receta_id"));
+            c.setUsuarioId(rs.getInt("usuario_id"));
+            c.setTexto(rs.getString("texto"));
+            c.setFecha(rs.getTimestamp("fecha"));
+            c.setUsuarioNombre(rs.getString("username"));
+            c.setUsuarioFoto(rs.getString("foto_perfil"));
+            return c;
+        }
+    }
+    return null;
+}
+
 public boolean eliminarPorId(int id) throws SQLException {
     String sql = "DELETE FROM comentarios WHERE id = ?";
     try (Connection conn = DatabaseConnection.getConnection();

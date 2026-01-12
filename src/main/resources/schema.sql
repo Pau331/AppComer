@@ -18,7 +18,8 @@ CREATE TABLE usuarios (
     password VARCHAR(255) NOT NULL,
     foto_perfil VARCHAR(255),
     biografia VARCHAR(1000),
-    isAdmin BOOLEAN DEFAULT FALSE
+    isAdmin BOOLEAN DEFAULT FALSE,
+    baneado BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE recetas (
@@ -75,7 +76,8 @@ CREATE TABLE notificaciones (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     usuario_destino_id INT,
     usuario_origen_id INT,
-    tipo VARCHAR(30) CHECK (tipo IN ('Solicitud de amistad','Like en receta','Comentario en receta','Eres amigo de...')),    
+    tipo VARCHAR(50) CHECK (tipo IN ('Solicitud de amistad','Like en receta','Comentario en receta','Eres amigo de...','Receta eliminada','Comentario eliminado')),
+    mensaje VARCHAR(255),
     leido BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (usuario_destino_id) REFERENCES usuarios(id) ON DELETE CASCADE,
     FOREIGN KEY (usuario_origen_id) REFERENCES usuarios(id) ON DELETE CASCADE
@@ -106,7 +108,7 @@ CREATE TABLE mensajes_privados (
 INSERT INTO usuarios (username, email, password, biografia, isAdmin, foto_perfil) VALUES
 ('juan123', 'juan@mail.com', 'pass123', 'Amante de la cocina italiana', FALSE, 'juan.jpg'),
 ('maria456', 'maria@mail.com', 'pass456', 'Me encanta hornear', FALSE, 'maria.jpg'),
-('admin', 'admin@mail.com', 'adminpass', 'Administrador del sitio', TRUE, 'default-avatar.jpg'),
+('admin', 'admin@mail.com', 'admin', 'Administrador del sitio', TRUE, 'default-avatar.png'),
 ('pedro789', 'pedro@mail.com', 'pass789', 'Fan de la comida saludable', FALSE, 'pedro.jpg'),
 ('laura321', 'laura@mail.com', 'pass321', 'Me gusta cocinar vegano', FALSE, 'laura.jpg');
 

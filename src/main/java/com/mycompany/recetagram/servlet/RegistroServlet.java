@@ -44,7 +44,7 @@ public class RegistroServlet extends HttpServlet {
 
                 // 5. Redirigir al Login tras el éxito
                 // Se usa contextPath para que la ruta sea siempre correcta
-                response.sendRedirect(request.getContextPath() + "/jsp/logIn.jsp?success=¡Registro exitoso! Ya puedes iniciar sesión");
+                response.sendRedirect(request.getContextPath() + "/jsp/logIn.jsp?success=Registro exitoso! Ya puedes iniciar sesion");
                 
             } catch (SQLException e) {
                 // Error de base de datos (ej: usuario o email ya existen)

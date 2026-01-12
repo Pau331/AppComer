@@ -25,10 +25,16 @@
 
     // ✅ Avatar YO (misma lógica que menu.jsp)
     String avatarYo = request.getContextPath() + "/img/default-avatar.png";
-    if (yo.getFotoPerfil() != null && !yo.getFotoPerfil().isEmpty()) {
+    if (yo != null && yo.getFotoPerfil() != null && !yo.getFotoPerfil().isEmpty()) {
         String fotoPerfil = yo.getFotoPerfil();
-        if (fotoPerfil.startsWith("/")) fotoPerfil = fotoPerfil.substring(1);
-        if (!fotoPerfil.startsWith("img/")) fotoPerfil = "img/" + fotoPerfil;
+        // Limpiar barras iniciales
+        while (fotoPerfil.startsWith("/")) {
+            fotoPerfil = fotoPerfil.substring(1);
+        }
+        // Si ya tiene el prefijo img/, usarlo directamente, si no, agregarlo
+        if (!fotoPerfil.startsWith("img/")) {
+            fotoPerfil = "img/" + fotoPerfil;
+        }
         avatarYo = request.getContextPath() + "/" + fotoPerfil;
     }
 %>
@@ -71,9 +77,14 @@
             <i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span>
         </a>
 
-        <a href="<%= request.getContextPath() %>/jsp/amigos.jsp">
+        <a href="<%= request.getContextPath() %>/social/amigos">
             <i class="fa-solid fa-user-group"></i> <span>Amigos</span>
         </a>
+        <% if (yo.isAdmin()) { %>
+        <a href="<%=request.getContextPath()%>/admin/panel">
+            <i class="fa-solid fa-shield-halved"></i> <span>Panel Admin</span>
+        </a>
+        <% } %>
     </nav>
 
     <div class="logout-wrapper">
@@ -370,6 +381,31 @@
                                 }
                             %>
                         </div>
+                        
+                        <% if (yo.isAdmin()) { %>
+                            <form method="post" action="<%=request.getContextPath()%>/admin/eliminarReceta" 
+                                  style="margin-top: 12px;" 
+                                  onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta receta?');">
+                                <input type="hidden" name="recetaId" value="<%= r.getId() %>">
+                                <button type="submit" style="
+                                    background: #dc3545;
+                                    color: white;
+                                    border: none;
+                                    border-radius: 6px;
+                                    padding: 6px 12px;
+                                    font-size: 12px;
+                                    font-weight: 600;
+                                    cursor: pointer;
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 5px;
+                                    transition: background 0.2s;
+                                " onmouseover="this.style.background='#c82333'" onmouseout="this.style.background='#dc3545'">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Eliminar (Admin)
+                                </button>
+                            </form>
+                        <% } %>
                     </div>
                 </article>
             </a>
@@ -396,12 +432,42 @@
                         av = request.getContextPath() + "/" + fp;
                     }
             %>
-                <li class="user-card" data-user-id="<%=u.getId()%>" style="position: relative; cursor: pointer;" onclick="window.location.href='<%= request.getContextPath() %>/usu/usuario?id=<%= u.getId() %>';">
-                    <img src="<%= av %>" alt="Perfil" class="avatar-large">
-                    <div>
-                        <h4>@<%= u.getUsername() %></h4>
-                        <p><%= (u.getBiografia() == null) ? "" : u.getBiografia() %></p>
+                <li class="user-card" data-user-id="<%=u.getId()%>" style="position: relative; cursor: pointer;">
+                    <div onclick="window.location.href='<%= request.getContextPath() %>/usu/usuario?id=<%= u.getId() %>';" style="display: flex; align-items: center; gap: 15px; flex: 1;">
+                        <img src="<%= av %>" alt="Perfil" class="avatar-large">
+                        <div>
+                            <h4>@<%= u.getUsername() %> <%= u.isBaneado() ? "<span style='color: #dc3545; font-size: 12px;'>(Baneado)</span>" : "" %></h4>
+                            <p><%= (u.getBiografia() == null) ? "" : u.getBiografia() %></p>
+                        </div>
                     </div>
+                    
+                    <% if (yo.isAdmin()) { %>
+                        <form method="post" 
+                              action="<%=request.getContextPath()%><%= u.isBaneado() ? "/admin/desbanearUsuario" : "/admin/banearUsuario" %>" 
+                              style="margin-left: auto;"
+                              onsubmit="return confirm('<%= u.isBaneado() ? "¿Desbanear a este usuario?" : "¿Estás seguro de que quieres banear a este usuario?" %>');"
+                              onclick="event.stopPropagation();">
+                            <input type="hidden" name="usuarioId" value="<%= u.getId() %>">
+                            <button type="submit" style="
+                                background: <%= u.isBaneado() ? "#28a745" : "#dc3545" %>;
+                                color: white;
+                                border: none;
+                                border-radius: 6px;
+                                padding: 6px 12px;
+                                font-size: 12px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                gap: 5px;
+                                transition: background 0.2s;
+                            " onmouseover="this.style.background='<%= u.isBaneado() ? "#218838" : "#c82333" %>'" 
+                               onmouseout="this.style.background='<%= u.isBaneado() ? "#28a745" : "#dc3545" %>'">
+                                <i class="fa-solid fa-<%= u.isBaneado() ? "check" : "ban" %>"></i>
+                                <%= u.isBaneado() ? "Desbanear" : "Banear" %> (Admin)
+                            </button>
+                        </form>
+                    <% } %>
                 </li>
             <%
                 }

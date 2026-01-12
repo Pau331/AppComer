@@ -5,6 +5,7 @@ public class Notificacion {
     private int usuarioDestinoId;
     private int usuarioOrigenId;
     private String tipo;
+    private String mensaje;
     private boolean leido;
 
     // Getters y setters
@@ -16,6 +17,8 @@ public class Notificacion {
     public void setUsuarioOrigenId(int usuarioOrigenId) { this.usuarioOrigenId = usuarioOrigenId; }
     public String getTipo() { return tipo; }
     public void setTipo(String tipo) { this.tipo = tipo; }
+    public String getMensaje() { return mensaje; }
+    public void setMensaje(String mensaje) { this.mensaje = mensaje; }
     public boolean isLeido() { return leido; }
     public void setLeido(boolean leido) { this.leido = leido; }
 }
