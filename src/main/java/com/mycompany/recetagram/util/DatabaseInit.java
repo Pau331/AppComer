@@ -10,7 +10,7 @@ import java.sql.Statement;
 public class DatabaseInit {
 
     private static final String URL =
-        "jdbc:derby://localhost:1527/recetagram;user=app;password=app";
+        "jdbc:derby://localhost:1527/recetagram;create=true;user=paula;password=paula";
 
     public static void main(String[] args) {
         try (Connection conn = DriverManager.getConnection(URL)) {

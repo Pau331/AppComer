@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseConnection {
-    private static final String URL = "jdbc:derby://localhost:1527/recetagram;user=paula;password=paula";
+    private static final String URL = "jdbc:derby://localhost:1527/recetagram;create=true;user=paula;password=paula";
 
     public static Connection getConnection() throws SQLException {
         Connection conn = DriverManager.getConnection(URL);

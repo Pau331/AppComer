@@ -68,21 +68,130 @@ document.addEventListener('DOMContentLoaded', () => {
               const div = document.createElement('div');
               div.className = 'notif-item';
               div.dataset.id = n.id;
+              
+              // Verificar si es una solicitud de amistad
+              const esSolicitudAmistad = n.tipo === 'Solicitud de amistad';
+              const esRecetaEliminada = n.tipo === 'Receta eliminada';
+              const esComentarioEliminado = n.tipo === 'Comentario eliminado';
+              const esNotificacionSistema = !n.origen || !n.origen.username;
+              
+              // Formatear el mensaje según el tipo
+              let mensajeTipo = n.tipo;
+              if (n.tipo === 'Eres amigo de...') {
+                mensajeTipo = `Eres amigo de ${n.origen.username}`;
+              } else if (esRecetaEliminada && n.mensaje) {
+                mensajeTipo = n.mensaje;
+              } else if (esComentarioEliminado && n.mensaje) {
+                mensajeTipo = n.mensaje;
+              }
+              
+              // Icono/Avatar según tipo de notificación
+              let avatarHTML = '';
+              if (esNotificacionSistema || esRecetaEliminada || esComentarioEliminado) {
+                // Icono para notificaciones del sistema
+                avatarHTML = `<div class="notif-icon-system" style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#dc3545,#c82333);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;padding-bottom:8px;">⚠️</div>`;
+              } else {
+                // Foto de usuario para notificaciones normales
+                avatarHTML = `<img src="${n.origen.avatar}" class="notif-avatar" alt="${n.origen.username}">`;
+              }
+              
               div.innerHTML = `
-                <img src="${n.origen.avatar}" class="notif-avatar" alt="${n.origen.username}">
+                ${avatarHTML}
                 <div style="flex:1">
-                  <strong>${n.origen.username}</strong>
-                  <div style="font-size:13px;color:#555">${n.tipo}</div>
+                  ${esRecetaEliminada || esComentarioEliminado ? 
+                    `<div style="color:#dc3545;font-weight:600;font-size:13px;">${esRecetaEliminada ? 'Receta eliminada' : 'Comentario eliminado'}</div>
+                     <div style="font-size:13px;color:#555">${mensajeTipo}</div>` 
+                    : 
+                    `<strong>${n.origen.username}</strong>
+                     <div style="font-size:13px;color:#555">${mensajeTipo}</div>`
+                  }
+                  ${esSolicitudAmistad ? `
+                    <div class="notif-actions" style="display:flex;gap:8px;margin-top:8px;">
+                      <button class="btn-aceptar-solicitud" data-user-id="${n.origen.id}" 
+                              style="background:#28a745;color:white;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;">
+                        Aceptar
+                      </button>
+                      <button class="btn-rechazar-solicitud" data-user-id="${n.origen.id}"
+                              style="background:#dc3545;color:white;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;">
+                        Rechazar
+                      </button>
+                    </div>
+                  ` : ''}
                 </div>
                 <div style="margin-left:8px">${n.leido ? '' : '<span class="notif-unread" style="color:#e13b63">●</span>'}</div>
               `;
-              if (!n.leido) {
+              
+              // Marcar como leída al hacer click (solo si no es solicitud de amistad o si ya fue leída)
+              if (!n.leido && !esSolicitudAmistad) {
                 div.style.cursor = 'pointer';
                 div.addEventListener('click', (e) => {
                   e.stopPropagation();
                   markAsRead(n.id, div);
                 });
               }
+              
+              // Handlers para botones de solicitud
+              if (esSolicitudAmistad) {
+                const btnAceptar = div.querySelector('.btn-aceptar-solicitud');
+                const btnRechazar = div.querySelector('.btn-rechazar-solicitud');
+                
+                if (btnAceptar) {
+                  btnAceptar.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const userId = e.target.dataset.userId;
+                    
+                    // Enviar solicitud de aceptación
+                    fetch(`${CONTEXT_PATH}/social/aceptarSolicitud`, {
+                      method: 'POST',
+                      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                      body: `id=${userId}`
+                    })
+                    .then(r => {
+                      if (r.ok) {
+                        // Marcar notificación como leída y eliminar del dropdown
+                        markAsRead(n.id, div);
+                        div.remove();
+                        mostrarNotificacion('¡Solicitud aceptada!', 'success');
+                      } else {
+                        mostrarNotificacion('Error al aceptar solicitud', 'error');
+                      }
+                    })
+                    .catch(err => {
+                      console.error('Error aceptando solicitud:', err);
+                      mostrarNotificacion('Error al aceptar solicitud', 'error');
+                    });
+                  });
+                }
+                
+                if (btnRechazar) {
+                  btnRechazar.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const userId = e.target.dataset.userId;
+                    
+                    // Enviar solicitud de rechazo (usa toggleAmigo para eliminar)
+                    fetch(`${CONTEXT_PATH}/social/toggleAmigo`, {
+                      method: 'POST',
+                      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                      body: `id=${userId}`
+                    })
+                    .then(r => {
+                      if (r.ok) {
+                        // Marcar notificación como leída y eliminar del dropdown
+                        markAsRead(n.id, div);
+                        div.remove();
+                        mostrarNotificacion('Solicitud rechazada', 'info');
+                      } else {
+                        mostrarNotificacion('Error al rechazar solicitud', 'error');
+                      }
+                    })
+                    .catch(err => {
+                      console.error('Error rechazando solicitud:', err);
+                      mostrarNotificacion('Error al rechazar solicitud', 'error');
+                    });
+                  });
+                }
+              }
+              
               notifDropdown.appendChild(div);
             });
           }

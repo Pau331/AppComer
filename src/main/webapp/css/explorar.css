@@ -148,6 +148,31 @@ body {
     object-fit: cover;      /* para que la foto no se deforme */
 }
 
+/* Botones de acciones en notificaciones */
+.notif-actions {
+    margin-top: 8px;
+}
+
+.btn-aceptar-solicitud,
+.btn-rechazar-solicitud {
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-aceptar-solicitud:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-rechazar-solicitud:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-aceptar-solicitud:active,
+.btn-rechazar-solicitud:active {
+    transform: translateY(0);
+}
+
 
 /* Botón cerrar sesión */
 .logout-wrapper {
@@ -495,4 +520,5 @@ body {
   border-radius: 50%;
   width: 60px;
   height: 60px;
+  object-fit: cover;
 }
