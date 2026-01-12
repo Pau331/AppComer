@@ -35,7 +35,7 @@
                 <input
                     type="text"
                     id="usuario"
-                    name="username" <%-- IMPORTANTE: name para que el Servlet lo reciba --%>
+                    name="username"
                     placeholder="usuario@ejemplo.com"
                     required
                 >
@@ -44,7 +44,7 @@
                 <input
                     type="password"
                     id="password"
-                    name="password" <%-- IMPORTANTE: name para que el Servlet lo reciba --%>
+                    name="password"
                     placeholder="********"
                     required
                 >
@@ -71,7 +71,7 @@
             </form>
 
             <p class="auth-text">
-                ¿No tienes cuenta? <a href="Registro.jsp">Regístrate aquí</a>
+                ¿No tienes cuenta? <a href="<%= request.getContextPath() %>/jsp/Registro.jsp">Regístrate aquí</a>
             </p>
         </div>
     </main>

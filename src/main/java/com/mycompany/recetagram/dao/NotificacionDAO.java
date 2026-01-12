@@ -63,4 +63,15 @@ public class NotificacionDAO {
         }
         return 0;
     }
+
+    public boolean eliminarNotificacion(int usuarioDestinoId, int usuarioOrigenId, String tipo) throws SQLException {
+        String sql = "DELETE FROM notificaciones WHERE usuario_destino_id = ? AND usuario_origen_id = ? AND tipo = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, usuarioDestinoId);
+            ps.setInt(2, usuarioOrigenId);
+            ps.setString(3, tipo);
+            return ps.executeUpdate() > 0;
+        }
+    }
 }
