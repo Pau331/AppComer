@@ -122,13 +122,7 @@
                                 method="get"
                                 style="display:inline;">
                                 <input type="hidden" name="id" value="<%= visitado.getId() %>">
-                                <button id="btnVerAmigos" class="btn" type="submit">
-                                    Ver amigos
-                                </button>
-                            </form>
-
-                        </div>
-                        <div class="meta">
+                                
                             <button id="btnVerAmigos" class="btn">Ver amigos</button>
                             
                             <!-- Botones de administrador -->

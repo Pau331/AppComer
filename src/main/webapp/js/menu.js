@@ -99,14 +99,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${avatarHTML}
                 <div style="flex:1">
                   ${esRecetaEliminada || esComentarioEliminado ? 
-                    `<div style="color:#dc3545;font-weight:600;font-size:13px;">${esRecetaEliminada ? 'Receta eliminada' : 'Comentario eliminado'}</div>
+                    `<div style="color:#dc3545;font-weight:600;font-size:13px;">
+                        ${esRecetaEliminada ? 'Receta eliminada' : 'Comentario eliminado'}
+                     </div>
                      <div style="font-size:13px;color:#555">${mensajeTipo}</div>` 
                     : 
                     `<strong>${n.origen.username}</strong>
                      <div style="font-size:13px;color:#555">${mensajeTipo}</div>`
                   }
-                  <strong>${n.origen.username}</strong>
-                  <div style="font-size:13px;color:#555">${mensajeTipo}</div>
                   ${esSolicitudAmistad ? `
                     <div class="notif-actions" style="display:flex;gap:8px;margin-top:8px;">
                       <button class="btn-aceptar-solicitud" data-user-id="${n.origen.id}" 
