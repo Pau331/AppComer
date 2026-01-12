@@ -41,7 +41,7 @@ public class UsuarioDAO {
 
     public List<Usuario> listarTodos() throws SQLException {
         List<Usuario> lista = new ArrayList<>();
-        String sql = "SELECT * FROM APP.usuarios";
+        String sql = "SELECT * FROM APP.usuarios WHERE isAdmin = FALSE";
         try (Connection conn = DatabaseConnection.getConnection();
              Statement st = conn.createStatement();
              ResultSet rs = st.executeQuery(sql)) {
@@ -121,7 +121,7 @@ public class UsuarioDAO {
      // === BUSCAR USUARIOS POR USERNAME (para explorar/amigos) ===
 public List<Usuario> buscarPorUsernameLike(String q) throws SQLException {
     List<Usuario> lista = new ArrayList<>();
-    String sql = "SELECT * FROM APP.usuarios WHERE LOWER(username) LIKE ?";
+    String sql = "SELECT * FROM APP.usuarios WHERE isAdmin = FALSE AND LOWER(username) LIKE ?";
     try (Connection conn = DatabaseConnection.getConnection();
          PreparedStatement ps = conn.prepareStatement(sql)) {
         ps.setString(1, "%" + (q == null ? "" : q.toLowerCase()) + "%");

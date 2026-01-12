@@ -16,20 +16,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // VALIDACIÓN CLIENTE: Si algo falla, detenemos el envío
     if (!nombre || !email || !pass || !conf) {
-      e.preventDefault(); // Detenemos el envío al Servlet
+      e.preventDefault();
       alert("Por favor, completa todos los campos.");
       return;
     }
 
     const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     if (!correoValido) {
-      e.preventDefault(); // Detenemos el envío al Servlet
+      e.preventDefault();
       alert("Por favor, introduce un correo electrónico válido.");
       return;
     }
 
     if (pass !== conf) {
-      e.preventDefault(); // Detenemos el envío al Servlet
+      e.preventDefault();
       alert("Las contraseñas no coinciden.");
       return;
     }

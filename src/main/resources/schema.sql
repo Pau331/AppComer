@@ -1,13 +1,10 @@
 SET SCHEMA APP;
-
--- Eliminar tablas en orden correcto (para evitar violación de FK)
--- En Derby, si la tabla no existe, el DROP fallará; en Java se puede capturar la excepción
+DROP TABLE amigos;
 DROP TABLE likes;
 DROP TABLE receta_caracteristica;
 DROP TABLE comentarios;
 DROP TABLE mensajes_privados;
 DROP TABLE notificaciones;
-DROP TABLE amigos;
 DROP TABLE recetas;
 DROP TABLE caracteristicas;
 DROP TABLE usuarios;
@@ -57,11 +54,19 @@ CREATE TABLE receta_caracteristica (
     FOREIGN KEY (caracteristica_id) REFERENCES caracteristicas(id) ON DELETE CASCADE
 );
 
+-- AMISTAD CON SOLICITUDES: Pendiente hasta que el destinatario acepte
 CREATE TABLE amigos (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-    usuario_id INT,
-    amigo_id INT,
-    estado VARCHAR(10) DEFAULT 'Pendiente' CHECK (estado IN ('Pendiente','Aceptado','Rechazado')),
+    usuario_id INT NOT NULL,
+    amigo_id INT NOT NULL,
+
+    -- Pendiente: solicitud enviada | Aceptado: confirmado por ambos
+    estado VARCHAR(10) DEFAULT 'Pendiente' NOT NULL CHECK (estado IN ('Pendiente','Aceptado')),
+
+    -- usuario_id = quien envía la solicitud
+    -- amigo_id = quien la recibe
+    CONSTRAINT uq_amigos UNIQUE (usuario_id, amigo_id),
+
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
     FOREIGN KEY (amigo_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
@@ -70,7 +75,7 @@ CREATE TABLE notificaciones (
     id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     usuario_destino_id INT,
     usuario_origen_id INT,
-    tipo VARCHAR(30) CHECK (tipo IN ('Solicitud de amistad','Like en receta','Comentario en receta')),    
+    tipo VARCHAR(30) CHECK (tipo IN ('Solicitud de amistad','Like en receta','Comentario en receta','Eres amigo de...')),    
     leido BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (usuario_destino_id) REFERENCES usuarios(id) ON DELETE CASCADE,
     FOREIGN KEY (usuario_origen_id) REFERENCES usuarios(id) ON DELETE CASCADE
@@ -130,9 +135,10 @@ INSERT INTO receta_caracteristica (receta_id, caracteristica_id) VALUES
 
 INSERT INTO amigos (usuario_id, amigo_id, estado) VALUES
 (1, 2, 'Aceptado'),
-(2, 3, 'Pendiente'),
-(1, 4, 'Aceptado'), 
-(4, 2, 'Aceptado');  
+(1, 4, 'Aceptado'),
+(2, 4, 'Aceptado');
+
+
 
 INSERT INTO notificaciones (usuario_destino_id, usuario_origen_id, tipo, leido) VALUES
 -- Para María (id=2): solicitud de amistad de Juan (no leída) y like de Pedro

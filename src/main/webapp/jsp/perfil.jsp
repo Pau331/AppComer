@@ -64,7 +64,6 @@
                         <div class="row">
                             <h2 id="usernameYo" class="u">@<%= u.getUsername() %></h2>
                             <button id="btnEditarPerfil" class="btn">Editar perfil</button>
-                            <button id="btnVerAmigos" class="btn">Ver amigos</button>
                         </div>
                         <div class="meta" id="nombreYo">
                             <%= (u.getBiografia() != null) ? u.getBiografia() : "¡Cuéntanos algo sobre ti!" %>
