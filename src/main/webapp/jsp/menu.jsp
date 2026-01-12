@@ -28,7 +28,7 @@
         </div>
 
         <nav class="nav-links">
-            <a href="<%= request.getContextPath() %>/feed"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
+            <a href="<%= request.getContextPath() %>/receta/feed"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
 
             <div class="notification-wrapper-sidebar" id="notif-wrapper">
                 <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i>
@@ -60,7 +60,7 @@
                 type="text" 
                 placeholder="Buscar recetas o usuarios..." 
                 class="search-bar" 
-                onclick="window.location.href='<%= request.getContextPath() %>/social/explorar'"
+                onclick="window.location.href='<%= request.getContextPath() %>/receta/explorar'"
                 readonly
             >
         </div>

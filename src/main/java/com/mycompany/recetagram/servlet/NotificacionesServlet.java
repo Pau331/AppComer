@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/notificaciones")
+@WebServlet("/social/notificaciones")
 public class NotificacionesServlet extends HttpServlet {
 
     @Override

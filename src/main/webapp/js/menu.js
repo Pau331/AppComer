@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Función para marcar como leída
   const markAsRead = (id, element) => {
-    fetch(`${CONTEXT_PATH}/notificacion/marcarLeido`, {
+    fetch(`${CONTEXT_PATH}/notificaciones/marcarLeido`, {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `id=${encodeURIComponent(id)}`
@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Si abrimos, cargamos notificaciones desde el servidor
     if (notifDropdown.style.display !== 'block') {
-      console.log('Fetching notifications from:', `${CONTEXT_PATH}/notificaciones`);
+      console.log('Fetching notifications from:', `${CONTEXT_PATH}/social/notificaciones`);
       
-      fetch(`${CONTEXT_PATH}/notificaciones`)
+      fetch(`${CONTEXT_PATH}/social/notificaciones`)
         .then(r => {
           console.log('Fetch response status:', r.status);
           if (!r.ok) {
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const userId = e.target.dataset.userId;
                     
                     // Enviar solicitud de rechazo (usa toggleAmigo para eliminar)
-                    fetch(`${CONTEXT_PATH}/social/toggleAmigo`, {
+                    fetch(`${CONTEXT_PATH}/social/solicitarAmistad`, {
                       method: 'POST',
                       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                       body: `id=${userId}`
@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Al cargar la página, actualizar el contador de notificaciones
   if (notifBadge) {
-    fetch(`${CONTEXT_PATH}/notificaciones`)
+    fetch(`${CONTEXT_PATH}/social/notificaciones`)
       .then(r => r.json())
       .then(list => {
         if (!list) return;

@@ -9,7 +9,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.sql.Timestamp;
 
-@WebServlet("/comentario")
+@WebServlet("/receta/comentario")
 public class ComentarioServlet extends HttpServlet {
 
     @Override
@@ -29,7 +29,7 @@ public class ComentarioServlet extends HttpServlet {
             String texto = request.getParameter("texto");
             if (texto != null) texto = texto.trim();
             if (texto == null || texto.isEmpty()) {
-                response.sendRedirect("verReceta?id=" + recetaId);
+                response.sendRedirect(request.getContextPath() +"/receta/ver?id=" + recetaId);
                 return;
             }
 
@@ -45,6 +45,6 @@ public class ComentarioServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        response.sendRedirect("verReceta?id=" + request.getParameter("recetaId"));
+        response.sendRedirect(request.getContextPath() +"/receta/ver?id=" + request.getParameter("recetaId"));
     }
 }

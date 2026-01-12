@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 
-@WebServlet("/receta")
+@WebServlet("/receta/crear")
 @MultipartConfig
 public class RecetaServlet extends HttpServlet {
 

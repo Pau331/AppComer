@@ -42,7 +42,7 @@ public class LogInServlet extends HttpServlet {
                 session.setAttribute("loginSuccess", "Bienvenido/a " + u.getUsername() + "! 👋");
                 
                 // Redirigir
-                response.sendRedirect(request.getContextPath() + "/feed");
+                response.sendRedirect(request.getContextPath() + "/receta/feed");
 
             } else {
                 // 4. Error: Volver al login con un mensaje 

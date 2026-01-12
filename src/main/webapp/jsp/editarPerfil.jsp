@@ -39,7 +39,7 @@
             </div>
             <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i><span>Crear receta</span></a>
             <a href="<%= request.getContextPath() %>/jsp/amigos.jsp"><i class="fa-solid fa-user-group"></i><span>Amigos</span></a>
-            <% if (yo.isAdmin()) { %>
+            <% if (u.isAdmin()) { %>
             <a href="<%= request.getContextPath() %>/admin/panel"><i class="fa-solid fa-shield-halved"></i><span>Panel Admin</span></a>
             <% } %>
         </nav>

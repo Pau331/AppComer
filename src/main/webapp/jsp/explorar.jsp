@@ -61,7 +61,7 @@
     </div>
 
     <nav class="nav-links">
-        <a href="<%= request.getContextPath() %>/feed">
+        <a href="<%= request.getContextPath() %>/receta/feed">
             <i class="fa-solid fa-house"></i> <span>Inicio</span>
         </a>
 
@@ -99,7 +99,7 @@
 <div class="topbar" style="justify-content: flex-start; gap: 15px;">
     <div class="search-wrapper">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <form method="get" action="<%=request.getContextPath()%>/social/explorar" style="width:100%;" id="search-form">
+        <form method="get" action="<%=request.getContextPath()%>/receta/explorar" style="width:100%;" id="search-form">
             <input
                 type="text"
                 name="q"
@@ -159,7 +159,7 @@
                onmouseover="this.style.color='#262626'" onmouseout="this.style.color='#999'"></i>
         </div>
         
-        <form method="get" action="<%=request.getContextPath()%>/social/explorar" id="filter-form">
+        <form method="get" action="<%=request.getContextPath()%>/receta/explorar" id="filter-form">
             <input type="hidden" name="q" value="<%= q %>">
             
             <%
@@ -260,7 +260,7 @@
                 </button>
                 
                 <% if (request.getParameter("caracteristica") != null) { %>
-                    <a href="<%=request.getContextPath()%>/social/explorar<%= q != null && !q.isEmpty() ? "?q=" + q : "" %>" 
+                    <a href="<%=request.getContextPath()%>/receta/explorar<%= q != null && !q.isEmpty() ? "?q=" + q : "" %>" 
                        style="
                         flex: 1;
                         background: #f0f0f0;
@@ -335,7 +335,7 @@
                         avatarAutor = request.getContextPath() + "/" + fp;
                     }
         %>
-            <a href="<%= request.getContextPath() %>/verReceta?id=<%= r.getId() %>" class="recipe-link">
+            <a href="<%= request.getContextPath() %>/receta/ver?id=<%= r.getId() %>" class="recipe-link">
                 <article class="recipe-card">
                     <img src="<%= fotoReceta %>" alt="<%= r.getTitulo() %>" class="recipe-img">
                     <div class="recipe-info">

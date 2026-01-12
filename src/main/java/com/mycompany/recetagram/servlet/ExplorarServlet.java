@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/social/explorar")
+@WebServlet("/receta/explorar")
 public class ExplorarServlet extends HttpServlet {
 
     @Override

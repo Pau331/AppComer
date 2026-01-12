@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
-@WebServlet("/like")
+@WebServlet("/receta/like")
 public class LikeServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
@@ -38,6 +38,6 @@ public class LikeServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        res.sendRedirect("verReceta?id=" + recetaId);
+        res.sendRedirect(req.getContextPath() +"/receta/ver?id=" + recetaId);
     }
 }

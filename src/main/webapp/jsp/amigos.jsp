@@ -75,7 +75,7 @@
     </div>
 
     <nav class="nav-links">
-        <a href="<%= request.getContextPath() %>/feed">
+        <a href="<%= request.getContextPath() %>/receta/feed">
             <i class="fa-solid fa-house"></i><span>Inicio</span>
         </a>
 

@@ -58,7 +58,7 @@ if (recetas == null) {
 %>
 
 <div style="position: relative;">
-    <a href="<%=request.getContextPath()%>/verReceta?id=<%= r.getId() %>" class="recipe-link">
+    <a href="<%=request.getContextPath()%>/receta/ver?id=<%= r.getId() %>" class="recipe-link">
         <div class="recipe-card">
 
             <!-- Contenedor de imagen flexible -->

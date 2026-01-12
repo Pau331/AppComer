@@ -115,7 +115,7 @@ $("#btnGuardar").addEventListener("click", async (e) => {
   if (fotoFile) formData.append("foto", fotoFile);
 
   try {
-    const resp = await fetch(CONTEXT_PATH + "/receta", { // URL de tu RecetaServlet
+    const resp = await fetch(CONTEXT_PATH + "/receta/crear", { // URL de tu RecetaServlet
       method: "POST",
       body: formData
     });
@@ -124,7 +124,7 @@ $("#btnGuardar").addEventListener("click", async (e) => {
     if (result.success) {
       mostrarNotificacion("Receta guardada correctamente.", "success");
       setTimeout(() => {
-        window.location.href = CONTEXT_PATH + "/feed"; // redirige al feed
+        window.location.href = CONTEXT_PATH + "/receta/feed"; // redirige al feed
       }, 1500);
     } else {
       mostrarNotificacion("Error al guardar: " + (result.message || "Error desconocido"), "error");

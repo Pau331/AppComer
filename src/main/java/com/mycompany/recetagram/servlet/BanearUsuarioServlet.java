@@ -49,7 +49,7 @@ public class BanearUsuarioServlet extends HttpServlet {
             if (referer != null && !referer.isEmpty()) {
                 response.sendRedirect(referer);
             } else {
-                response.sendRedirect(request.getContextPath() + "/social/explorar");
+                response.sendRedirect(request.getContextPath() + "/receta/explorar");
             }
             
         } catch (NumberFormatException e) {

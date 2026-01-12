@@ -13,7 +13,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/verReceta")
+@WebServlet("/receta/ver")
 public class VerRecetaServlet extends HttpServlet {
 
     @Override
@@ -23,7 +23,7 @@ public class VerRecetaServlet extends HttpServlet {
 
             Receta receta = new RecetaDAO().obtenerPorId(recetaId);
             if (receta == null) {
-                response.sendRedirect(request.getContextPath() + "/feed");
+                response.sendRedirect(request.getContextPath() + "/receta/feed");
                 return;
             }
 
@@ -44,7 +44,7 @@ public class VerRecetaServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/feed");
+            response.sendRedirect(request.getContextPath() + "/receta/feed");
         }
     }
 }

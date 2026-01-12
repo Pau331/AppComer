@@ -11,7 +11,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/social/toggleAmigo")
+@WebServlet("/social/solicitarAmistad")
 public class ToggleAmigoServlet extends HttpServlet {
 
     @Override
@@ -28,7 +28,7 @@ public class ToggleAmigoServlet extends HttpServlet {
 
         String idStr = request.getParameter("id"); // id del usuario visitado
         if (idStr == null || idStr.isBlank()) {
-            response.sendRedirect(request.getContextPath() + "/explorar");
+            response.sendRedirect(request.getContextPath() + "/receta/explorar");
             return;
         }
 

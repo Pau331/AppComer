@@ -44,7 +44,7 @@
 
     <nav class="nav-links">
       <a href="<%=request.getContextPath()%>/jsp/menu.jsp"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
-      <a href="<%=request.getContextPath()%>/social/explorar"><i class="fa-solid fa-compass"></i> <span>Explorar</span></a>
+      <a href="<%=request.getContextPath()%>/receta/explorar"><i class="fa-solid fa-compass"></i> <span>Explorar</span></a>
       <a href="<%=request.getContextPath()%>/social/amigos"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>
       <a href="<%=request.getContextPath()%>/social/chat"><i class="fa-solid fa-envelope"></i> <span>Chats</span></a>
       <a href="<%=request.getContextPath()%>/admin/panel" class="active"><i class="fa-solid fa-shield"></i> <span>Admin</span></a>

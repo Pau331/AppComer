@@ -15,7 +15,7 @@
     // 3. Usuario visitado + recetas + sonAmigos (del servlet)
     Usuario visitado = (Usuario) request.getAttribute("usuarioVisitado");
     if (visitado == null) {
-        response.sendRedirect(request.getContextPath() + "/explorar");
+        response.sendRedirect(request.getContextPath() + "/receta/explorar");
         return;
     }
 
@@ -40,7 +40,7 @@
     <aside class="sidebar">
         <div class="logo"><img src="<%= request.getContextPath() %>/img/logo_texto.png" class="logo-full" alt="Recetagram"></div>
         <nav class="nav-links">
-            <a href="<%= request.getContextPath() %>/feed"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
+            <a href="<%= request.getContextPath() %>/receta/feed"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
             <div class="notification-wrapper-sidebar" id="notif-wrapper">
                 <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i><span>Notificaciones</span>
                 <span class="notif-badge" id="notif-badge">0</span>
@@ -82,7 +82,7 @@
                                 if (estadoRelacion == null) {
                                     // Sin relación -> Enviar solicitud
                             %>
-                                <form action="<%= request.getContextPath() %>/social/toggleAmigo" method="post" style="display:inline;">
+                                <form action="<%= request.getContextPath() %>/social/solicitarAmistad" method="post" style="display:inline;">
                                     <input type="hidden" name="id" value="<%= visitado.getId() %>">
                                     <button class="btn" type="submit">Enviar solicitud</button>
                                 </form>
@@ -90,7 +90,7 @@
                                 } else if ("Pendiente".equals(estadoRelacion)) {
                                     // Yo envié solicitud -> Cancelar
                             %>
-                                <form action="<%= request.getContextPath() %>/social/toggleAmigo" method="post" style="display:inline;">
+                                <form action="<%= request.getContextPath() %>/social/solicitarAmistad" method="post" style="display:inline;">
                                     <input type="hidden" name="id" value="<%= visitado.getId() %>">
                                     <button class="btn" type="submit">Cancelar solicitud</button>
                                 </form>
@@ -102,7 +102,7 @@
                                     <input type="hidden" name="id" value="<%= visitado.getId() %>">
                                     <button class="btn" type="submit" style="background-color:#28a745;">Aceptar solicitud</button>
                                 </form>
-                                <form action="<%= request.getContextPath() %>/social/toggleAmigo" method="post" style="display:inline;">
+                                <form action="<%= request.getContextPath() %>/social/solicitarAmistad" method="post" style="display:inline;">
                                     <input type="hidden" name="id" value="<%= visitado.getId() %>">
                                     <button class="btn" type="submit" style="background-color:#dc3545;">Rechazar</button>
                                 </form>
@@ -110,7 +110,7 @@
                                 } else if ("Aceptado".equals(estadoRelacion)) {
                                     // Son amigos -> Dejar de ser amigos
                             %>
-                                <form action="<%= request.getContextPath() %>/social/toggleAmigo" method="post" style="display:inline;">
+                                <form action="<%= request.getContextPath() %>/social/solicitarAmistad" method="post" style="display:inline;">
                                     <input type="hidden" name="id" value="<%= visitado.getId() %>">
                                     <button class="btn" type="submit">Dejar de ser amigos</button>
                                 </form>
@@ -187,7 +187,7 @@
                             }
                     %>
 
-                    <a href="<%=request.getContextPath()%>/verReceta?id=<%= r.getId() %>" class="recipe-link">
+                    <a href="<%=request.getContextPath()%>/receta/ver?id=<%= r.getId() %>" class="recipe-link">
                         <div class="recipe-card">
                             <div class="recipe-img-container">
                                 <img src="<%= recetaFoto %>" alt="<%= r.getTitulo() %>">

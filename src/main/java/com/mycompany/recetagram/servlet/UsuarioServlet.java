@@ -34,7 +34,7 @@ public class UsuarioServlet extends HttpServlet {
         // id del usuario visitado
         String idStr = request.getParameter("id");
         if (idStr == null || idStr.isBlank()) {
-            response.sendRedirect(request.getContextPath() + "/explorar");
+            response.sendRedirect(request.getContextPath() + "/receta/explorar");
             return;
         }
 

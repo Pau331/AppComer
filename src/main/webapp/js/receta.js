@@ -6,7 +6,7 @@ const receta = {
   titulo: "Brownies de Chocolate",
   tiempo: "20 min",
   dificultad: "Baja",
-  dietas: ["Sin gluten"],   // puedes añadir "Healthy" o "Vegetariano"
+  dietas: ["Sin gluten"],
   pasos: [
     "Precalienta el horno a 180ºC y engrasa un molde.",
     "Derrite chocolate y mantequilla; mezcla con azúcar.",

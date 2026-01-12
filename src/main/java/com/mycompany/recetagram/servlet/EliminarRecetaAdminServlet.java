@@ -67,7 +67,7 @@ public class EliminarRecetaAdminServlet extends HttpServlet {
             if (referer != null && !referer.isEmpty()) {
                 response.sendRedirect(referer);
             } else {
-                response.sendRedirect(request.getContextPath() + "/usu/feed");
+                response.sendRedirect(request.getContextPath() + "/receta/feed");
             }
             
         } catch (NumberFormatException e) {

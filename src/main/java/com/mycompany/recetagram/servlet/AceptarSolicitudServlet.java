@@ -28,7 +28,7 @@ public class AceptarSolicitudServlet extends HttpServlet {
 
         String idStr = request.getParameter("id"); // id del usuario que envió la solicitud
         if (idStr == null || idStr.isBlank()) {
-            response.sendRedirect(request.getContextPath() + "/explorar");
+            response.sendRedirect(request.getContextPath() + "/receta/explorar");
             return;
         }
 

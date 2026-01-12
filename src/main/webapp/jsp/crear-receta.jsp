@@ -27,7 +27,7 @@
     </div>
 
     <nav class="nav-links">
-      <a href="<%= request.getContextPath() %>/feed"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
+      <a href="<%= request.getContextPath() %>/receta/feed"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
 
       <div class="notification-wrapper-sidebar" id="notif-wrapper">
         <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i>
@@ -87,7 +87,7 @@
   <!-- CONTENIDO -->
   <main class="page-wrap">
     <div class="center-col">
-      <form action="<%= request.getContextPath() %>/receta" method="post" enctype="multipart/form-data">
+      <form action="<%= request.getContextPath() %>/receta/crear" method="post" enctype="multipart/form-data">
         <div class="recipe-header">
           <input name="titulo" id="tituloInput" class="input-title" type="text" placeholder="Título de la receta" required>
         </div>

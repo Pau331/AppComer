@@ -15,7 +15,7 @@
     }
     
     if (receta == null) {
-        response.sendRedirect(request.getContextPath() + "/feed");
+        response.sendRedirect(request.getContextPath() + "/receta/feed");
         return;
     }
 %>
@@ -35,13 +35,13 @@
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="logo">
-            <a href="<%= request.getContextPath() %>/feed">
+            <a href="<%= request.getContextPath() %>/receta/feed">
                 <img src="<%= request.getContextPath() %>/img/logo_texto.png" alt="Logo Recetagram" class="logo-full">
             </a>
         </div>
 
         <nav class="nav-links">
-            <a href="<%= request.getContextPath() %>/feed"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
+            <a href="<%= request.getContextPath() %>/receta/feed"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
             <div class="notification-wrapper-sidebar" id="notif-wrapper">
                 <i class="fa-solid fa-bell" id="notif-icon-sidebar"></i>
                 <span>Notificaciones</span>
@@ -71,7 +71,7 @@
                 type="text" 
                 placeholder="Buscar recetas o usuarios..." 
                 class="search-bar" 
-                onclick="window.location.href='<%= request.getContextPath() %>/social/explorar'"
+                onclick="window.location.href='<%= request.getContextPath() %>/receta/explorar'"
                 readonly
             >
         </div>
@@ -128,7 +128,7 @@
             <% } %>
 
             <% boolean liked = Boolean.TRUE.equals(request.getAttribute("liked")); %>
-            <form action="<%= request.getContextPath() %>/like" method="post" class="like-area">
+            <form action="<%= request.getContextPath() %>/receta/like" method="post" class="like-area">
                 <input type="hidden" name="recetaId" value="<%= receta.getId() %>">
                 <button type="submit" class="btn-like" aria-label="Me gusta">
                     <i class="<%= liked ? "fa-solid fa-heart" : "fa-regular fa-heart" %>"></i>
@@ -164,7 +164,7 @@
 
         <!-- FORMULARIO NUEVO COMENTARIO -->
         <% if (u != null) { %>
-        <form class="add-comment" action="<%= request.getContextPath() %>/comentario" method="post">
+        <form class="add-comment" action="<%= request.getContextPath() %>/receta/comentario" method="post">
             <input type="hidden" name="recetaId" value="<%= receta.getId() %>">
             <textarea name="texto" placeholder="Escribe un comentario..." rows="2" required></textarea>
             <button type="submit" class="btn-like">Publicar</button>

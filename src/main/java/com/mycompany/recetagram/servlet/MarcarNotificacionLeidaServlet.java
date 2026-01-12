@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet("/notificacion/marcarLeido")
+@WebServlet("/social/notificaciones/marcarLeido")
 public class MarcarNotificacionLeidaServlet extends HttpServlet {
 
     @Override
