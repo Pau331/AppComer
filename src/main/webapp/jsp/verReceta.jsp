@@ -50,6 +50,9 @@
             </div>
             <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
             <a href="<%= request.getContextPath() %>/jsp/amigos.jsp"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>
+            <% if (u.isAdmin()) { %>
+            <a href="<%= request.getContextPath() %>/admin/panel"><i class="fa-solid fa-shield-halved"></i> <span>Panel Admin</span></a>
+            <% } %>
         </nav>
         
         <div class="logout-wrapper">
@@ -202,6 +205,34 @@
                         <%= c.getTexto() %>
                     </div>
                 </div>
+                
+                <% if (u.isAdmin()) { %>
+                <form action="<%= request.getContextPath() %>/admin/delete" method="post" style="margin-left: auto;">
+                    <input type="hidden" name="tipo" value="comentario">
+                    <input type="hidden" name="id" value="<%= c.getId() %>">
+                    <button type="submit" 
+                            onclick="return confirm('¿Eliminar este comentario?');"
+                            style="
+                                background: #dc3545;
+                                color: white;
+                                border: none;
+                                border-radius: 6px;
+                                padding: 6px 12px;
+                                font-size: 12px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                gap: 5px;
+                                transition: background 0.2s;
+                            "
+                            onmouseover="this.style.background='#c82333'" 
+                            onmouseout="this.style.background='#dc3545'">
+                        <i class="fa-solid fa-trash"></i>
+                        Eliminar (Admin)
+                    </button>
+                </form>
+                <% } %>
             </div>
         <% } } else { %>
             <p>No hay comentarios todavía.</p>

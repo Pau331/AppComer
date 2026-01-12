@@ -39,6 +39,9 @@
 
             <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
             <a href="<%= request.getContextPath() %>/social/amigos"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>
+            <% if (u.isAdmin()) { %>
+            <a href="<%= request.getContextPath() %>/admin/panel"><i class="fa-solid fa-shield-halved"></i> <span>Panel Admin</span></a>
+            <% } %>
         </nav>
         
         <div class="logout-wrapper">
@@ -69,10 +72,16 @@
         <a href="<%= request.getContextPath() %>/usu/perfil" class="icon">
             <% 
                 String avatar = request.getContextPath() + "/img/default-avatar.png";
-                if (u.getFotoPerfil() != null && !u.getFotoPerfil().isEmpty()) {
+                if (u != null && u.getFotoPerfil() != null && !u.getFotoPerfil().isEmpty()) {
                     String fotoPerfil = u.getFotoPerfil();
-                    if (fotoPerfil.startsWith("/")) fotoPerfil = fotoPerfil.substring(1);
-                    if (!fotoPerfil.startsWith("img/")) fotoPerfil = "img/" + fotoPerfil;
+                    // Limpiar barras iniciales
+                    while (fotoPerfil.startsWith("/")) {
+                        fotoPerfil = fotoPerfil.substring(1);
+                    }
+                    // Si ya tiene el prefijo img/, usarlo directamente, si no, agregarlo
+                    if (!fotoPerfil.startsWith("img/")) {
+                        fotoPerfil = "img/" + fotoPerfil;
+                    }
                     avatar = request.getContextPath() + "/" + fotoPerfil;
                 }
             %>

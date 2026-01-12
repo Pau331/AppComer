@@ -29,6 +29,13 @@ public class LogInServlet extends HttpServlet {
             Usuario u = dao.validar(user, pass);
             
             if (u != null) {
+                // Verificar si el usuario está baneado
+                if (u.isBaneado()) {
+                    request.setAttribute("error", "Tu cuenta ha sido suspendida. Contacta al administrador.");
+                    request.getRequestDispatcher("/jsp/logIn.jsp").forward(request, response);
+                    return;
+                }
+                
                 // 3. Éxito: Crear sesión y guardar al usuario 
                 HttpSession session = request.getSession();
                 session.setAttribute("usuarioLogueado", u);

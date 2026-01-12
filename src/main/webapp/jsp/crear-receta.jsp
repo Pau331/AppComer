@@ -37,7 +37,10 @@
       </div>
 
       <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp" class="active"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
-      <a href="<%= request.getContextPath() %>/jsp/amigos.jsp"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>
+      <a href="<%= request.getContextPath() %>/social/amigos"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>
+      <% if (u.isAdmin()) { %>
+      <a href="<%= request.getContextPath() %>/admin/panel"><i class="fa-solid fa-shield-halved"></i> <span>Panel Admin</span></a>
+      <% } %>
     </nav>
     
     <div class="logout-wrapper">
@@ -151,5 +154,7 @@
   <script src="<%= request.getContextPath() %>/js/notificaciones.js"></script>
   <script src="<%= request.getContextPath() %>/js/menu.js"></script>
   <script src="<%= request.getContextPath() %>/js/crear-receta.js"></script>
+  <script src="<%= request.getContextPath() %>/js/amigos.js"></script>
+
 </body>
 </html>

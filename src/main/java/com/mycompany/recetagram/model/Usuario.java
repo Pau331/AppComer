@@ -8,6 +8,7 @@ public class Usuario {
     private String fotoPerfil;
     private String biografia;
     private boolean isAdmin;
+    private boolean baneado;
 
     // Getters y setters
     public int getId() { return id; }
@@ -24,4 +25,6 @@ public class Usuario {
     public void setBiografia(String biografia) { this.biografia = biografia; }
     public boolean isAdmin() { return isAdmin; }
     public void setAdmin(boolean isAdmin) { this.isAdmin = isAdmin; }
+    public boolean isBaneado() { return baneado; }
+    public void setBaneado(boolean baneado) { this.baneado = baneado; }
 }

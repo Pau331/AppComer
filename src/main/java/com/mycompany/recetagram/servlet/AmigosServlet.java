@@ -29,6 +29,9 @@ public class AmigosServlet extends HttpServlet {
         try {
             AmigoDAO amigoDAO = new AmigoDAO();
             List<Usuario> amigos = amigoDAO.listarAmigos(yo.getId());
+            
+            System.out.println("DEBUG AmigosServlet - Usuario: " + yo.getUsername() + " (ID: " + yo.getId() + ")");
+            System.out.println("DEBUG AmigosServlet - Amigos encontrados: " + (amigos != null ? amigos.size() : "null"));
 
             request.setAttribute("amigos", amigos);
             request.getRequestDispatcher("/jsp/amigos.jsp").forward(request, response);

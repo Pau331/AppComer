@@ -61,6 +61,9 @@
 
       <a href="<%= request.getContextPath() %>/jsp/crear-receta.jsp"><i class="fa-solid fa-circle-plus"></i> <span>Crear receta</span></a>
       <a href="<%= request.getContextPath() %>/social/amigos" class="active"><i class="fa-solid fa-user-group"></i> <span>Amigos</span></a>
+      <% if (yo.isAdmin()) { %>
+      <a href="<%= request.getContextPath() %>/admin/panel"><i class="fa-solid fa-shield-halved"></i> <span>Panel Admin</span></a>
+      <% } %>
     </nav>
 
     <div class="logout-wrapper">
@@ -89,7 +92,7 @@
       <%
         if (amigos == null || amigos.isEmpty()) {
       %>
-        <p style="padding: 18px; color:#666;">Aún no tienes amigos añadidos.</p>
+        <p style="padding: 18px; color:#666; text-align: center; width: 100%;">Aún no tienes amigos añadidos.</p>
       <%
         } else {
           for (Usuario u : amigos) {

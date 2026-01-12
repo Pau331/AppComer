@@ -5,6 +5,7 @@
 <%@ page import="com.mycompany.recetagram.dao.RecetaCaracteristicaDAO" %>
 
 <%
+Usuario yo = (Usuario) session.getAttribute("usuarioLogueado");
 List<Receta> recetas = (List<Receta>) request.getAttribute("recetas");
 UsuarioDAO udao = new UsuarioDAO();
 RecetaCaracteristicaDAO rcdao = new RecetaCaracteristicaDAO();
@@ -15,7 +16,7 @@ if (recetas == null) {
 <%
 } else if (recetas.isEmpty()) {
 %>
-    <p>No hay recetas de tus amigos todav�a.</p>
+    <p>No hay recetas de tus amigos todav�a.</p>
 <%
 } else {
     for (Receta r : recetas) {
@@ -56,54 +57,81 @@ if (recetas == null) {
         List<String> dietas = rcdao.listarCaracteristicasReceta(r.getId());
 %>
 
-<a href="<%=request.getContextPath()%>/verReceta?id=<%= r.getId() %>" class="recipe-link">
-    <div class="recipe-card">
+<div style="position: relative;">
+    <a href="<%=request.getContextPath()%>/verReceta?id=<%= r.getId() %>" class="recipe-link">
+        <div class="recipe-card">
 
-        <!-- Contenedor de imagen flexible -->
-        <div class="recipe-img-container">
-            <img src="<%= recetaFoto %>" alt="<%= r.getTitulo() %>">
-        </div>
-
-        <div class="recipe-info">
-
-            <h2 class="recipe-title"><%= r.getTitulo() %></h2>
-
-            <div class="recipe-user">
-                <img src="<%= avatar %>" alt="<%= username %>" class="avatar">
-                <span class="username"><%= username %></span>
+            <!-- Contenedor de imagen flexible -->
+            <div class="recipe-img-container">
+                <img src="<%= recetaFoto %>" alt="<%= r.getTitulo() %>">
             </div>
 
-            <div class="recipe-details">
+            <div class="recipe-info">
 
-                <div class="detail">
-                    <i class="fa-solid fa-star"></i>
-                    <span>Dificultad: <%= r.getDificultad() %></span>
+                <h2 class="recipe-title"><%= r.getTitulo() %></h2>
+
+                <div class="recipe-user">
+                    <img src="<%= avatar %>" alt="<%= username %>" class="avatar">
+                    <span class="username"><%= username %></span>
                 </div>
 
-                <div class="detail">
-                    <i class="fa-solid fa-clock"></i>
-                    <span>Tiempo: <%= r.getTiempoPreparacion() %> min</span>
-                </div>
+                <div class="recipe-details">
 
-                <% for (String d : dietas) { %>
                     <div class="detail">
-                        <% if (d.equalsIgnoreCase("Vegetariano")) { %>
-                            <i class="fa-solid fa-leaf"></i>
-                        <% } else if (d.equalsIgnoreCase("Vegano")) { %>
-                            <i class="fa-solid fa-seedling"></i>
-                        <% } else if (d.equalsIgnoreCase("Sin gluten")) { %>
-                            <img src="<%= request.getContextPath() %>/img/sin-gluten.png" class="diet-icon">
-                        <% } else if (d.equalsIgnoreCase("Healthy")) { %>
-                            <i class="fa-solid fa-apple-whole"></i>
-                        <% } %>
-                        <span><%= d %></span>
+                        <i class="fa-solid fa-star"></i>
+                        <span>Dificultad: <%= r.getDificultad() %></span>
                     </div>
-                <% } %>
 
+                    <div class="detail">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Tiempo: <%= r.getTiempoPreparacion() %> min</span>
+                    </div>
+
+                    <% for (String d : dietas) { %>
+                        <div class="detail">
+                            <% if (d.equalsIgnoreCase("Vegetariano")) { %>
+                                <i class="fa-solid fa-leaf"></i>
+                            <% } else if (d.equalsIgnoreCase("Vegano")) { %>
+                                <i class="fa-solid fa-seedling"></i>
+                            <% } else if (d.equalsIgnoreCase("Sin gluten")) { %>
+                                <img src="<%= request.getContextPath() %>/img/sin-gluten.png" class="diet-icon">
+                            <% } else if (d.equalsIgnoreCase("Healthy")) { %>
+                                <i class="fa-solid fa-apple-whole"></i>
+                            <% } %>
+                            <span><%= d %></span>
+                        </div>
+                    <% } %>
+
+                </div>
             </div>
         </div>
-    </div>
-</a>
+    </a>
+    
+    <% if (yo.isAdmin()) { %>
+        <form method="post" action="<%=request.getContextPath()%>/admin/eliminarReceta" 
+              style="margin-top: 15px;" 
+              onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta receta?');">
+            <input type="hidden" name="recetaId" value="<%= r.getId() %>">
+            <button type="submit" style="
+                background: #dc3545;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                padding: 8px 16px;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                transition: background 0.2s;
+            " onmouseover="this.style.background='#c82333'" onmouseout="this.style.background='#dc3545'">
+                <i class="fa-solid fa-trash"></i>
+                Eliminar receta (Admin)
+            </button>
+        </form>
+    <% } %>
+</div>
 
 <%
     } // for recetas

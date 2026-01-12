@@ -243,6 +243,31 @@
   font-family: 'Segoe UI', Arial, sans-serif; /* distinta si quieres */
 }
 
+/* Botón de eliminar comentario (solo admin) */
+.btn-delete-comment {
+  background-color: #dc3545 !important;
+  color: white !important;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.btn-delete-comment:hover {
+  background-color: #c82333 !important;
+}
+
+.btn-delete-comment:active {
+  transform: scale(0.98);
+}
+
 
 
 /*Responsive*/
